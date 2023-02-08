@@ -1,6 +1,10 @@
-const dotenv = require("dotenv");
-const connectDatabase = require("./database/connect");
+import { config } from "dotenv";
+import { connectDatabase } from "./database/connect.js";
 
-dotenv.config();
-
+// CONFIG
+config();
 connectDatabase();
+
+// RESOURCES
+import "./resources/auth.js";
+import "./resources/customer.js";
