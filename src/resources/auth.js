@@ -1,5 +1,7 @@
-import { api } from "./server.js";
+import { Router } from "express";
 
-api.get("/auth", (req, res) => {
+export const route = Router();
+
+route.get("/auth", (req, res) => {
   return res.json({ test: "test" });
 });
