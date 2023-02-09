@@ -1,14 +1,13 @@
 import { config } from "dotenv";
+
+process.env.ENV = "test";
+process.env.PORT = 5000;
+
 import { connectDatabase } from "../src/database/connect.js";
-import { api } from "../src/resources/server";
+import { server } from "../src/resources/server";
 
 // CONFIG
 config();
 connectDatabase();
 
-// RESOURCES
-import "../src/resources/auth";
-import "../src/resources/customer.js";
-
-// START SERVER AFTER IMPORT RESOURCES
-module.exports = api;
+export const testServer = server;
