@@ -1,39 +1,41 @@
-import { expect, test } from "vitest";
+import { expect, describe, it } from "vitest";
 import { config } from "dotenv";
-import {
-  checkEnv,
-  getUri,
-  connectToDatabase,
-} from "../../src/database/connect.js";
+import { checkEnv, getUri } from "../../src/database/connect.js";
 
 config();
 
-test("Connection to the database in production", () => {
-  process.env.ENV = "pro";
-  const credentials = checkEnv();
-  const uri = getUri(credentials);
+describe("Production", () => {
+  it("check env and credentials", () => {
+    process.env.ENV = "pro";
 
-  expect(credentials.database).toEqual("PRODUCTION");
-  expect(uri).toContain("PRODUCTION");
-  expect(connectToDatabase);
+    const credentials = checkEnv();
+    const uri = getUri(credentials);
+
+    expect(credentials.database).toEqual("PRODUCTION");
+    expect(uri).toContain("PRODUCTION");
+  });
 });
 
-test("Connection to the database in development", () => {
-  process.env.ENV = "dev";
-  const credentials = checkEnv();
-  const uri = getUri(credentials);
+describe("Development", () => {
+  it("check env and credentials", () => {
+    process.env.ENV = "dev";
 
-  expect(credentials.database).toEqual("DEVELOPMENT");
-  expect(uri).toContain("DEVELOPMENT");
-  expect(connectToDatabase);
+    const credentials = checkEnv();
+    const uri = getUri(credentials);
+
+    expect(credentials.database).toEqual("DEVELOPMENT");
+    expect(uri).toContain("DEVELOPMENT");
+  });
 });
 
-test("Connection to the database in test", () => {
-  process.env.ENV = "test";
-  const credentials = checkEnv();
-  const uri = getUri(credentials);
+describe("Test", () => {
+  it("check env and credentials", () => {
+    process.env.ENV = "test";
 
-  expect(credentials.database).toEqual("TEST");
-  expect(uri).toContain("TEST");
-  expect(connectToDatabase);
+    const credentials = checkEnv();
+    const uri = getUri(credentials);
+
+    expect(credentials.database).toEqual("TEST");
+    expect(uri).toContain("TEST");
+  });
 });
