@@ -5,16 +5,11 @@
 - [Tasks](tasks.md)
 - [Tests](tests.md)
 
-## Indice
+>
 
 - [Red-Boar-Inn API](#red-boar-inn-api)
-  - [Indice](#indice)
-  - [Modelagem](#modelagem)
   - [Estrutura](#estrutura)
-
-## Modelagem
-
-....
+  - [Modelagem](#modelagem)
 
 ## Estrutura
 
@@ -30,5 +25,8 @@
     └── index.js
 
 2 directories, 6 files
-
 ```
+
+## Modelagem
+
+![MBD](MBD-RBI.png)
