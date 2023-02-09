@@ -6,4 +6,5 @@ export const api = express();
 
 api.use(express.json());
 
-api.listen(PORT, () => console.log("Run Server"));
+export const startServer = () =>
+  api.listen(PORT, () => console.log("Run Server"));
