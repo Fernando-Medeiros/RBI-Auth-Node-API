@@ -26,29 +26,22 @@ export const customerSchema = {
 };
 
 export class CustomerCreateSchema {
-  constructor({ firstName, lastName, email, password }) {
-    this.props = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-      createdAt: new Date(),
-    };
+  props: {};
+
+  constructor(requestBody: object) {
+    this.props = { ...requestBody, createdAt: new Date() };
   }
-  getValidData() {
+  getData() {
     return this.props;
   }
 }
 
 export class CustomerUpdateSchema {
-  constructor({ firstName, lastName, email }) {
-    this.props = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-    };
+  props: {};
+  constructor(requestBody: object) {
+    this.props = { ...requestBody };
   }
-  getValidData() {
+  getData() {
     return this.props;
   }
 }

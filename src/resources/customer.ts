@@ -4,7 +4,7 @@ import {
   createCustomer,
   updateCustomer,
   deleteCustomer,
-} from "../controllers/customer.controller.js";
+} from "../controllers/customer.controller";
 
 export const route = Router();
 

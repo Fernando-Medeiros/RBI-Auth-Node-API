@@ -1,10 +1,10 @@
 import express from "express";
-import { route as customer } from "./customer.js";
-import { route as auth } from "./auth.js";
+import { route as customer } from "./customer";
+import { route as auth } from "./auth";
 
 export const server = express();
 
-const PORT = parseInt(process.env.PORT) || 8080;
+const PORT = process.env["PORT"] || 8080;
 
 server.use(express.json());
 server.use(customer);
