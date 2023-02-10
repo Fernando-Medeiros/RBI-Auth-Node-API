@@ -1,12 +1,12 @@
 import { expect, describe, it } from "vitest";
 import { config } from "dotenv";
-import { checkEnv, getUri } from "../../src/database/connect.js";
+import { checkEnv, getUri } from "../../database/connect";
 
 config();
 
 describe("Production", () => {
   it("check env and credentials", () => {
-    process.env.ENV = "pro";
+    process.env["ENV"] = "pro";
 
     const credentials = checkEnv();
     const uri = getUri(credentials);
@@ -18,7 +18,7 @@ describe("Production", () => {
 
 describe("Development", () => {
   it("check env and credentials", () => {
-    process.env.ENV = "dev";
+    process.env["ENV"] = "dev";
 
     const credentials = checkEnv();
     const uri = getUri(credentials);
@@ -30,7 +30,7 @@ describe("Development", () => {
 
 describe("Test", () => {
   it("check env and credentials", () => {
-    process.env.ENV = "test";
+    process.env["ENV"] = "test";
 
     const credentials = checkEnv();
     const uri = getUri(credentials);
