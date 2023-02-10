@@ -1,4 +1,12 @@
+import mongoose from "mongoose";
+
+const ObjectId = mongoose.Types.ObjectId;
+
 export const customerSchema = {
+  _id: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+  },
   firstName: {
     type: String,
     required: true,
@@ -26,10 +34,10 @@ export const customerSchema = {
 };
 
 export class CustomerCreateSchema {
-  props: {};
+  props: object;
 
   constructor(requestBody: object) {
-    this.props = { ...requestBody, createdAt: new Date() };
+    this.props = { _id: new ObjectId(), ...requestBody, createdAt: new Date() };
   }
   getData() {
     return this.props;
@@ -37,11 +45,20 @@ export class CustomerCreateSchema {
 }
 
 export class CustomerUpdateSchema {
-  props: {};
+  props: object;
+
   constructor(requestBody: object) {
     this.props = { ...requestBody };
   }
   getData() {
     return this.props;
+  }
+  validate() {
+    const values = Object.values(this.props).filter((value: string) => value);
+
+    if (values.length <= 0) {
+      return false;
+    }
+    return true;
   }
 }

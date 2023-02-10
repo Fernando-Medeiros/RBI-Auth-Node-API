@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   getAllCustomer,
+  getIdCustomer,
   createCustomer,
   updateCustomer,
   deleteCustomer,
@@ -8,8 +9,9 @@ import {
 
 export const route = Router();
 
-// BASIC CRUD
 route.get("/customers", getAllCustomer);
+
+route.get("/customers/:id", getIdCustomer);
 
 route.post("/customers", createCustomer);
 
