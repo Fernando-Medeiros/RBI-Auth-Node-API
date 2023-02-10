@@ -11,42 +11,65 @@ export const getAllCustomer = async (_req: Request, res: Response) => {
   res.status(200).json(result);
 };
 
+export const getIdCustomer = async (req: Request, res: Response) => {
+  try {
+    const id = req.params["id"];
+
+    const result = await CustomerModel.findById(id);
+
+    if (!result) {
+      throw new Error("Account does not exist!");
+    }
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json(`${error}`);
+  }
+};
+
 export const createCustomer = async (req: Request, res: Response) => {
   try {
     const data = new CustomerCreateSchema(req.body).getData();
 
-    await CustomerModel.create(data);
+    if (!(await CustomerModel.create(data))) {
+      throw new Error("Error processing the request!");
+    }
 
     res.status(201).json();
   } catch (error) {
-    res.status(400).json({ detail: `Error processing the request! ${error}` });
+    res.status(400).json(`${error}`);
   }
 };
 
 export const updateCustomer = async (req: Request, res: Response) => {
   try {
     const id = req.params["id"];
-    const data = new CustomerUpdateSchema(req.body).getData();
+    const data = new CustomerUpdateSchema(req.body);
 
-    await CustomerModel.findByIdAndUpdate(id, data);
+    if (!data.validate()) {
+      throw new Error("No content!");
+    }
+
+    if (!(await CustomerModel.findByIdAndUpdate(id, data.getData()))) {
+      throw new Error("Account does not exist!");
+    }
 
     res.status(204).json();
   } catch (error) {
-    res.status(400).json(`Invalid data! ${error}`);
+    res.status(400).json(`${error}`);
   }
 };
 
 export const deleteCustomer = async (req: Request, res: Response) => {
   try {
     const id = req.params["id"];
-    const result = await CustomerModel.findByIdAndRemove(id);
 
-    if (id && result === null) {
-      throw new Error();
+    if (!(await CustomerModel.findByIdAndRemove(id))) {
+      throw new Error("Account not found!");
     }
 
     res.status(204).json();
-  } catch {
-    res.status(400).json(`Account not found!`);
+  } catch (error) {
+    res.status(400).json(`${error}`);
   }
 };
