@@ -1,5 +1,5 @@
 import request from "supertest";
-import { expect, it, describe } from "vitest";
+import { expect, test, describe } from "vitest";
 import { testServer as server } from "../conftest";
 import { TestClient } from "../clients";
 import { CustomerCreateMock, CustomerUpdateMock } from "../mock/customers.mock";
@@ -7,14 +7,14 @@ import { CustomerCreateMock, CustomerUpdateMock } from "../mock/customers.mock";
 const req = request(server);
 
 describe("Get", () => {
-  it("get all", async () => {
+  test("get all", async () => {
     const resp = await req.get("/customers");
 
     expect(resp.statusCode).toBe(200);
     expect(resp.body).toBeTypeOf("object");
   });
 
-  it("by id", async () => {
+  test("by id", async () => {
     TestClient(async (id: string) => {
       const resp = await req.get(`/customers/${id}`);
 
@@ -23,7 +23,7 @@ describe("Get", () => {
     });
   });
 
-  it("try get by id", async () => {
+  test("try get by id", async () => {
     TestClient(async (id: string) => {
       const resp = await req.get(`/customers/${id}1`);
 
@@ -36,7 +36,7 @@ describe("Get", () => {
 });
 
 describe("Post", () => {
-  it("register new customer", async () => {
+  test("register new customer", async () => {
     const data = Object.assign({}, CustomerCreateMock.getData());
 
     const resp = await req.post("/customers").send(data);
@@ -44,7 +44,7 @@ describe("Post", () => {
     expect(resp.statusCode).toBe(201);
   });
 
-  it("try register new customer with invalid data", async () => {
+  test("try register new customer with invalid data", async () => {
     const data = Object.assign({}, CustomerCreateMock.getData());
 
     data["email"] = undefined;
@@ -57,7 +57,7 @@ describe("Post", () => {
 });
 
 describe("Patch", () => {
-  it("update first and last name", () =>
+  test("update first and last name", () =>
     TestClient(async (id: string) => {
       const data = Object.assign({}, CustomerUpdateMock.getData());
 
@@ -68,7 +68,7 @@ describe("Patch", () => {
       expect(resp.statusCode).toBe(204);
     }));
 
-  it("update email", () =>
+  test("update email", () =>
     TestClient(async (id: string) => {
       const data = Object.assign({}, CustomerUpdateMock.getData());
 
@@ -80,7 +80,7 @@ describe("Patch", () => {
       expect(resp.statusCode).toBe(204);
     }));
 
-  it("try update without content", () =>
+  test("try update without content", () =>
     TestClient(async (id: string) => {
       const data = Object.assign({}, CustomerUpdateMock.getData());
 
@@ -98,14 +98,14 @@ describe("Patch", () => {
 });
 
 describe("Delete", () => {
-  it("delete customer", () =>
+  test("delete customer", () =>
     TestClient(async (id: string) => {
       const resp = await req.delete(`/customers/${id}`);
 
       expect(resp.statusCode).toBe(204);
     }));
 
-  it("try deleting the same customer twice", () =>
+  test("try deleting the same customer twice", () =>
     TestClient(async (id: string) => {
       await req.delete(`/customers/${id}`);
 
@@ -115,7 +115,7 @@ describe("Delete", () => {
       expect(resp.body).toBeTypeOf("string");
     }));
 
-  it("try delete inexist customer", () =>
+  test("try delete inexist customer", () =>
     TestClient(async (id: string) => {
       const resp = await req.delete(`/customers/${id}1`);
 
