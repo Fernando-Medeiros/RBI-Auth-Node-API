@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "test": "vitest",
     "start:dev": "nodemon --watch 'src/' --exec 'ts-node-esm src/index.ts' -e ts",
@@ -10,7 +11,6 @@
     "start": "node build/index.js"
   },
   "keywords": [],
-  "type": "commonjs",
   "author": "Fernando-Medeiros",
   "license": "ISC",
   "dependencies": {
