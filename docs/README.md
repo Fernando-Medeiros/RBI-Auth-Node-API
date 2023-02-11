@@ -2,11 +2,6 @@
 
 > Projeto Server - API utilizando **NodeJs** para o jogo **Red Boar Inn**
 
-- [Tasks](tasks.md)
-- [Tests](tests.md)
-
->
-
 - [Red-Boar-Inn API](#red-boar-inn-api)
   - [Estrutura](#estrutura)
   - [Modelagem](#modelagem)
@@ -17,10 +12,13 @@
 .
 ├── docs
 │   ├── CLI.md
+│   ├── Diagrama de Fluxo AccessToken.png
+│   ├── Diagrama de Fluxo RefreshToken.png
 │   ├── MBD-RBI.png
 │   ├── README.md
 │   ├── tasks.md
-│   └── tests.md
+│   ├── tests.md
+│   └── userCase.png
 ├── package.json
 ├── package-lock.json
 ├── src
@@ -50,12 +48,28 @@
 │           ├── auth.spec.ts
 │           └── customers.spec.ts
 ├── tsconfig.json
+├── vitest.config.ts
 └── yarn.lock
 
-12 directories, 24 files
-
+12 directories, 28 files
 ```
 
 ## Modelagem
 
-![MBD](MBD-RBI.png)
+<div style="display: flex; gap:10px; align-items:center">
+
+<img width=400px src="MBD-RBI.png" />
+
+<img width=400px src="userCase.png" />
+
+</div>
+
+<br>
+
+<div style="display: flex; gap:10px; align-items:center">
+
+<img width=400px src="Diagrama%20de%20Fluxo%20AccessToken.png" />
+
+<img width=400px src="Diagrama%20de%20Fluxo%20RefreshToken.png" />
+
+</div>
