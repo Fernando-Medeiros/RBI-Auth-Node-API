@@ -5,86 +5,78 @@
 - [Red-Boar-Inn API](#red-boar-inn-api)
   - [Estrutura](#estrutura)
   - [Modelagem](#modelagem)
-  - [Diagramas -\> Auth](#diagramas---auth)
-  - [Diagramas -\> Customers](#diagramas---customers)
+  - [Diagramas - Auth](#diagramas---auth)
+  - [Diagramas - Customers](#diagramas---customers)
 
 ## Estrutura
 
 ```sh
 .
 ├── docs
-│   ├── Diagrama de Fluxo AccessToken.png
-│   ├── Diagrama de Fluxo Post Customers.png
-│   ├── Diagrama de Fluxo RefreshToken.png
-│   ├── MBD-RBI.png
-│   ├── README.md
-│   ├── tasks.md
-│   ├── tests.md
-│   ├── tips.md
-│   └── userCase.png
+│   ├── Diagrama-de-Fluxo-AccessToken.png
+│   ├── Diagrama-de-Fluxo-Post-Customers.png
+│   ├── Diagrama-de-Fluxo-RefreshToken.png
+│   ├── MBD-RBI.png
+│   ├── README.md
+│   ├── tasks.md
+│   ├── tests.md
+│   ├── tips.md
+│   └── userCase.png
 ├── package.json
 ├── package-lock.json
 ├── src
-│   ├── controllers
-│   │   └── customer.controller.ts
-│   ├── database
-│   │   └── connect.ts
-│   ├── index.ts
-│   ├── models
-│   │   ├── customer.model.ts
-│   │   ├── entities
-│   │   │   └── customer.ts
-│   │   └── schemas
-│   │       └── customer.schema.ts
-│   ├── resources
-│   │   ├── auth.ts
-│   │   ├── customer.ts
-│   │   └── server.ts
-│   └── tests
-│       ├── clients.ts
-│       ├── conftest.ts
-│       ├── connection
-│       │   └── database.spec.ts
-│       ├── mock
-│       │   └── customers.mock.ts
-│       └── resources
-│           ├── auth.spec.ts
-│           └── customers.spec.ts
+│   ├── controllers
+│   │   └── customer.controller.ts
+│   ├── index.ts
+│   ├── models
+│   │   ├── characters.model.ts
+│   │   ├── customers.model.ts
+│   │   ├── entities
+│   │   │   └── customer.ts
+│   │   ├── equipments.model.ts
+│   │   ├── inventories.model.ts
+│   │   ├── schemas
+│   │   │   └── customer.schema.ts
+│   │   ├── skills.model.ts
+│   │   └── status.model.ts
+│   ├── resources
+│   │   ├── auth.ts
+│   │   └── customer.ts
+│   ├── server.ts
+│   ├── services
+│   │   └── mongodb.ts
+│   └── tests
+│       ├── clients.ts
+│       ├── conftest.ts
+│       ├── mock
+│       │   └── customers.mock.ts
+│       ├── resources
+│       │   ├── auth.spec.ts
+│       │   └── customers.spec.ts
+│       └── services
+│           └── mongo.connect.spec.ts
 ├── tsconfig.json
 ├── vitest.config.ts
 └── yarn.lock
 
-12 directories, 29 files
+12 directories, 34 files
+
 ```
 
 ## Modelagem
 
-<div style="display: flex; gap:10px; align-items:center">
+|                     |                           |
+| ------------------- | :-----------------------: |
+| ![MBD](MBD-RBI.png) | ![userCase](userCase.png) |
 
-<img width=400px src="MBD-RBI.png" />
+## Diagramas - Auth
 
-<img width=400px src="userCase.png" />
+|                                                   |                                                     |
+| ------------------------------------------------- | :-------------------------------------------------: |
+| ![AccessToken](Diagrama-de-Fluxo-AccessToken.png) | ![RefreshToken](Diagrama-de-Fluxo-RefreshToken.png) |
 
-</div>
+## Diagramas - Customers
 
-<br>
-
-## Diagramas -> Auth
-
-<div style="display: flex; gap:10px; align-items:center">
-
-<img width=400px src="Diagrama%20de%20Fluxo%20AccessToken.png" />
-
-<img width=400px src="Diagrama%20de%20Fluxo%20RefreshToken.png" />
-
-</div>
-
-<br>
-
-## Diagramas -> Customers
-
-<div style="display: flex; gap:10px; align-items:center">
-
-<img width=400px src="Diagrama%20de%20Fluxo%20Post%20Customers.png" />
-
-</div>
+|                                                    |     |
+| -------------------------------------------------- | :-: |
+| ![Customers](Diagrama-de-Fluxo-Post-Customers.png) |     |
