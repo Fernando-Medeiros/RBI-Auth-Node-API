@@ -1,4 +1,4 @@
-import { CustomerModel } from "../models/customer.model";
+import { CustomerModel } from "../models/customers.model";
 import type { Request, Response } from "express";
 import {
   CustomerCreateSchema,

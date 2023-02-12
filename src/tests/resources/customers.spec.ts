@@ -6,6 +6,27 @@ import { CustomerCreateMock, CustomerUpdateMock } from "../mock/customers.mock";
 
 const req = request(server);
 
+describe("Post", () => {
+  test("register new customer", async () => {
+    const data = Object.assign({}, CustomerCreateMock.getData());
+
+    const resp = await req.post("/customers").send(data);
+
+    expect(resp.statusCode).toBe(201);
+  });
+
+  test("try register new customer with invalid data", async () => {
+    const data = Object.assign({}, CustomerCreateMock.getData());
+
+    data["email"] = undefined;
+
+    const resp = await req.post("/customers").send(data);
+
+    expect(resp.statusCode).toBe(400);
+    expect(resp.body).toBeTypeOf("string");
+  });
+});
+
 describe("Get", () => {
   test("get all", async () => {
     const resp = await req.get("/customers");
@@ -33,27 +54,6 @@ describe("Get", () => {
   });
 
   // add 401
-});
-
-describe("Post", () => {
-  test("register new customer", async () => {
-    const data = Object.assign({}, CustomerCreateMock.getData());
-
-    const resp = await req.post("/customers").send(data);
-
-    expect(resp.statusCode).toBe(201);
-  });
-
-  test("try register new customer with invalid data", async () => {
-    const data = Object.assign({}, CustomerCreateMock.getData());
-
-    data["email"] = undefined;
-
-    const resp = await req.post("/customers").send(data);
-
-    expect(resp.statusCode).toBe(400);
-    expect(resp.body).toBeTypeOf("string");
-  });
 });
 
 describe("Patch", () => {
