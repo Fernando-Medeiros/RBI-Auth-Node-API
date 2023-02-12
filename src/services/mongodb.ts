@@ -30,11 +30,10 @@ export const getUri = ({ username = "", password = "", database = "" }) => {
 export const connectToDatabase = async () => {
   const uri = getUri(checkEnv()) || "";
 
-  await connect(uri),
-    (error: string) => {
-      if (error) {
-        return console.log(`Error connecting to the database! ${error}`);
-      }
-      return console.log(`Connected to the database -> ${process.env["ENV"]}`);
-    };
+  await connect(uri, (error) => {
+    if (error) {
+      return console.log(`Error connecting to the database! ${error}`);
+    }
+    console.log(`Connected to the database -> ${process.env["ENV"]}`);
+  });
 };
