@@ -4,7 +4,7 @@ process.env["ENV"] = "test";
 process.env["PORT"] = "5000";
 
 import { connectToDatabase } from "../services/connect";
-import { server } from "../resources/server";
+import { server } from "../server";
 
 config();
 

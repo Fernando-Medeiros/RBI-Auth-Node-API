@@ -1,6 +1,6 @@
 import express from "express";
-import { route as customer } from "./customer";
-import { route as auth } from "./auth";
+import { route as customer } from "./resources/customer";
+import { route as auth } from "./resources/auth";
 
 export const server = express();
 
