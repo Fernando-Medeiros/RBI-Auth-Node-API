@@ -16,6 +16,7 @@
 │   ├── Diagrama-de-Fluxo-AccessToken.png
 │   ├── Diagrama-de-Fluxo-Post-Customers.png
 │   ├── Diagrama-de-Fluxo-RefreshToken.png
+│   ├── Diagrama-de-Sequencia-Endpoints.png
 │   ├── MBD-RBI.png
 │   ├── README.md
 │   ├── tasks.md
@@ -26,7 +27,9 @@
 ├── package-lock.json
 ├── src
 │   ├── controllers
-│   │   └── customer.controller.ts
+│   │   ├── customer.controller.ts
+│   │   └── handlers
+│   │       └── customer.handler.ts
 │   ├── index.ts
 │   ├── models
 │   │   ├── characters.model.ts
@@ -36,7 +39,12 @@
 │   │   ├── equipments.model.ts
 │   │   ├── inventories.model.ts
 │   │   ├── schemas
-│   │   │   └── customer.schema.ts
+│   │   │   ├── character.schema.ts
+│   │   │   ├── customer.schema.ts
+│   │   │   ├── equipment.schema.ts
+│   │   │   ├── inventory.schema.ts
+│   │   │   ├── skills.schema.ts
+│   │   │   └── status.schema.ts
 │   │   ├── skills.model.ts
 │   │   └── status.model.ts
 │   ├── resources
@@ -59,8 +67,7 @@
 ├── vitest.config.ts
 └── yarn.lock
 
-12 directories, 34 files
-
+13 directories, 41 files
 ```
 
 ## Modelagem
@@ -77,6 +84,6 @@
 
 ## Diagramas - Customers
 
-|                                                    |     |
-| -------------------------------------------------- | :-: |
-| ![Customers](Diagrama-de-Fluxo-Post-Customers.png) |     |
+|                                                    |                                                   |
+| -------------------------------------------------- | :-----------------------------------------------: |
+| ![Customers](Diagrama-de-Fluxo-Post-Customers.png) | ![Customers](Diagrama-de-Sequencia-Endpoints.png) |
