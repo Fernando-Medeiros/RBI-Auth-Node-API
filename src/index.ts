@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import { connectToDatabase } from "./database/connect";
+import { connectToDatabase } from "./services/connect";
 import { startServer } from "./resources/server";
 
 config();

@@ -1,6 +1,6 @@
 import { expect, describe, test } from "vitest";
 import { config } from "dotenv";
-import { checkEnv, getUri } from "../../database/connect";
+import { checkEnv, getUri } from "../../services/connect";
 
 config();
 
