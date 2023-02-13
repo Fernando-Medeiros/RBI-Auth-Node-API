@@ -2,37 +2,32 @@ import { set, connect } from "mongoose";
 
 set("strictQuery", false);
 
-export const checkEnv = () => {
-  const _env = process.env["ENV"] || "dev";
-  let dbName = process.env["MONGO_DEV_DATABASE"];
-
-  if (_env.toLowerCase() === "pro") {
-    dbName = process.env["MONGO_DATABASE"];
-  } else if (_env.toLowerCase() === "test") {
-    dbName = process.env["MONGO_TEST_DATABASE"];
-  }
-
-  return {
+export const getCredentials = (): string => {
+  const payload = {
     username: process.env["MONGO_USERNAME"],
     password: process.env["MONGO_PASSWORD"],
-    database: dbName,
+    database: process.env["MONGO_DEV_DATABASE"],
   };
-};
 
-export const getUri = ({ username = "", password = "", database = "" }) => {
-  try {
-    return `mongodb+srv://${username}:${password}.cy0lncg.mongodb.net/${database}?retryWrites=true&w=majority`;
-  } catch (error) {
-    return console.log(`Invalid or missing credentials! ${error}`);
+  const env = process.env["ENV"] || "dev";
+
+  switch (env.toLowerCase()) {
+    case "pro":
+      payload.database = process.env["MONGO_DATABASE"];
+      break;
+    case "test":
+      payload.database = process.env["MONGO_TEST_DATABASE"];
+      break;
   }
+  return `mongodb+srv://${payload.username}:${payload.password}.cy0lncg.mongodb.net/${payload.database}?retryWrites=true&w=majority`;
 };
 
 export const connectToDatabase = async () => {
-  const uri = getUri(checkEnv()) || "";
+  const uri: string = getCredentials();
 
   await connect(uri, (error) => {
     if (error) {
-      return console.log(`Error connecting to the database! ${error}`);
+      throw new Error(`Error connecting to the database! ${error}`);
     }
     console.log(`Connected to the database -> ${process.env["ENV"]}`);
   });
