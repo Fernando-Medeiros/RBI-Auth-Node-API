@@ -1,21 +1,17 @@
-import { CustomerModel } from "../models/customers.model";
 import type { Request, Response } from "express";
-import {
-  CustomerCreateSchema,
-  CustomerUpdateSchema,
-} from "../models/schemas/customer.schema";
+import { CustomerHandler } from "./handlers/customer.handler";
+
+const handler = new CustomerHandler();
 
 export const getAllCustomer = async (_req: Request, res: Response) => {
-  const result = await CustomerModel.find();
+  const result = await handler.getAllCustomer();
 
   res.status(200).json(result);
 };
 
 export const getIdCustomer = async (req: Request, res: Response) => {
   try {
-    const id = req.params["id"];
-
-    const result = await CustomerModel.findById(id);
+    const result = await handler.getIdCustomer(req);
 
     if (!result) {
       throw new Error("Account does not exist!");
@@ -23,53 +19,48 @@ export const getIdCustomer = async (req: Request, res: Response) => {
 
     res.status(200).json(result);
   } catch (error) {
-    res.status(400).json(`${error}`);
+    res.status(404).json({ detail: `${error}` });
   }
 };
 
 export const createCustomer = async (req: Request, res: Response) => {
   try {
-    const data = new CustomerCreateSchema(req.body).getData();
+    const result = await handler.createCustomer(req);
 
-    if (!(await CustomerModel.create(data))) {
+    if (!result) {
       throw new Error("Error processing the request!");
     }
 
     res.status(201).json();
   } catch (error) {
-    res.status(400).json(`${error}`);
+    res.status(400).json({ detail: `${error}` });
   }
 };
 
 export const updateCustomer = async (req: Request, res: Response) => {
   try {
-    const id = req.params["id"];
-    const data = new CustomerUpdateSchema(req.body);
+    const result = await handler.updateCustomer(req);
 
-    if (!data.validate()) {
-      throw new Error("No content!");
-    }
-
-    if (!(await CustomerModel.findByIdAndUpdate(id, data.getData()))) {
+    if (!result) {
       throw new Error("Account does not exist!");
     }
 
     res.status(204).json();
   } catch (error) {
-    res.status(400).json(`${error}`);
+    res.status(400).json({ detail: `${error}` });
   }
 };
 
 export const deleteCustomer = async (req: Request, res: Response) => {
   try {
-    const id = req.params["id"];
+    const result = await handler.deleteCustomer(req);
 
-    if (!(await CustomerModel.findByIdAndRemove(id))) {
+    if (!result) {
       throw new Error("Account not found!");
     }
 
     res.status(204).json();
   } catch (error) {
-    res.status(400).json(`${error}`);
+    res.status(400).json({ detail: `${error}` });
   }
 };
