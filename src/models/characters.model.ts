@@ -1,30 +1,25 @@
 import { Schema, model } from "mongoose";
 import mongoose from "mongoose";
 
-export const customerSchema = {
+export const characterSchema = {
   _id: {
     type: mongoose.Types.ObjectId,
     required: true,
   },
-  firstName: {
+  level: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
+  charName: {
     type: String,
     required: true,
     minlength: 4,
   },
-  lastName: {
+  class: {
     type: String,
     required: true,
     minlength: 4,
-  },
-  email: {
-    type: String,
-    required: true,
-    minlength: 9,
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 8,
   },
   createdAt: {
     type: Date,
@@ -32,6 +27,6 @@ export const customerSchema = {
   },
 };
 
-const schema = new Schema(customerSchema);
+const schema = new Schema(characterSchema);
 
-export const CustomerModel = model("Customers", schema);
+export const CharactersModel = model("Characters", schema);
