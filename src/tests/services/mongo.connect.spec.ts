@@ -1,6 +1,6 @@
 import { expect, describe, test } from "vitest";
 import { config } from "dotenv";
-import { checkEnv, getUri } from "../../services/mongodb";
+import { getCredentials } from "../../services/mongodb";
 
 config();
 
@@ -8,11 +8,9 @@ describe("Production", () => {
   test("check env and credentials", () => {
     process.env["ENV"] = "pro";
 
-    const credentials = checkEnv();
-    const uri = getUri(credentials);
+    const credentials = getCredentials();
 
-    expect(credentials.database).toEqual("PRODUCTION");
-    expect(uri).toContain("PRODUCTION");
+    expect(credentials).toContain("PRODUCTION");
   });
 });
 
@@ -20,11 +18,9 @@ describe("Development", () => {
   test("check env and credentials", () => {
     process.env["ENV"] = "dev";
 
-    const credentials = checkEnv();
-    const uri = getUri(credentials);
+    const credentials = getCredentials();
 
-    expect(credentials.database).toEqual("DEVELOPMENT");
-    expect(uri).toContain("DEVELOPMENT");
+    expect(credentials).toContain("DEVELOPMENT");
   });
 });
 
@@ -32,10 +28,8 @@ describe("Test", () => {
   test("check env and credentials", () => {
     process.env["ENV"] = "test";
 
-    const credentials = checkEnv();
-    const uri = getUri(credentials);
+    const credentials = getCredentials();
 
-    expect(credentials.database).toEqual("TEST");
-    expect(uri).toContain("TEST");
+    expect(credentials).toContain("TEST");
   });
 });
