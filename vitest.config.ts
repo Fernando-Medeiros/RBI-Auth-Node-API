@@ -7,5 +7,6 @@ export default defineConfig({
     globals: true,
     environment: "node",
     includeSource: ["src/**/*.{js,ts}"],
+    include: ["**/*.{test,spec}.{js,ts}"],
   },
 });

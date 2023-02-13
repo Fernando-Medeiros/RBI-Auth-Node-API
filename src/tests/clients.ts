@@ -1,19 +1,35 @@
-import type { ObjectId } from "mongoose";
-
 import request from "supertest";
+import { beforeAll, afterAll } from "vitest";
 import { testServer as server } from "./conftest";
-import { CustomerCreateMock } from "./mock/customers.mock";
+import { CustomerCreateMock, CustomerUpdateMock } from "./mock/customers.mock";
 
 const req = request(server);
 
-const data = Object.assign({}, CustomerCreateMock.getData());
+export class CustomerMock {
+  customerData = CustomerCreateMock;
+  customerUpdate = CustomerUpdateMock;
 
-const _id: ObjectId = data["_id"].toHexString();
+  getDataToUpdate() {
+    return Object.assign({}, this.customerUpdate.getData);
+  }
 
-export const TestClient = async (innerFunction: Function) => {
-  Promise.all([
-    await req.post("/customers").send(data),
-    await innerFunction(_id),
-    await req.delete(`/customers/${_id}`),
-  ]);
-};
+  getDataToCreate() {
+    return Object.assign({}, this.customerData.getData);
+  }
+
+  getId(): string {
+    return this.customerData.getid;
+  }
+
+  beforeAll(): void {
+    beforeAll(async () => {
+      const result = await req.post("/customers").send(this.getDataToCreate());
+    });
+  }
+
+  afterAll(): void {
+    afterAll(async () => {
+      await req.delete(`/customers/${this.getId()}`);
+    });
+  }
+}
