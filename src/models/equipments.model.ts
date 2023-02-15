@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 import mongoose from "mongoose";
 
-export const equipmentsSchema = {
+const equipmentsSchema = {
   _id: {
     type: mongoose.Types.ObjectId,
     required: true,

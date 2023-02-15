@@ -1,18 +1,18 @@
 import { Schema, model } from "mongoose";
 import mongoose from "mongoose";
 
-export const inventoriesSchema = {
+const inventoriesSchema = {
   _id: {
     type: mongoose.Types.ObjectId,
     required: true,
   },
   gold: {
     type: Number,
-    default: 0,
+    default: 1,
   },
   jewel: {
     type: Number,
-    default: 0,
+    default: 1,
   },
 };
 
