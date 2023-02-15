@@ -13,9 +13,9 @@ interface PropsCreate {
 }
 
 interface PropsUpdate {
-  firstName: string;
-  lastName: string;
-  email: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
 }
 
 export class CustomerCreateSchema {
@@ -53,12 +53,7 @@ export class CustomerUpdateSchema {
   }
 
   validateFields(): boolean {
-    const values = Object.values(this.props).filter((value: string) => value);
-
-    if (values.length <= 0) {
-      return false;
-    }
-    return true;
+    return Object.values(this.props).length === 0 ?  false : true
   }
 
   constructor(requestBody: PropsUpdate) {
