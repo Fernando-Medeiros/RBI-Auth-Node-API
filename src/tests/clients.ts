@@ -3,7 +3,7 @@ import { beforeAll, afterAll } from "vitest";
 import { testServer as server } from "./conftest";
 import { CustomerCreateMock, CustomerUpdateMock } from "./mock/customers.mock";
 
-const req = request(server);
+export const req = request(server);
 
 export class CustomerMock {
   customerData = CustomerCreateMock;
@@ -21,9 +21,17 @@ export class CustomerMock {
     return this.customerData.getid;
   }
 
+  async getHashPassword(): Promise<string> {
+    return await this.customerData.hashPassword();
+  }
+
+  async compareHashPassword(password: string): Promise<boolean> {
+    return await this.customerData.compareHashPassword(password);
+  }
+
   beforeAll(): void {
     beforeAll(async () => {
-      const result = await req.post("/customers").send(this.getDataToCreate());
+      await req.post("/customers").send(this.getDataToCreate());
     });
   }
 

@@ -1,9 +1,5 @@
-import request from "supertest";
 import { expect, test, describe } from "vitest";
-import { testServer as server } from "../../conftest";
-import { CustomerMock } from "../../clients";
-
-const req = request(server);
+import { CustomerMock, req } from "../../clients";
 
 const mock = new CustomerMock();
 
