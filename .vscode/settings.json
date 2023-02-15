@@ -6,5 +6,8 @@
   "workbench.colorCustomizations": {
     "editorInlayHint.background": "#ffffff00",
     "editorInlayHint.foreground": "#66f2fc72"
-  }
+  },
+  "window.autoDetectColorScheme": true,
+  "workbench.preferredLightColorTheme": "Vitesse Light",
+  "workbench.preferredDarkColorTheme": "Vitesse Dark Soft"
 }
