@@ -3,7 +3,7 @@ import { CustomerModel } from "../../models/customers.model";
 import {
   CustomerCreateSchema,
   CustomerUpdateSchema,
-} from "../../schemas/customer.schema";
+} from "../../entities/customer";
 
 export class CustomerHandler {
   async getAllCustomer() {

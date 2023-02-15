@@ -1,7 +1,7 @@
 import {
   CustomerCreateSchema,
   CustomerUpdateSchema,
-} from "../../schemas/customer.schema";
+} from "../../entities/customer";
 
 export const CustomerCreateMock = new CustomerCreateSchema({
   firstName: "Tester",
