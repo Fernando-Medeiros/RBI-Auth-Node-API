@@ -9,22 +9,26 @@ export const customerSchema = {
   firstName: {
     type: String,
     required: true,
-    minlength: 4,
+    minlength: 3,
+    maxlength: 20,
   },
   lastName: {
     type: String,
     required: true,
-    minlength: 4,
+    minlength: 3,
+    maxlength: 20,
   },
   email: {
     type: String,
     required: true,
-    minlength: 9,
+    minlength: 11,
+    maxlength: 60,
   },
   password: {
     type: String,
     required: true,
     minlength: 8,
+    maxlength: 255,
   },
   createdAt: {
     type: Date,
