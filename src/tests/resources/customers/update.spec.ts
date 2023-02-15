@@ -10,7 +10,7 @@ describe("Patch", () => {
   test("update first and last name", async () => {
     const payload = mock.getDataToUpdate();
 
-    payload.email = "";
+    delete payload.email
 
     const resp = await req.patch(`/customers/${mock.getId()}`).send(payload);
 
@@ -21,8 +21,8 @@ describe("Patch", () => {
   test("update email", async () => {
     const payload = mock.getDataToUpdate();
 
-    payload.firstName = "";
-    payload.lastName = "";
+    delete payload.firstName
+    delete payload.lastName
 
     const resp = await req.patch(`/customers/${mock.getId()}`).send(payload);
 
@@ -31,14 +31,8 @@ describe("Patch", () => {
   });
 
   test("try update without content", async () => {
-    const payload = mock.getDataToUpdate();
-
-    payload.firstName = "";
-    payload.lastName = "";
-    payload.email = "";
-
-    const resp = await req.patch(`/customers/${mock.getId()}`).send(payload);
-
+    const resp = await req.patch(`/customers/${mock.getId()}`).send({});
+    
     expect(resp.statusCode).toBe(400);
     expect(resp.body).toBeTypeOf("object");
   });
