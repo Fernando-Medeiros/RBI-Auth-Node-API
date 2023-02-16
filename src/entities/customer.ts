@@ -1,15 +1,16 @@
+import type { Schema } from "mongoose";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
 const ObjectId = mongoose.Types.ObjectId;
 
-interface PropsCreate {
-  _id: mongoose.Types.ObjectId;
+export interface PropsCreate {
+  _id: Schema.Types.ObjectId;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-  createdAt: Date;
+  createdAt?: Date;
 }
 
 interface PropsUpdate {
@@ -41,7 +42,6 @@ export class CustomerCreateSchema {
   constructor(requestBody: PropsCreate) {
     this.props = requestBody;
     this.props._id = this.props._id || new ObjectId();
-    this.props.createdAt = this.props.createdAt || new Date();
   }
 }
 
@@ -53,7 +53,7 @@ export class CustomerUpdateSchema {
   }
 
   validateFields(): boolean {
-    return Object.values(this.props).length === 0 ?  false : true
+    return Object.values(this.props).length === 0 ? false : true;
   }
 
   constructor(requestBody: PropsUpdate) {

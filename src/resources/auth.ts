@@ -1,7 +1,8 @@
 import { Router } from "express";
+import { login, refresh } from "../controllers/auth.controller";
 
 export const route = Router();
 
-route.get("/auth", (_req, res) => {
-  return res.json({ test: "test" });
-});
+route.post("/token", login);
+
+route.post("/refresh", refresh);
