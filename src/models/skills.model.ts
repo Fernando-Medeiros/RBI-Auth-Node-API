@@ -1,9 +1,8 @@
 import { Schema, model } from "mongoose";
-import mongoose from "mongoose";
 
 const skillsSchema = {
   _id: {
-    type: mongoose.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     required: true,
   },
   slash: {
