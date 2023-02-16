@@ -11,55 +11,65 @@
 ```sh
 .
 ├── docs
-│   ├── auth.png
-│   ├── customers.png
-│   ├── modeling.png
-│   ├── README.md
-│   ├── tasks.md
-│   ├── tests.md
-│   └── tips.md
+│   ├── auth.png
+│   ├── customers.png
+│   ├── modeling.png
+│   ├── README.md
+│   ├── tasks.md
+│   ├── tests.md
+│   └── tips.md
+├── src
+│   ├── controllers
+│   │   ├── handlers
+│   │   │   ├── auth.handler.ts
+│   │   │   └── customer.handler.ts
+│   │   ├── auth.controller.ts
+│   │   └── customer.controller.ts
+│   ├── entities
+│   │   └── customer.ts
+│   ├── models
+│   │   ├── characters.model.ts
+│   │   ├── customers.model.ts
+│   │   ├── equipments.model.ts
+│   │   ├── inventories.model.ts
+│   │   ├── skills.model.ts
+│   │   └── status.model.ts
+│   ├── resources
+│   │   ├── auth.ts
+│   │   └── customer.ts
+│   ├── security
+│   │   └── token.ts
+│   ├── services
+│   │   └── mongodb.ts
+│   ├── tests
+│   │   ├── mock
+│   │   │   └── customers.mock.ts
+│   │   ├── resources
+│   │   │   ├── auth
+│   │   │   │   ├── access.spec.ts
+│   │   │   │   └── refresh.spec.ts
+│   │   │   └── customers
+│   │   │       ├── delete.spec.ts
+│   │   │       ├── get.spec.ts
+│   │   │       ├── post.spec.ts
+│   │   │       ├── unit.spec.ts
+│   │   │       └── update.spec.ts
+│   │   ├── security
+│   │   │   └── token.spec.ts
+│   │   ├── services
+│   │   │   └── mongo.connect.spec.ts
+│   │   ├── clients.ts
+│   │   └── conftest.ts
+│   ├── index.ts
+│   └── server.ts
+├── env.example
 ├── package.json
 ├── package-lock.json
-├── src
-│   ├── controllers
-│   │   ├── customer.controller.ts
-│   │   └── handlers
-│   │       └── customer.handler.ts
-│   ├── index.ts
-│   ├── models
-│   │   ├── characters.model.ts
-│   │   ├── customers.model.ts
-│   │   ├── equipments.model.ts
-│   │   ├── inventories.model.ts
-│   │   ├── skills.model.ts
-│   │   └── status.model.ts
-│   ├── resources
-│   │   ├── auth.ts
-│   │   └── customer.ts
-│   ├── schemas
-│   │   └── customer.schema.ts
-│   ├── server.ts
-│   ├── services
-│   │   └── mongodb.ts
-│   └── tests
-│       ├── clients.ts
-│       ├── conftest.ts
-│       ├── mock
-│       │   └── customers.mock.ts
-│       ├── resources
-│       │   ├── auth.spec.ts
-│       │   └── customers
-│       │       ├── delete.spec.ts
-│       │       ├── get.spec.ts
-│       │       ├── post.spec.ts
-│       │       └── update.spec.ts
-│       └── services
-│           └── mongo.connect.spec.ts
 ├── tsconfig.json
 ├── vitest.config.ts
 └── yarn.lock
 
-13 directories, 35 files
+16 directories, 42 files
 ```
 
 ## Modelagem
