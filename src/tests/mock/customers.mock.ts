@@ -8,6 +8,7 @@ export const CustomerCreateMock = new CustomerCreateSchema({
   lastName: "DevSan",
   email: `tester-${Math.random()}@tester.com`,
   password: "tester@123",
+  createdAt: new Date(),
 });
 
 export const CustomerUpdateMock = new CustomerUpdateSchema({

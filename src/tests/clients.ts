@@ -9,6 +9,12 @@ export class CustomerMock {
   customerData = CustomerCreateMock;
   customerUpdate = CustomerUpdateMock;
 
+  getDataToLogin() {
+    return {
+      email: this.customerData.getData.email,
+      password: this.customerData.getData.password,
+    };
+  }
   getDataToUpdate() {
     return Object.assign({}, this.customerUpdate.getData);
   }
@@ -27,6 +33,16 @@ export class CustomerMock {
 
   async compareHashPassword(password: string): Promise<boolean> {
     return await this.customerData.compareHashPassword(password);
+  }
+
+  async getAccessToken(): Promise<string> {
+    const tokens = await req.post("/token").send(this.getDataToLogin());
+    return tokens.body.access;
+  }
+
+  async getRefreshToken(): Promise<string> {
+    const tokens = await req.post("/token").send(this.getDataToLogin());
+    return tokens.body.refresh;
   }
 
   beforeAll(): void {

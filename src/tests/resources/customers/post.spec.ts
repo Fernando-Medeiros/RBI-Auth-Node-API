@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { expect, test, describe } from "vitest";
 import { CustomerMock, req } from "../../clients";
 
@@ -24,7 +25,11 @@ describe("Post", () => {
   });
 
   test("try to register new customer with email already registered", async () => {
-    const resp = await req.post("/customers").send(mock.getDataToCreate());
+    const ObjectId = mongoose.Types.ObjectId;
+    const data = mock.getDataToCreate();
+    data._id = new ObjectId();
+
+    const resp = await req.post("/customers").send(data);
 
     expect(resp.statusCode).toBe(400);
     expect(resp.body).toBeTypeOf("object");

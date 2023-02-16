@@ -9,9 +9,10 @@ describe("Get", () => {
 
   test("get all customers", async () => {
     const resp = await req.get("/customers");
-
+    
     expect(resp.statusCode).toBe(200);
     expect(resp.body).toBeTypeOf("object");
+    expect(resp.body.length).toBeGreaterThan(0);
   });
 
   test("get customer by id", async () => {
