@@ -13,10 +13,6 @@ export const getIdCustomer = async (req: Request, res: Response) => {
   try {
     const result = await handler.getIdCustomer(req);
 
-    if (!result) {
-      throw new Error("Account does not exist!");
-    }
-
     res.status(200).json(result);
   } catch (error) {
     res.status(404).json({ detail: `${error}` });
@@ -25,11 +21,7 @@ export const getIdCustomer = async (req: Request, res: Response) => {
 
 export const createCustomer = async (req: Request, res: Response) => {
   try {
-    const result = await handler.createCustomer(req);
-
-    if (!result) {
-      throw new Error("Error processing the request!");
-    }
+    await handler.createCustomer(req);
 
     res.status(201).json();
   } catch (error) {
@@ -39,11 +31,7 @@ export const createCustomer = async (req: Request, res: Response) => {
 
 export const updateCustomer = async (req: Request, res: Response) => {
   try {
-    const result = await handler.updateCustomer(req);
-
-    if (!result) {
-      throw new Error("Account does not exist!");
-    }
+    await handler.updateCustomer(req); 
 
     res.status(204).json();
   } catch (error) {
@@ -53,11 +41,7 @@ export const updateCustomer = async (req: Request, res: Response) => {
 
 export const deleteCustomer = async (req: Request, res: Response) => {
   try {
-    const result = await handler.deleteCustomer(req);
-
-    if (!result) {
-      throw new Error("Account not found!");
-    }
+    await handler.deleteCustomer(req);
 
     res.status(204).json();
   } catch (error) {

@@ -1,5 +1,5 @@
-import { env } from "process";
 import type { Algorithm } from "jsonwebtoken";
+import { env } from "process";
 import Jwt from "jsonwebtoken";
 
 const SECRET = env["SECRET_KEY"] || `${Math.random()}`;

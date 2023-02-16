@@ -22,4 +22,4 @@ route.delete("/customers/:id", deleteCustomer);
 // QUERY
 // get all - (filter by) - (limite) - (asc || des)
 
-// get by - (id) - (email) - (firstName || lastName)
+// get by - (email) - (firstName || lastName)
