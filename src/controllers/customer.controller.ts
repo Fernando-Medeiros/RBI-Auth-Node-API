@@ -31,7 +31,7 @@ export const createCustomer = async (req: Request, res: Response) => {
 
 export const updateCustomer = async (req: Request, res: Response) => {
   try {
-    await handler.updateCustomer(req); 
+    await handler.updateCustomer(req);
 
     res.status(204).json();
   } catch (error) {
