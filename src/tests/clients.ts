@@ -45,6 +45,15 @@ export class CustomerMock {
     return tokens.body.refresh;
   }
 
+  async getAuthorization(scope: string = "access"): Promise<object> {
+    const token =
+      scope === "access"
+        ? await this.getAccessToken()
+        : await this.getRefreshToken();
+
+    return { Authorization: `bearer ${token}` };
+  }
+
   beforeAll(): void {
     beforeAll(async () => {
       await req.post("/customers").send(this.getDataToCreate());
@@ -53,7 +62,9 @@ export class CustomerMock {
 
   afterAll(): void {
     afterAll(async () => {
-      await req.delete(`/customers/${this.getId()}`);
+      await req
+        .delete(`/customers/${this.getId()}`)
+        .set(await this.getAuthorization());
     });
   }
 }

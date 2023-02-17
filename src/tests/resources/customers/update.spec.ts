@@ -6,13 +6,18 @@ const mock = new CustomerMock();
 describe("Patch", () => {
   mock.beforeAll();
   mock.afterAll();
+  let headerAuth: object;
 
   test("update first and last name", async () => {
+    headerAuth = await mock.getAuthorization();
+
     const payload = mock.getDataToUpdate();
+    delete payload.email;
 
-    delete payload.email
-
-    const resp = await req.patch(`/customers/${mock.getId()}`).send(payload);
+    const resp = await req
+      .patch(`/customers/${mock.getId()}`)
+      .send(payload)
+      .set(headerAuth);
 
     expect(resp.statusCode).toBe(204);
     expect(resp.body).toBeNull;
@@ -20,22 +25,31 @@ describe("Patch", () => {
 
   test("update email", async () => {
     const payload = mock.getDataToUpdate();
+    delete payload.firstName;
+    delete payload.lastName;
 
-    delete payload.firstName
-    delete payload.lastName
-
-    const resp = await req.patch(`/customers/${mock.getId()}`).send(payload);
+    const resp = await req
+      .patch(`/customers/${mock.getId()}`)
+      .send(payload)
+      .set(headerAuth);
 
     expect(resp.statusCode).toBe(204);
     expect(resp.body).toBeNull;
   });
 
   test("try update without content", async () => {
-    const resp = await req.patch(`/customers/${mock.getId()}`).send({});
-    
+    const resp = await req
+      .patch(`/customers/${mock.getId()}`)
+      .send({})
+      .set(headerAuth);
+
     expect(resp.statusCode).toBe(400);
     expect(resp.body).toBeTypeOf("object");
   });
 
-  // add 401
+  test("Should return unauthorized 401", async () => {
+    const resp = await req.patch(`/customers/${mock.getId()}`).send({});
+
+    expect(resp.statusCode).toBe(401);
+  });
 });
