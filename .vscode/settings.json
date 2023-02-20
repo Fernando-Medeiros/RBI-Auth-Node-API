@@ -9,5 +9,8 @@
   },
   "window.autoDetectColorScheme": true,
   "workbench.preferredLightColorTheme": "Vitesse Light",
-  "workbench.preferredDarkColorTheme": "Vitesse Dark Soft"
+  "workbench.preferredDarkColorTheme": "Vitesse Dark Soft",
+  "[typescript]": {
+    "editor.rulers": [79]
+  }
 }
