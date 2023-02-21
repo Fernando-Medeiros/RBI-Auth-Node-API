@@ -1,10 +1,6 @@
 import { Schema, model } from "mongoose";
 
 const skillsSchema = {
-  _id: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
   slash: {
     type: Object,
   },

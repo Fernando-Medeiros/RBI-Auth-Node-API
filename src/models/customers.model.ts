@@ -1,10 +1,6 @@
 import { Schema, model } from "mongoose";
 
 const customerSchema = {
-  _id: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
   firstName: {
     type: String,
     required: true,
@@ -24,8 +20,8 @@ const customerSchema = {
   email: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
+    lowercase: true,
     minlength: 11,
     maxlength: 60,
   },
@@ -38,7 +34,7 @@ const customerSchema = {
   },
   createdAt: {
     type: Date,
-    default: new Date(),
+    default: Date.now,
   },
 };
 

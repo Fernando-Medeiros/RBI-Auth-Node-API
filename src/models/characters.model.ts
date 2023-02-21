@@ -1,10 +1,6 @@
 import { Schema, model } from "mongoose";
 
 const characterSchema = {
-  _id: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
   level: {
     type: Number,
     required: true,
@@ -15,6 +11,7 @@ const characterSchema = {
   charName: {
     type: String,
     required: true,
+    unique: true,
     trim: true,
     minlength: 4,
     maxlength: 20,
@@ -30,7 +27,7 @@ const characterSchema = {
   },
   createdAt: {
     type: Date,
-    default: new Date(),
+    default: Date.now,
   },
 };
 

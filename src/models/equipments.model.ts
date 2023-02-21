@@ -1,10 +1,6 @@
 import { Schema, model } from "mongoose";
 
 const equipmentsSchema = {
-  _id: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
   head: {
     type: Object,
   },

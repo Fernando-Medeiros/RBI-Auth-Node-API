@@ -1,10 +1,6 @@
 import { Schema, model } from "mongoose";
 
 const inventoriesSchema = {
-  _id: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
   gold: {
     type: Number,
     min: 1,

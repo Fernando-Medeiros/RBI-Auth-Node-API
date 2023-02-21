@@ -1,10 +1,6 @@
 import { Schema, model } from "mongoose";
 
 const statusSchema = {
-  _id: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
   points: {
     type: Number,
     min: 1,
