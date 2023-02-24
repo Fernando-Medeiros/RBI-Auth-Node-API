@@ -24,3 +24,9 @@ export class Unauthorized extends BaseException {
     super(message, 401);
   }
 }
+
+export class InternalServerError extends BaseException {
+  constructor(message: string) {
+    super(message, 500);
+  }
+}
