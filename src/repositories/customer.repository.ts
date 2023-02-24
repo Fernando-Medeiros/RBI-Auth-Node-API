@@ -1,4 +1,7 @@
-import type { PropsCreate, PropsUpdate } from "../entities/customer";
+import type {
+  PropsCreate,
+  PropsUpdate,
+} from "../entities/interfaces/customer.interface";
 import { CustomerModel } from "../models/customers.model";
 
 export class CustomerRepository {
@@ -6,7 +9,7 @@ export class CustomerRepository {
     return await CustomerModel.create(data);
   }
 
-  async emailExists(_email: string) {
+  async findByEmail(_email: string) {
     return await CustomerModel.exists({ email: _email });
   }
 
@@ -27,6 +30,6 @@ export class CustomerRepository {
   }
 
   async findByIdAndDelete(id: string) {
-    return await CustomerModel.findByIdAndUpdate(id);
+    return await CustomerModel.findByIdAndRemove(id);
   }
 }
