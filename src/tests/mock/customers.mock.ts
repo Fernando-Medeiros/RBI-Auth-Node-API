@@ -1,18 +1,6 @@
-import {
-  CustomerCreateSchema,
-  CustomerUpdateSchema,
-} from "../../entities/customer";
-
-export const CustomerCreateMock = new CustomerCreateSchema({
+export const dataToNewCustomer = {
   firstName: "Tester",
   lastName: "DevSan",
   email: `tester-${Math.random()}@tester.com`,
   password: "tester@123",
-  createdAt: new Date(),
-});
-
-export const CustomerUpdateMock = new CustomerUpdateSchema({
-  firstName: "NewTesterName",
-  lastName: "NewLastName",
-  email: `newtester-${Math.random()}@tester.com`,
-});
+};

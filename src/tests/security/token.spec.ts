@@ -13,11 +13,13 @@ describe("Test expired token and conversion in seconds", () => {
 
   test("Should return expired token error", async () => {
     const newToken = await jwt.createRefresh({
-      sub: "ID",
+      sub: "123456789123456789123456", // === 24
       exp: jwt.convertToMilliseconds(0),
     });
 
-    expect(jwt.decode(newToken)).rejects.toThrowError("jwt expired");
+    expect(jwt.decode(newToken)).rejects.toThrowError(
+      "Could not validate credentials"
+    );
   });
 });
 
@@ -26,7 +28,7 @@ describe("Encode and Decode", () => {
 
   test("Should encode token with sub and exp", async () => {
     newToken = await jwt.encode({
-      sub: "123456789",
+      sub: "123456789123456789123456", // === 24
       exp: jwt.convertToMilliseconds(15),
     });
 
@@ -45,8 +47,10 @@ describe("Encode and Decode", () => {
   test("Should return error when receiving invalid tokens", () => {
     const iTokens = ["1221212", "", "//@||@\\"];
 
-    for (let iTkn of iTokens) {
-      expect(jwt.decode(iTkn)).rejects.toThrowError("jwt");
+    for (const iTkn of iTokens) {
+      expect(jwt.decode(iTkn)).rejects.toThrowError(
+        "Could not validate credentials"
+      );
     }
   });
 });
@@ -55,7 +59,7 @@ describe("AccessToken", () => {
   let newToken: string;
 
   test("Create", async () => {
-    newToken = await jwt.createAccess({ sub: "ID" });
+    newToken = await jwt.createAccess({ sub: "123456789123456789123456" });
 
     expect(newToken).toBeTypeOf("string");
     expect(newToken?.length).toBeGreaterThan(150);
@@ -75,7 +79,7 @@ describe("RefreshToken", () => {
   let newToken: string;
 
   test("Create", async () => {
-    newToken = await jwt.createRefresh({ sub: "ID" });
+    newToken = await jwt.createRefresh({ sub: "123456789123456789123456" });
 
     expect(newToken).toBeTypeOf("string");
     expect(newToken?.length).toBeGreaterThan(150);
@@ -95,7 +99,7 @@ describe("RecoverToken", () => {
   let newToken: string;
 
   test("Create", async () => {
-    newToken = await jwt.createRecover({ sub: "ID" });
+    newToken = await jwt.createRecover({ sub: "123456789123456789123456" });
 
     expect(newToken).toBeTypeOf("string");
     expect(newToken?.length).toBeGreaterThan(150);

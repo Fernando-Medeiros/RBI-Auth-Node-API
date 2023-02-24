@@ -7,7 +7,6 @@ import { connectToDatabase } from "../services/mongodb";
 import { server } from "../server";
 
 config();
-
 connectToDatabase();
 
 export const testServer = server;

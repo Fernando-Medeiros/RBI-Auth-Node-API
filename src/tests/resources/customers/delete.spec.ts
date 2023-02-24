@@ -1,41 +1,39 @@
-import { expect, test, describe } from "vitest";
+import { expect, it, describe } from "vitest";
 import { CustomerMock, req } from "../../clients";
 
 const mock = new CustomerMock();
 
-describe("Delete", () => {
+describe("Delete - Ok", async () => {
   mock.beforeAll();
-  let headerAuth: object;
 
-  test("delete customer", async () => {
-    headerAuth = await mock.getAuthorization();
+  it("Should delete customer with authenticated session", async () => {
 
-    const resp = await req.delete(`/customers/${mock.getId()}`).set(headerAuth);
+    const resp = await req.delete("/customers")
+    .set(await mock.getAuthorization());
 
     expect(resp.statusCode).toBe(204);
     expect(resp.body).toBeNull;
   });
 
-  test("try deleting the same customer twice", async () => {
-    await req.delete(`/customers/${mock.getId()}`).set(headerAuth);
+})
 
-    const resp = await req.delete(`/customers/${mock.getId()}`).set(headerAuth);
+describe("Delete - Exceptions", async () => {
+  mock.beforeAll();
 
-    expect(resp.statusCode).toBe(400);
+  it("Should return 401 when trying to delete the same customer twice", async () => {
+    
+    await req.delete("/customers")
+    .set( await mock.getAuthorization());
+
+    const resp = await req.delete("/customers")
+    .set(await mock.getAuthorization());
+
+    expect(resp.statusCode).toBe(401);
     expect(resp.body).toBeTypeOf("object");
   });
 
-  test("try delete customer by invalid id", async () => {
-    const resp = await req
-      .delete(`/customers/${"safaf4as311"}`)
-      .set(headerAuth);
-
-    expect(resp.statusCode).toBe(400);
-    expect(resp.body).toBeTypeOf("object");
-  });
-
-  test("Should return unauthorized 401", async () => {
-    const resp = await req.delete(`/customers/${mock.getId()}`);
+  it("Should return unauthorized 401", async () => {
+    const resp = await req.delete("/customers");
 
     expect(resp.statusCode).toBe(401);
   });

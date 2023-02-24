@@ -1,16 +1,24 @@
-import { expect, test, describe } from "vitest";
+import { expect, it, describe } from "vitest";
 import { CustomerMock, req } from "../../clients";
 
 const mock = new CustomerMock();
 
-describe("Get", () => {
+describe("Get - Ok", async () => {
   mock.beforeAll();
   mock.afterAll();
-  let headerAuth: object;
 
-  test("get all customers", async () => {
+  let headerAuth: { Authorization: string };
+  let id: string;
+
+  it("Should return current session header", async () => {
     headerAuth = await mock.getAuthorization();
+    id = await mock.getOneCustomerId(headerAuth);
 
+    expect(headerAuth).toHaveProperty("Authorization");
+    expect(id).toBeTypeOf("string");
+  });
+
+  it("Should return all customers", async () => {
     const resp = await req.get("/customers").set(headerAuth);
 
     expect(resp.statusCode).toBe(200);
@@ -18,25 +26,38 @@ describe("Get", () => {
     expect(resp.body.length).toBeGreaterThan(0);
   });
 
-  test("get customer by id", async () => {
-    const resp = await req.get(`/customers/${mock.getId()}`).set(headerAuth);
+  it("Should return a customer by id", async () => {
+    const resp = await req.get(`/customers/${id}`).set(headerAuth);
 
     expect(resp.statusCode).toBe(200);
     expect(resp.body).toBeTypeOf("object");
   });
+});
 
-  test("try get customer by invalid id", async () => {
-    const resp = await req.get(`/customers/${"sad1243SA12"}`).set(headerAuth);
+describe("Get - Exceptions", async () => {
+  mock.beforeAll();
+  mock.afterAll();
 
-    expect(resp.statusCode).toBe(404);
+  let headerAuth: { Authorization: string };
+
+  it("Should return current session header", async () => {
+    headerAuth = await mock.getAuthorization();
+
+    expect(headerAuth).toHaveProperty("Authorization");
+  });
+
+  it("Should return 404 when searching for a customer with an invalid id", async () => {
+    const resp = await req
+      .get(`/customers/sad1243SA12sad1243SA1222`)
+      .set(headerAuth);
+
+    expect(resp.statusCode).toBe(400);
     expect(resp.body).toBeTypeOf("object");
   });
 
-  test("Should return unauthorized 401", async () => {
-    const respAll = await req.get("/customers");
-    const respById = await req.get(`/customers/${mock.getId()}`);
+  it("Should return unauthorized 401", async () => {
+    const respById = await req.get(`/customers/sad1243SA12sad1243SA1222`);
 
-    expect(respAll.statusCode).toBe(401);
     expect(respById.statusCode).toBe(401);
   });
 });

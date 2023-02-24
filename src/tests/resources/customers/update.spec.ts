@@ -1,55 +1,91 @@
-import { expect, test, describe } from "vitest";
+import { expect, it, describe } from "vitest";
 import { CustomerMock, req } from "../../clients";
 
 const mock = new CustomerMock();
 
-describe("Patch", () => {
+describe("Patch - Ok", async () => {
   mock.beforeAll();
   mock.afterAll();
-  let headerAuth: object;
 
-  test("update first and last name", async () => {
+  let headerAuth: { Authorization: string };
+
+  it("Should return current session header", async () => {
     headerAuth = await mock.getAuthorization();
+  
+    expect(headerAuth).toHaveProperty("Authorization");
+  });
 
-    const payload = mock.getDataToUpdate();
-    delete payload.email;
+  it("Should update first and last name", async () => {
+
+    const data = {
+      firstName: "NewTesterName",
+      lastName: "NewLastName",
+    };
 
     const resp = await req
-      .patch(`/customers/${mock.getId()}`)
-      .send(payload)
+      .patch(`/customers`)
+      .send(data)
       .set(headerAuth);
 
     expect(resp.statusCode).toBe(204);
     expect(resp.body).toBeNull;
   });
 
-  test("update email", async () => {
-    const payload = mock.getDataToUpdate();
-    delete payload.firstName;
-    delete payload.lastName;
+  it("Should update email", async () => {
+    const data = {
+      email: `newtester-${Math.random()}@tester.com`,
+    };
 
     const resp = await req
-      .patch(`/customers/${mock.getId()}`)
-      .send(payload)
+      .patch(`/customers`)
+      .send(data)
       .set(headerAuth);
 
     expect(resp.statusCode).toBe(204);
     expect(resp.body).toBeNull;
   });
+});
 
-  test("try update without content", async () => {
-    const resp = await req
-      .patch(`/customers/${mock.getId()}`)
-      .send({})
-      .set(headerAuth);
+describe("Patch - Exceptions", async () => {
+  mock.beforeAll();
+  mock.afterAll();
+
+  let headerAuth: { Authorization: string };
+  
+  it("Should return current session header", async () => {
+    headerAuth = await mock.getAuthorization();
+ 
+    expect(headerAuth).toHaveProperty("Authorization");
+  });
+
+  it("Should return 400 when sending request without content", async () => {
+
+    const resp = await req.patch(`/customers`)
+    .send({})
+    .set(headerAuth);
 
     expect(resp.statusCode).toBe(400);
     expect(resp.body).toBeTypeOf("object");
   });
 
-  test("Should return unauthorized 401", async () => {
-    const resp = await req.patch(`/customers/${mock.getId()}`).send({});
+  it("Should return 400 when passing non-existent data to update", async () => {
+    const data = {
+      password: "password@123"
+    }
+
+    const resp = await req.patch(`/customers`)
+    .send(data)
+    .set(headerAuth);
+
+    expect(resp.statusCode).toBe(400);
+    expect(resp.body).toBeTypeOf("object");
+  });
+
+  it("Should return unauthorized 401", async () => {
+    const resp = await req.patch(`/customers`)
+    .send({});
 
     expect(resp.statusCode).toBe(401);
+    expect(resp.body).toBeTypeOf("object");
   });
 });

@@ -1,38 +1,38 @@
 import request from "supertest";
+
 import { beforeAll, afterAll } from "vitest";
 import { testServer as server } from "./conftest";
-import { CustomerCreateMock, CustomerUpdateMock } from "./mock/customers.mock";
+
+import { Customer } from "../entities/customer";
+import { dataToNewCustomer } from "./mock/customers.mock";
 
 export const req = request(server);
 
 export class CustomerMock {
-  customerData = CustomerCreateMock;
-  customerUpdate = CustomerUpdateMock;
+  customer: Customer;
+
+  constructor() {
+    this.customer = new Customer(dataToNewCustomer);
+  }
 
   getDataToLogin() {
     return {
-      email: this.customerData.getData.email,
-      password: this.customerData.getData.password,
+      email: this.customer.getEmail,
+      password: this.customer.getPassword,
     };
-  }
-  getDataToUpdate() {
-    return Object.assign({}, this.customerUpdate.getData);
   }
 
   getDataToCreate() {
-    return Object.assign({}, this.customerData.getData);
+    return Object.assign({}, this.customer.getDataToCreate);
   }
 
-  getId(): string {
-    return this.customerData.getid;
-  }
+  async getOneCustomerId(headerAuth: {
+    Authorization: string;
+  }): Promise<string> {
+    const manyCustomers = await req.get("/customers").set(headerAuth);
 
-  async getHashPassword(): Promise<string> {
-    return await this.customerData.hashPassword();
-  }
-
-  async compareHashPassword(password: string): Promise<boolean> {
-    return await this.customerData.compareHashPassword(password);
+    const { _id } = manyCustomers.body[0];
+    return _id;
   }
 
   async getAccessToken(): Promise<string> {
@@ -45,13 +45,13 @@ export class CustomerMock {
     return tokens.body.refresh;
   }
 
-  async getAuthorization(scope: string = "access"): Promise<object> {
+  async getAuthorization(scope = "access"): Promise<{ Authorization: string }> {
     const token =
       scope === "access"
         ? await this.getAccessToken()
         : await this.getRefreshToken();
 
-    return { Authorization: `bearer ${token}` };
+    return { Authorization: `bearer ${token || ""}` };
   }
 
   beforeAll(): void {
@@ -62,9 +62,7 @@ export class CustomerMock {
 
   afterAll(): void {
     afterAll(async () => {
-      await req
-        .delete(`/customers/${this.getId()}`)
-        .set(await this.getAuthorization());
+      await req.delete(`/customers`).set(await this.getAuthorization());
     });
   }
 }
