@@ -1,75 +1,70 @@
-import type { BooleanExpression } from "mongoose";
 import type { Request } from "express";
+
+import { Bcrypt } from "../../security/bcrypt";
 import { Token } from "../../security/token";
-import { CustomerModel } from "../../models/customers.model";
-import { CustomerCreateSchema, PropsCreate } from "../../entities/customer";
 
-interface loginRequest {
-  email: string;
-  password: string;
-}
-interface loginResponse {
-  access: string;
-  refresh: string;
-  type: string;
-}
-interface refreshRequest {
-  token: string;
-}
-interface refreshReponse {
-  refresh: string;
-  type: string;
-}
+import { AuthRequest } from "../requests/auth.request";
+import { isTrue_or_400, isTrue_or_404 } from "../../validators/validators";
 
-const throwError = (expression: BooleanExpression, message: string) => {
-  if (expression) {
-    throw new Error(message);
-  }
-};
-
-const jwt = new Token();
+import { Customer } from "../../entities/customer";
+import { CustomerRepository } from "../../repositories/customer.repository";
 
 export class AuthHandler {
-  async login(req: Request): Promise<loginResponse> {
-    const payload: loginRequest = req.body;
+  private readonly CRYPT = new Bcrypt();
+  private readonly JWT = new Token();
+  private readonly REPO = new CustomerRepository();
+  private readonly REQ = new AuthRequest();
 
-    throwError(
-      !payload.email && !payload.password,
-      "Missing email and password!"
+  async access(req: Request): Promise<accessResponse> {
+    const payload = this.REQ.accessRequest(req);
+
+    const emailExists = await this.REPO.findByEmail(payload.email);
+
+    isTrue_or_404(emailExists, "Email not found!");
+
+    const customerExists = await this.REPO.findOne({ email: payload.email });
+
+    isTrue_or_404(customerExists, "Account not found!");
+
+    const customer = new Customer(Object(customerExists));
+
+    const isEqualTo = await this.CRYPT.compareHashPassword(
+      payload.password,
+      customer.getPassword
     );
 
-    const result: PropsCreate | null = await CustomerModel.findOne({
-      email: payload.email,
-    });
-
-    throwError(result === null, "Email not found!");
-
-    const customer = new CustomerCreateSchema(result);
-
-    throwError(
-      (await customer.compareHashPassword(payload.password)) === false,
-      "Invalid password!"
-    );
+    isTrue_or_400(isEqualTo, "Invalid password!");
 
     return {
-      access: await jwt.createAccess({ sub: customer.getid }),
-      refresh: await jwt.createRefresh({ sub: customer.getid }),
+      access: await this.JWT.createAccess({ sub: customerExists?.id }),
+      refresh: await this.JWT.createRefresh({ sub: customerExists?.id }),
       type: "bearer",
     };
   }
 
   async refresh(req: Request): Promise<refreshReponse> {
-    const { token }: refreshRequest = req.body;
+    const token = this.REQ.refreshRequest(req);
 
-    throwError(!token, "Missing refresh token!");
+    const payload = await this.JWT.decode(token);
 
-    const payload = await jwt.decode(token);
-
-    throwError(payload.scope != "refresh", "Use refresh scope tokens only!");
+    isTrue_or_400(
+      payload.scope === "refresh",
+      "Use refresh scope tokens only!"
+    );
 
     return {
-      refresh: await jwt.createRefresh({ sub: payload.sub }),
+      refresh: await this.JWT.createRefresh({ sub: payload.sub }),
       type: "bearer",
     };
   }
+}
+
+interface accessResponse {
+  access: string;
+  refresh: string;
+  type: string;
+}
+interface refreshReponse {
+  refresh: string;
+  type: string;
 }

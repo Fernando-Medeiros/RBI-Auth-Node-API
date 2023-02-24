@@ -1,63 +1,60 @@
-import type { BooleanExpression } from "mongoose";
 import type { Request } from "express";
-import { CustomerModel } from "../../models/customers.model";
-import {
-  CustomerCreateSchema,
-  CustomerUpdateSchema,
-} from "../../entities/customer";
 
-const throwError = (expression: BooleanExpression, message: string) => {
-  if (expression) {
-    throw new Error(message);
-  }
-};
+import { Bcrypt } from "../../security/bcrypt";
+
+import { idIsValid } from "../../validators/auth.validators";
+import { isTrue_or_404, isTrue_or_400 } from "../../validators/validators";
+
+import { Customer } from "../../entities/customer";
+import { CustomerRepository } from "../../repositories/customer.repository";
+import { CustomerRequest } from "../requests/customer.resquest";
 
 export class CustomerHandler {
-  async getAllCustomer() {
-    return await CustomerModel.find();
+  private readonly CRYPT = new Bcrypt();
+  private readonly REPO = new CustomerRepository();
+  private readonly REQ = new CustomerRequest();
+
+  async getAll() {
+    return await this.REPO.find();
   }
 
-  async getIdCustomer(req: Request) {
+  async getById(req: Request) {
     const { id } = req.params;
-    const result = await CustomerModel.findById(id);
 
-    throwError(result === null, "Account does not exist!");
+    idIsValid(id);
 
-    return result;
+    const customer = await this.REPO.findById(String(id));
+
+    isTrue_or_404(customer, "Account does not exist!");
+
+    return customer;
   }
 
-  async createCustomer(req: Request) {
-    const schema = new CustomerCreateSchema(req.body);
-    await schema.hashPassword();
+  async create(req: Request) {
+    const dataToCreate = this.REQ.createRequest(req);
 
-    const emailExists = await CustomerModel.exists({
-      email: schema.getData.email,
-    });
+    const emailExists = await this.REPO.findByEmail(dataToCreate.email);
 
-    throwError(emailExists != null, "Email already in use!");
+    isTrue_or_400(!emailExists, "Email already exists");
 
-    return await CustomerModel.create(schema.getData);
+    const customer = new Customer(dataToCreate);
+
+    customer.setPassword = await this.CRYPT.hashPassword(customer.getPassword);
+
+    await this.REPO.create(customer.getDataToCreate);
   }
 
-  async updateCustomer(req: Request) {
-    const { id } = req.params;
-    const schema = new CustomerUpdateSchema(req.body);
+  async update(req: Request, sub: string) {
+    const dataToUpdate = this.REQ.updateRequest(req);
 
-    throwError(schema.validateFields() === false, "No content!");
+    const customer = await this.REPO.findByIdAndUpdate(sub, dataToUpdate);
 
-    const result = await CustomerModel.findByIdAndUpdate(id, schema.getData);
-
-    throwError(result === null, "Account does not exist!");
-
-    return result;
+    isTrue_or_404(customer, "Account does not exist!");
   }
 
-  async deleteCustomer(req: Request) {
-    const { id } = req.params;
-    const result = await CustomerModel.findByIdAndDelete(id);
+  async delete(sub: string) {
+    const customer = await this.REPO.findByIdAndDelete(sub);
 
-    throwError(result === null, "Account not found!");
-
-    return result;
+    isTrue_or_404(customer, "Account does not exist!");
   }
 }

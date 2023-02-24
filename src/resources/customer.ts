@@ -16,11 +16,6 @@ route.get("/customers/:id", (req, res) => session(req, res, getIdCustomer));
 
 route.post("/customers", createCustomer);
 
-route.patch("/customers/:id", (req, res) => session(req, res, updateCustomer));
+route.patch("/customers", (req, res) => session(req, res, updateCustomer));
 
-route.delete("/customers/:id", (req, res) => session(req, res, deleteCustomer));
-
-// QUERY
-// get all - (filter by) - (limite) - (asc || des)
-
-// get by - (email) - (firstName || lastName)
+route.delete("/customers", (req, res) => session(req, res, deleteCustomer));

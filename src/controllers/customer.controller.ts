@@ -1,50 +1,43 @@
 import type { Request, Response } from "express";
+import { RespCreate, RespOK, RespOkNoContent } from "../helpers/http.protocols";
 import { CustomerHandler } from "./handlers/customer.handler";
 
 const handler = new CustomerHandler();
 
 export const getAllCustomer = async (_req: Request, res: Response) => {
-  const result = await handler.getAllCustomer();
+  const customers = await handler.getAll();
 
-  res.status(200).json(result);
+  new RespOK(res, customers);
 };
 
 export const getIdCustomer = async (req: Request, res: Response) => {
-  try {
-    const result = await handler.getIdCustomer(req);
+  const customer = await handler.getById(req);
 
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(404).json({ detail: `${error}` });
-  }
+  return new RespOK(res, customer);
 };
 
 export const createCustomer = async (req: Request, res: Response) => {
-  try {
-    await handler.createCustomer(req);
+  await handler.create(req);
 
-    res.status(201).json();
-  } catch (error) {
-    res.status(400).json({ detail: `${error}` });
-  }
+  new RespCreate(res);
 };
 
-export const updateCustomer = async (req: Request, res: Response) => {
-  try {
-    await handler.updateCustomer(req);
+export const updateCustomer = async (
+  req: Request,
+  res: Response,
+  sub: string
+) => {
+  await handler.update(req, sub);
 
-    res.status(204).json();
-  } catch (error) {
-    res.status(400).json({ detail: `${error}` });
-  }
+  new RespOkNoContent(res);
 };
 
-export const deleteCustomer = async (req: Request, res: Response) => {
-  try {
-    await handler.deleteCustomer(req);
+export const deleteCustomer = async (
+  _req: Request,
+  res: Response,
+  sub: string
+) => {
+  await handler.delete(sub);
 
-    res.status(204).json();
-  } catch (error) {
-    res.status(400).json({ detail: `${error}` });
-  }
+  new RespOkNoContent(res);
 };
