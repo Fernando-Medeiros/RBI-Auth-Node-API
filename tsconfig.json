@@ -106,7 +106,7 @@
     "esm": true // «———— enabling ESM for ts-node
   },
   "include": ["/**/*.ts", "src/index.ts"],
-  "exclude": ["node_modules", "./src/tests", "vitest.config.ts"],
+  "exclude": ["node_modules", "vitest.config.ts"],
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@tsconfig/node-lts-strictest-esm/tsconfig.json"
 }
