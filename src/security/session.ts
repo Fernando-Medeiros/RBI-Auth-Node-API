@@ -1,25 +1,24 @@
 import type { Request, Response } from "express";
-import { Token } from "../security/token";
 
-const jwt = new Token();
+import { Token } from "../security/token";
+import { subIsValid, tokenIsValid } from "../validators/auth.validators";
+
+const JWT = new Token();
 
 export const session = async (
   req: Request,
   res: Response,
   next: CallableFunction
 ) => {
-  try {
-    const { authorization } = req.headers;
+  const { authorization } = req.headers;
 
-    const token = authorization?.replace("bearer ", "");
+  const token = authorization?.replace("bearer ", "");
 
-    await jwt.decode(token);
+  tokenIsValid(token, "Missing Authorization header with token");
 
-    next(req, res);
-  } catch {
-    res.status(401).json({
-      detail: "Could not validate credentials",
-      headers: { "WWW-Authenticate": "Bearer" },
-    });
-  }
+  const sub = await JWT.decode(String(token));
+
+  subIsValid(sub.sub);
+
+  return next(req, res, sub.sub);
 };
