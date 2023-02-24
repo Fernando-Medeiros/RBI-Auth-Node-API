@@ -9,10 +9,10 @@ describe("Unit", () => {
   test("hash password", async () => {
     const { password } = mock.getDataToCreate();
 
-    const hashPwd = await bcrypt.hashPassword(password);
+    const hashPwd = await bcrypt.hash(password);
 
     expect(hashPwd.length).toBeGreaterThan(50);
 
-    expect(await bcrypt.compareHashPassword(password, hashPwd)).toEqual(true);
+    expect(await bcrypt.compare(password, hashPwd)).toEqual(true);
   });
 });
