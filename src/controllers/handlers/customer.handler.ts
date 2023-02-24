@@ -7,7 +7,7 @@ import { isTrue_or_404, isTrue_or_400 } from "../../validators/validators";
 
 import { Customer } from "../../entities/customer";
 import { CustomerRepository } from "../../repositories/customer.repository";
-import { CustomerRequest } from "../requests/customer.resquest";
+import { CustomerRequest } from "../requests/customer.request";
 
 export class CustomerHandler {
   private readonly CRYPT = new Bcrypt();
@@ -39,21 +39,28 @@ export class CustomerHandler {
 
     const customer = new Customer(dataToCreate);
 
-    customer.setPassword = await this.CRYPT.hashPassword(customer.getPassword);
+    customer.setPassword = await this.CRYPT.hash(customer.getPassword);
 
-    await this.REPO.create(customer.getDataToCreate);
+    await this.REPO.save(customer.getDataToCreate);
   }
 
-  async update(req: Request, sub: string) {
+  async update(req: Request) {
+    const { sub } = req.headers;
+
     const dataToUpdate = this.REQ.updateRequest(req);
 
-    const customer = await this.REPO.findByIdAndUpdate(sub, dataToUpdate);
+    const customer = await this.REPO.findByIdAndUpdate(
+      sub as string,
+      dataToUpdate
+    );
 
     isTrue_or_404(customer, "Account does not exist!");
   }
 
-  async delete(sub: string) {
-    const customer = await this.REPO.findByIdAndDelete(sub);
+  async delete(req: Request) {
+    const { sub } = req.headers;
+
+    const customer = await this.REPO.findByIdAndDelete(sub as string);
 
     isTrue_or_404(customer, "Account does not exist!");
   }

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { session } from "../security/session";
+import { sessionMiddleware } from "../middlewares/session";
 import {
   getAllCustomer,
   getIdCustomer,
@@ -10,12 +10,14 @@ import {
 
 export const route = Router();
 
-route.get("/customers", (req, res) => session(req, res, getAllCustomer));
-
-route.get("/customers/:id", (req, res) => session(req, res, getIdCustomer));
-
 route.post("/customers", createCustomer);
 
-route.patch("/customers", (req, res) => session(req, res, updateCustomer));
+route.use(sessionMiddleware);
 
-route.delete("/customers", (req, res) => session(req, res, deleteCustomer));
+route.get("/customers", getAllCustomer);
+
+route.get("/customers/:id", getIdCustomer);
+
+route.patch("/customers", updateCustomer);
+
+route.delete("/customers", deleteCustomer);

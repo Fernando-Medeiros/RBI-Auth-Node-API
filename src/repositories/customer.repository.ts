@@ -5,7 +5,7 @@ import type {
 import { CustomerModel } from "../models/customers.model";
 
 export class CustomerRepository {
-  async create(data: PropsCreate) {
+  async save(data: PropsCreate) {
     return await CustomerModel.create(data);
   }
 

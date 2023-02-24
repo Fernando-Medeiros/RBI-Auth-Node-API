@@ -22,25 +22,21 @@ class EncodeToDecode {
   async encode(payload: PropsToken): Promise<string> {
     const token = await new Promise((resolve) => {
       resolve(Jwt.sign(payload, SECRET, { algorithm: ALGORITHM }));
-    })
-    .catch(() => {
+    }).catch(() => {
       throw new InternalServerError("Internal failure while encoding token!");
     });
 
-    return String(token);
+    return token as string;
   }
 
   async decode(token: string): Promise<PropsToken> {
     const jwtPayload = await new Promise((resolve) => {
       resolve(Jwt.verify(token, SECRET, { algorithms: [ALGORITHM] }));
-    })
-    .catch(() => {
+    }).catch(() => {
       throw new Unauthorized("Could not validate credentials!");
     });
-    
-    const payload: PropsToken = Object(jwtPayload);
 
-    return payload;
+    return jwtPayload as PropsToken;
   }
 }
 

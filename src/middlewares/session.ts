@@ -1,14 +1,14 @@
-import type { Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 
 import { Token } from "../security/token";
 import { subIsValid, tokenIsValid } from "../validators/auth.validators";
 
 const JWT = new Token();
 
-export const session = async (
+export const sessionMiddleware = async (
   req: Request,
-  res: Response,
-  next: CallableFunction
+  _res: Response,
+  next: NextFunction
 ) => {
   const { authorization } = req.headers;
 
@@ -16,9 +16,11 @@ export const session = async (
 
   tokenIsValid(token, "Missing Authorization header with token");
 
-  const sub = await JWT.decode(String(token));
+  const { sub } = await JWT.decode(String(token));
 
-  subIsValid(sub.sub);
+  subIsValid(sub);
 
-  return next(req, res, sub.sub);
+  req.headers = { sub: sub };
+
+  next();
 };

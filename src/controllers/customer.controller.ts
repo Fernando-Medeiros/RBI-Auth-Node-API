@@ -7,7 +7,7 @@ const handler = new CustomerHandler();
 export const getAllCustomer = async (_req: Request, res: Response) => {
   const customers = await handler.getAll();
 
-  new RespOK(res, customers);
+  return new RespOK(res, customers);
 };
 
 export const getIdCustomer = async (req: Request, res: Response) => {
@@ -19,25 +19,17 @@ export const getIdCustomer = async (req: Request, res: Response) => {
 export const createCustomer = async (req: Request, res: Response) => {
   await handler.create(req);
 
-  new RespCreate(res);
+  return new RespCreate(res);
 };
 
-export const updateCustomer = async (
-  req: Request,
-  res: Response,
-  sub: string
-) => {
-  await handler.update(req, sub);
+export const updateCustomer = async (req: Request, res: Response) => {
+  await handler.update(req);
 
-  new RespOkNoContent(res);
+  return new RespOkNoContent(res);
 };
 
-export const deleteCustomer = async (
-  _req: Request,
-  res: Response,
-  sub: string
-) => {
-  await handler.delete(sub);
+export const deleteCustomer = async (req: Request, res: Response) => {
+  await handler.delete(req);
 
-  new RespOkNoContent(res);
+  return new RespOkNoContent(res);
 };

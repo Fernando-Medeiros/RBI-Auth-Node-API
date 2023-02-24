@@ -7,11 +7,11 @@ const handler = new AuthHandler();
 export const access = async (req: Request, res: Response) => {
   const tokenPayload = await handler.access(req);
 
-  new RespOK(res, tokenPayload);
+  return new RespOK(res, tokenPayload);
 };
 
 export const refresh = async (req: Request, res: Response) => {
   const tokenPayload = await handler.refresh(req);
 
-  new RespOK(res, tokenPayload);
+  return new RespOK(res, tokenPayload);
 };

@@ -1,4 +1,5 @@
 import type { Request } from "express";
+import type { PropsCreate } from "../../entities/interfaces/customer.interface";
 
 import { Bcrypt } from "../../security/bcrypt";
 import { Token } from "../../security/token";
@@ -26,9 +27,9 @@ export class AuthHandler {
 
     isTrue_or_404(customerExists, "Account not found!");
 
-    const customer = new Customer(Object(customerExists));
+    const customer = new Customer(customerExists as PropsCreate);
 
-    const isEqualTo = await this.CRYPT.compareHashPassword(
+    const isEqualTo = await this.CRYPT.compare(
       payload.password,
       customer.getPassword
     );

@@ -2,7 +2,7 @@ import "express-async-errors";
 import express from "express";
 import { route as authRoute } from "./resources/auth";
 import { route as customerRoute } from "./resources/customer";
-import { MiddleException } from "./middlewares/exceptions";
+import { exceptionMiddleware } from "./middlewares/exceptions";
 
 export const server = express();
 
@@ -12,6 +12,6 @@ server.use(express.json());
 server.use(authRoute);
 server.use(customerRoute);
 
-server.use(MiddleException);
+server.use(exceptionMiddleware);
 
 export const startServer = () => server.listen(PORT);
