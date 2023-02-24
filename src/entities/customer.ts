@@ -1,62 +1,24 @@
-import type { Schema } from "mongoose";
-import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
+import type {
+  PropsCreate,
+  CustomerInterface,
+} from "./interfaces/customer.interface";
 
-const ObjectId = mongoose.Types.ObjectId;
+export class Customer implements CustomerInterface {
+  props: PropsCreate;
 
-export interface PropsCreate {
-  _id: Schema.Types.ObjectId;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  createdAt?: Date;
-}
-
-interface PropsUpdate {
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-}
-
-export class CustomerCreateSchema {
-  private props: PropsCreate;
-
-  get getData(): PropsCreate {
-    return this.props;
+  get getEmail(): string {
+    return this.props.email;
   }
-
-  get getid(): string {
-    return this.props._id.toString();
-  }
-
-  async hashPassword(): Promise<string> {
-    this.props.password = await bcrypt.hash(this.props.password, 10);
+  get getPassword(): string {
     return this.props.password;
   }
-
-  async compareHashPassword(password: string): Promise<boolean> {
-    return await bcrypt.compare(password, this.props.password);
+  set setPassword(password: string) {
+    this.props.password = password;
   }
-
-  constructor(requestBody: PropsCreate) {
-    this.props = requestBody;
-    this.props._id = this.props._id || new ObjectId();
-  }
-}
-
-export class CustomerUpdateSchema {
-  private props: PropsUpdate;
-
-  get getData(): PropsUpdate {
+  get getDataToCreate(): PropsCreate {
     return this.props;
   }
-
-  validateFields(): boolean {
-    return Object.values(this.props).length === 0 ? false : true;
-  }
-
-  constructor(requestBody: PropsUpdate) {
-    this.props = requestBody;
+  constructor(dataToCreate: PropsCreate) {
+    this.props = dataToCreate;
   }
 }
