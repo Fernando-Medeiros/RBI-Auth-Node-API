@@ -3,19 +3,19 @@ import type { Request } from "express";
 import { Bcrypt } from "../../security/bcrypt";
 
 import { idIsValid } from "../../validators/auth.validators";
-import { isTrue_or_404, isTrue_or_400 } from "../../validators/validators";
+import { isTrue_or_400 } from "../../validators/validators";
 
 import { Customer } from "../../entities/customer";
 import { CustomerRepository } from "../../repositories/customer.repository";
 import { CustomerRequest } from "../requests/customer.request";
 
 export class CustomerHandler {
-  private readonly CRYPT = new Bcrypt();
-  private readonly REPO = new CustomerRepository();
-  private readonly REQ = new CustomerRequest();
+  private readonly crypt = new Bcrypt();
+  private readonly repository = new CustomerRepository();
+  private readonly customerRequest = new CustomerRequest();
 
   async getAll() {
-    return await this.REPO.find();
+    return await this.repository.find();
   }
 
   async getById(req: Request) {
@@ -23,45 +23,36 @@ export class CustomerHandler {
 
     idIsValid(id);
 
-    const customer = await this.REPO.findById(String(id));
-
-    isTrue_or_404(customer, "Account does not exist!");
+    const customer = await this.repository.findById(String(id));
 
     return customer;
   }
 
   async create(req: Request) {
-    const dataToCreate = this.REQ.createRequest(req);
+    const dataToCreate = this.customerRequest.createRequest(req);
 
-    const emailExists = await this.REPO.findByEmail(dataToCreate.email);
+    const emailExists = await this.repository.findByEmail(dataToCreate.email);
 
     isTrue_or_400(!emailExists, "Email already exists");
 
     const customer = new Customer(dataToCreate);
 
-    customer.setPassword = await this.CRYPT.hash(customer.getPassword);
+    customer.setPassword = await this.crypt.hash(customer.getPassword);
 
-    await this.REPO.save(customer.getDataToCreate);
+    await this.repository.save(customer.getDataToCreate);
   }
 
   async update(req: Request) {
     const { sub } = req.headers;
 
-    const dataToUpdate = this.REQ.updateRequest(req);
+    const dataToUpdate = this.customerRequest.updateRequest(req);
 
-    const customer = await this.REPO.findByIdAndUpdate(
-      sub as string,
-      dataToUpdate
-    );
-
-    isTrue_or_404(customer, "Account does not exist!");
+    await this.repository.findByIdAndUpdate(sub as string, dataToUpdate);
   }
 
   async delete(req: Request) {
     const { sub } = req.headers;
 
-    const customer = await this.REPO.findByIdAndDelete(sub as string);
-
-    isTrue_or_404(customer, "Account does not exist!");
+    await this.repository.findByIdAndDelete(sub as string);
   }
 }

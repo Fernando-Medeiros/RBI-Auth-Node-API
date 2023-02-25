@@ -2,34 +2,51 @@ import type {
   PropsCreate,
   PropsUpdate,
 } from "../entities/interfaces/customer.interface";
-import { CustomerModel } from "../models/customers.model";
+import { CustomerModel as model } from "../models/customers.model";
+import { isTrue_or_404 } from "../validators/validators";
 
 export class CustomerRepository {
   async save(data: PropsCreate) {
-    return await CustomerModel.create(data);
+    return await model.create(data);
   }
 
   async findByEmail(_email: string) {
-    return await CustomerModel.exists({ email: _email });
+    return await model.exists({ email: _email });
   }
 
   async find() {
-    return await CustomerModel.find();
+    return await model.find();
   }
 
   async findById(id: string) {
-    return await CustomerModel.findById(id);
+    const customer = await model.findById(id);
+
+    isTrue_or_404(customer, "Customer not found!");
+
+    return customer;
   }
 
   async findOne(query: object) {
-    return await CustomerModel.findOne(query);
+    const customer = await model.findOne(query);
+
+    isTrue_or_404(customer, "Customer not found!");
+
+    return customer;
   }
 
   async findByIdAndUpdate(id: string, data: PropsUpdate) {
-    return await CustomerModel.findByIdAndUpdate(id, data);
+    const customer = await model.findByIdAndUpdate(id, data);
+
+    isTrue_or_404(customer, "Account does not exist!");
+
+    return customer;
   }
 
   async findByIdAndDelete(id: string) {
-    return await CustomerModel.findByIdAndRemove(id);
+    const customer = await model.findByIdAndRemove(id);
+
+    isTrue_or_404(customer, "Account does not exist!");
+
+    return customer;
   }
 }

@@ -11,25 +11,23 @@ import { Customer } from "../../entities/customer";
 import { CustomerRepository } from "../../repositories/customer.repository";
 
 export class AuthHandler {
-  private readonly CRYPT = new Bcrypt();
-  private readonly JWT = new Token();
-  private readonly REPO = new CustomerRepository();
-  private readonly REQ = new AuthRequest();
+  private readonly crypt = new Bcrypt();
+  private readonly jwt = new Token();
+  private readonly repository = new CustomerRepository();
+  private readonly authRequest = new AuthRequest();
 
   async access(req: Request): Promise<accessResponse> {
-    const payload = this.REQ.accessRequest(req);
+    const payload = this.authRequest.accessRequest(req);
 
-    const emailExists = await this.REPO.findByEmail(payload.email);
+    const emailExists = await this.repository.findByEmail(payload.email);
 
     isTrue_or_404(emailExists, "Email not found!");
 
-    const customerExists = await this.REPO.findOne({ email: payload.email });
-
-    isTrue_or_404(customerExists, "Account not found!");
+    const customerExists = await this.repository.findOne({ email: payload.email });
 
     const customer = new Customer(customerExists as PropsCreate);
 
-    const isEqualTo = await this.CRYPT.compare(
+    const isEqualTo = await this.crypt.compare(
       payload.password,
       customer.getPassword
     );
@@ -37,16 +35,16 @@ export class AuthHandler {
     isTrue_or_400(isEqualTo, "Invalid password!");
 
     return {
-      access: await this.JWT.createAccess({ sub: customerExists?.id }),
-      refresh: await this.JWT.createRefresh({ sub: customerExists?.id }),
+      access: await this.jwt.createAccess({ sub: customerExists?.id }),
+      refresh: await this.jwt.createRefresh({ sub: customerExists?.id }),
       type: "bearer",
     };
   }
 
   async refresh(req: Request): Promise<refreshReponse> {
-    const token = this.REQ.refreshRequest(req);
+    const token = this.authRequest.refreshRequest(req);
 
-    const payload = await this.JWT.decode(token);
+    const payload = await this.jwt.decode(token);
 
     isTrue_or_400(
       payload.scope === "refresh",
@@ -54,7 +52,7 @@ export class AuthHandler {
     );
 
     return {
-      refresh: await this.JWT.createRefresh({ sub: payload.sub }),
+      refresh: await this.jwt.createRefresh({ sub: payload.sub }),
       type: "bearer",
     };
   }
