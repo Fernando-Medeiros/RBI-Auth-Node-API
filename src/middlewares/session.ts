@@ -12,7 +12,7 @@ export const sessionMiddleware = async (
 ) => {
   const { authorization } = req.headers;
 
-  const token = authorization?.replace("bearer ", "");
+  const token = authorization?.substring(authorization.indexOf(" ") + 1);
 
   tokenIsValid(token, "Missing Authorization header with token");
 
