@@ -46,12 +46,21 @@ describe("Get - Exceptions", async () => {
     expect(headerAuth).toHaveProperty("Authorization");
   });
 
-  it("Should return 404 when searching for a customer with an invalid id", async () => {
+  it("Should return 400 when searching for a customer with an invalid id", async () => {
     const resp = await req
       .get(`/customers/sad1243SA12sad1243SA1222`)
       .set(headerAuth);
 
     expect(resp.statusCode).toBe(400);
+    expect(resp.body).toBeTypeOf("object");
+  });
+
+  it("Should return 404 when looking up a customer with a valid but non-existent hex string", async () => {
+    const resp = await req
+      .get(`/customers/63f80f49ab18b61e74a92c28`)
+      .set(headerAuth);
+
+    expect(resp.statusCode).toBe(404);
     expect(resp.body).toBeTypeOf("object");
   });
 
