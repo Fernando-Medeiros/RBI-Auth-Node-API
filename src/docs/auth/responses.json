@@ -1,0 +1,28 @@
+{
+  "ResponseAccess": {
+    "type": "object",
+    "properties": {
+      "access": {
+        "type": "string"
+      },
+      "refresh": {
+        "type": "string"
+      },
+      "type": {
+        "type": "string"
+      }
+    }
+  },
+
+  "ResponseRefresh": {
+    "type": "object",
+    "properties": {
+      "refresh": {
+        "type": "string"
+      },
+      "type": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "RequestAccess": {
+    "type": "object",
+    "properties": {
+      "email": {
+        "type": "string",
+        "required": true
+      },
+      "password": {
+        "type": "string",
+        "required": true
+      }
+    }
+  },
+
+  "RequestRefresh": {
+    "type": "object",
+    "properties": {
+      "token": {
+        "type": "string",
+        "required": true
+      }
+    }
+  }
+}

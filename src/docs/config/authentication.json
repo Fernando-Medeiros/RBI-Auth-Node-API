@@ -1,0 +1,18 @@
+{
+  "bearerAuth": {
+    "type": "http",
+    "scheme": "bearer",
+    "bearerFormat": "JWT"
+  },
+
+  "oAuth2AuthCode": {
+    "type": "oauth2",
+    "description": "",
+    "flows": {
+      "password": {
+        "tokenUrl": "http://localhost:8080/token",
+        "scopes": {}
+      }
+    }
+  }
+}

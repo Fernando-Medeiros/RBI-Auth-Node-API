@@ -1,0 +1,48 @@
+{
+  "RequestCreated": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "required": true
+      },
+      "lastName": {
+        "type": "string",
+        "required": true
+      },
+      "email": {
+        "type": "string",
+        "required": true
+      },
+      "password": {
+        "type": "string",
+        "required": true
+      }
+    }
+  },
+
+  "RequestUpdate": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "required": true
+      },
+      "lastName": {
+        "type": "string",
+        "required": true
+      },
+      "email": {
+        "type": "string",
+        "required": true
+      }
+    }
+  },
+
+  "ParameterID": {
+    "name": "id",
+    "in": "path",
+    "type": "string",
+    "required": true
+  }
+}
