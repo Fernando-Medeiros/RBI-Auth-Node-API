@@ -3,20 +3,22 @@
 > Projeto Server - API utilizando **NodeJs** para o jogo **Red Boar Inn**
 
 - [Red-Boar-Inn API](#red-boar-inn-api)
-  - [Estrutura](#estrutura)
-  - [Modelagem](#modelagem)
+  - [Structure](#structure)
+  - [Diagrams](#diagrams)
 
-## Estrutura
+![endpoints](endpoints.png)
+
+## Structure
 
 ```sh
 .
 ├── docs
-│   ├── auth.png
-│   ├── customers.png
-│   ├── modeling.png
+│   ├── diagrams
+│   │   ├── auth_routes.png
+│   │   ├── customer_routes.png
+│   │   └── modeling.png
+│   ├── endpoints.png
 │   ├── README.md
-│   ├── tasks.md
-│   ├── tests.md
 │   └── tips.md
 ├── src
 │   ├── controllers
@@ -25,9 +27,26 @@
 │   │   │   └── customer.handler.ts
 │   │   ├── requests
 │   │   │   ├── auth.request.ts
-│   │   │   └── customer.resquest.ts
+│   │   │   └── customer.request.ts
 │   │   ├── auth.controller.ts
 │   │   └── customer.controller.ts
+│   ├── docs
+│   │   ├── auth
+│   │   │   ├── paths.json
+│   │   │   ├── requests.json
+│   │   │   └── responses.json
+│   │   ├── build
+│   │   │   ├── interface.ts
+│   │   │   └── script.ts
+│   │   ├── config
+│   │   │   ├── authentication.json
+│   │   │   ├── exceptions.json
+│   │   │   └── info.json
+│   │   ├── customer
+│   │   │   ├── paths.json
+│   │   │   ├── requests.json
+│   │   │   └── responses.json
+│   │   └── swagger.json
 │   ├── entities
 │   │   ├── interfaces
 │   │   │   └── customer.interface.ts
@@ -36,7 +55,8 @@
 │   │   ├── http.exceptions.ts
 │   │   └── http.protocols.ts
 │   ├── middlewares
-│   │   └── exceptions.ts
+│   │   ├── exceptions.ts
+│   │   └── session.ts
 │   ├── models
 │   │   ├── characters.model.ts
 │   │   ├── customers.model.ts
@@ -51,7 +71,6 @@
 │   │   └── customer.ts
 │   ├── security
 │   │   ├── bcrypt.ts
-│   │   ├── session.ts
 │   │   └── token.ts
 │   ├── services
 │   │   └── mongodb.ts
@@ -87,11 +106,11 @@
 ├── vitest.config.ts
 └── yarn.lock
 
-22 directories, 54 files
+28 directories, 65 files
 ```
 
-## Modelagem
+## Diagrams
 
-![auth](auth.png)
-![customers](customers.png)
-![modeling](modeling.png)
+![auth](./diagrams/auth_routes.png)
+![customers](./diagrams/customer_routes.png)
+![modeling](./diagrams/modeling.png)
