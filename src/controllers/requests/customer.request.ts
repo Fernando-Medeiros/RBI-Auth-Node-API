@@ -36,21 +36,17 @@ export class CustomerRequest {
     lastName ? nameIsValid(lastName) : null;
     email ? emailIsValid(email) : null;
 
-    const dataToUpdate = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
+    const toUpdate = {
+      ...(firstName && { firstName: firstName }),
+      ...(lastName && { lastName: lastName }),
+      ...(email && { email: email }),
     };
 
-    firstName ? null : delete dataToUpdate.firstName;
-    lastName ? null : delete dataToUpdate.lastName;
-    email ? null : delete dataToUpdate.email;
-
     isTrue_or_400(
-      Object.values(dataToUpdate).length ? true : null,
+      Object.values(toUpdate).length ? true : null,
       "There is no content, enter valid data to update!"
     );
 
-    return dataToUpdate;
+    return toUpdate;
   }
 }
