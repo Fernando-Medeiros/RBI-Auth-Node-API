@@ -8,9 +8,9 @@ import { InternalServerError, Unauthorized } from "../helpers/http.exceptions";
 const SECRET = env["SECRET_KEY"] || `${Math.random()}`;
 const ALGORITHM: Algorithm = "HS512";
 
-const ExpACCESS = parseInt(env["EXP_ACCESS_TOKEN"] || "15");
-const ExpREFRESH = parseInt(env["EXP_REFRESH_TOKEN"] || "15");
-const ExpRECOVER = parseInt(env["EXP_PWD_RECOVER_TOKEN"] || "5");
+const ExpACCESS = parseInt(env["EXP_ACCESS"] || "15");
+const ExpREFRESH = parseInt(env["EXP_REFRESH"] || "15");
+const ExpRECOVER = parseInt(env["EXP_RECOVER"] || "5");
 
 export interface PropsToken {
   sub: string;

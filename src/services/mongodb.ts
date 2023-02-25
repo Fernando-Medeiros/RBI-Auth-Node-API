@@ -6,17 +6,17 @@ export const getCredentials = (): string => {
   const credentials = {
     username: process.env["MONGO_USERNAME"],
     password: process.env["MONGO_PASSWORD"],
-    database: process.env["MONGO_DEV_DATABASE"],
+    database: "DEVELOPMENT",
   };
 
   const env = process.env["ENV"] || "dev";
-
+  
   switch (env.toLowerCase()) {
     case "pro":
-      credentials.database = process.env["MONGO_DATABASE"];
+      credentials.database = process.env["MONGO_COLLECTION"] as string;
       break;
     case "test":
-      credentials.database = process.env["MONGO_TEST_DATABASE"];
+      credentials.database = "TEST";
       break;
   }
   return `mongodb+srv://${credentials.username}:${credentials.password}.cy0lncg.mongodb.net/${credentials.database}?retryWrites=true&w=majority`;
