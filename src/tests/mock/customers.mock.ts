@@ -1,6 +1,6 @@
 export const dataToNewCustomer = {
   firstName: "Tester",
-  lastName: "DevSan",
+  lastName: "Example",
   email: `tester-${Math.random()}@tester.com`,
-  password: "tester@123",
+  password: "Test@123",
 };

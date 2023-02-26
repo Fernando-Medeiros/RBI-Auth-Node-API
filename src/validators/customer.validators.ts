@@ -1,9 +1,8 @@
 import { BadRequest } from "../helpers/http.exceptions";
 
 class RegexValidator {
-  constructor(field: string | undefined, pattern: string, message: string) {
-    const regex = new RegExp(pattern);
-    const exp = field === null || !regex.test(field || "");
+  constructor(value: string | undefined, regex: RegExp, message: string) {
+    const exp = value === null || !regex.test(value as string);
 
     if (exp) {
       throw new BadRequest(message);
@@ -12,13 +11,17 @@ class RegexValidator {
 }
 
 export const nameIsValid = (name?: string): void => {
-  new RegexValidator(name, `([A-Za-z]{3,20})`, "Name format is invalid!");
+  new RegexValidator(
+    name,
+    /^[a-zA-Z]{4,12}(\s[a-zA-Z]{3,12})?$/g,
+    "Name format is invalid!"
+  );
 };
 
 export const emailIsValid = (email?: string): void => {
   new RegexValidator(
     email,
-    `([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9]+(.[A-Z|a-z]{2,})+`,
+    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/g,
     "Email format is invalid!"
   );
 };
@@ -26,7 +29,7 @@ export const emailIsValid = (email?: string): void => {
 export const passwordIsValid = (password?: string): void => {
   new RegexValidator(
     password,
-    `^([A-Za-z0-9]).{7,}$`,
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{7,16}$/g,
     "Password format is invalid!"
   );
 };

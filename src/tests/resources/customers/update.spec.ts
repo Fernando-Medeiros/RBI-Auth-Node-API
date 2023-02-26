@@ -18,8 +18,8 @@ describe("Patch - Ok", async () => {
   it("Should update first and last name", async () => {
 
     const data = {
-      firstName: "NewTesterName",
-      lastName: "NewLastName",
+      firstName: "test test",
+      lastName: "example",
     };
 
     const resp = await req
