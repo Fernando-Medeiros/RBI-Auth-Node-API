@@ -3,18 +3,18 @@ import * as fs from "fs";
 
 import swaggerJson from "../swagger.json";
 
-import informations from "../config/info.json";
+import information from "../config/info.json";
 
 import authentication from "../config/authentication.json";
 import exceptions from "../config/exceptions.json";
 
 import authRoutes from "../auth/paths.json";
 import authRequests from "../auth/requests.json";
-import authReponses from "../auth/responses.json";
+import authResponses from "../auth/responses.json";
 
 import customerRoutes from "../customer/paths.json";
 import customerRequests from "../customer/requests.json";
-import customerReponses from "../customer/responses.json";
+import customerResponses from "../customer/responses.json";
 
 class BuildSwagger implements SwaggerInterface {
   public file = swaggerJson as Swagger;
@@ -52,7 +52,7 @@ class BuildSwagger implements SwaggerInterface {
 
 const build = new BuildSwagger();
 
-build.info([informations]);
+build.info([information]);
 
 build.security([authentication]);
 
@@ -60,8 +60,8 @@ build.components([
   exceptions,
   authRequests,
   customerRequests,
-  authReponses,
-  customerReponses,
+  authResponses,
+  customerResponses,
 ]);
 
 build.paths([authRoutes, customerRoutes]);

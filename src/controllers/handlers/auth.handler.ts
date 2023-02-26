@@ -41,7 +41,7 @@ export class AuthHandler {
     };
   }
 
-  async refresh(req: Request): Promise<refreshReponse> {
+  async refresh(req: Request): Promise<refreshResponse> {
     const token = this.authRequest.refreshRequest(req);
 
     const payload = await this.jwt.decode(token);
@@ -63,7 +63,7 @@ interface accessResponse {
   refresh: string;
   type: string;
 }
-interface refreshReponse {
+interface refreshResponse {
   refresh: string;
   type: string;
 }

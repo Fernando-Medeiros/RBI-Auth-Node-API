@@ -3,7 +3,7 @@ import { CustomerMock, req } from "../../clients";
 
 const mock = new CustomerMock();
 
-describe("RefresToken - Ok", () => {
+describe("RefreshToken - Ok", () => {
   mock.beforeAll();
   mock.afterAll();
 
@@ -18,7 +18,7 @@ describe("RefresToken - Ok", () => {
   });
 });
 
-describe("RefresToken - Exceptions", () => {
+describe("RefreshToken - Exceptions", () => {
   mock.beforeAll();
   mock.afterAll();
 
