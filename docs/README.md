@@ -111,6 +111,7 @@
 
 ## Diagrams
 
+![architecture](./diagrams/architecture.png)
 ![auth](./diagrams/auth_routes.png)
 ![customers](./diagrams/customer_routes.png)
 ![modeling](./diagrams/modeling.png)
