@@ -5,16 +5,20 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "format": "uuid"
         },
         "firstName": {
-          "type": "string"
+          "type": "string",
+          "example": "example"
         },
         "lastName": {
-          "type": "string"
+          "type": "string",
+          "example": "example"
         },
         "email": {
-          "type": "string"
+          "type": "string",
+          "example": "example@gmail.com"
         }
       }
     }
@@ -24,16 +28,20 @@
     "type": "object",
     "properties": {
       "id": {
-        "type": "string"
+        "type": "string",
+        "format": "uuid"
       },
       "firstName": {
-        "type": "string"
+        "type": "string",
+        "example": "example"
       },
       "lastName": {
-        "type": "string"
+        "type": "string",
+        "example": "example"
       },
       "email": {
-        "type": "string"
+        "type": "string",
+        "example": "example"
       }
     }
   }

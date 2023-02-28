@@ -4,19 +4,23 @@
     "properties": {
       "firstName": {
         "type": "string",
-        "required": true
+        "required": true,
+        "example": "example"
       },
       "lastName": {
         "type": "string",
-        "required": true
+        "required": true,
+        "example": "example"
       },
       "email": {
         "type": "string",
-        "required": true
+        "required": true,
+        "example": "example@gmail.com"
       },
       "password": {
         "type": "string",
-        "required": true
+        "required": true,
+        "example": "Example@123"
       }
     }
   },
@@ -26,20 +30,21 @@
     "properties": {
       "firstName": {
         "type": "string",
-        "required": true
+        "example": "example"
       },
       "lastName": {
         "type": "string",
-        "required": true
+        "example": "example"
       },
       "email": {
         "type": "string",
-        "required": true
+        "example": "example@gmail.com"
       }
     }
   },
 
   "ParameterID": {
+    "description": "Customer ID",
     "name": "id",
     "in": "path",
     "type": "string",

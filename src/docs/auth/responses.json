@@ -9,7 +9,8 @@
         "type": "string"
       },
       "type": {
-        "type": "string"
+        "type": "string",
+        "example": "bearer"
       }
     }
   },
@@ -21,7 +22,8 @@
         "type": "string"
       },
       "type": {
-        "type": "string"
+        "type": "string",
+        "example": "bearer"
       }
     }
   }

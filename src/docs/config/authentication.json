@@ -1,5 +1,6 @@
 {
   "bearerAuth": {
+    "description": "Authentication with bearer token ",
     "type": "http",
     "scheme": "bearer",
     "bearerFormat": "JWT"
@@ -7,10 +8,10 @@
 
   "oAuth2AuthCode": {
     "type": "oauth2",
-    "description": "",
+    "description": "Authentication with email and password",
     "flows": {
       "password": {
-        "tokenUrl": "http://localhost:8080/token",
+        "tokenUrl": "/token",
         "scopes": {}
       }
     }
