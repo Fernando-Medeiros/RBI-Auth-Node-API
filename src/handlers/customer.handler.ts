@@ -1,6 +1,6 @@
 import type { Request } from "express";
-import { Crypt } from "../security/crypt/crypt";
 
+import { Crypt } from "../security/crypt/crypt";
 import { CustomerRepository } from "../repositories/customer/repository";
 import { CustomerRequests } from "./requests/customer/customer.requests";
 

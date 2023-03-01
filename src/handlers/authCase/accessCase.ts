@@ -34,8 +34,8 @@ export async function accessCase(
   isTrue_or_400(isEqualTo, "Invalid password!");
 
   return {
-    access: await jwt.createAccess({ sub: customerExists?.id }),
-    refresh: await jwt.createRefresh({ sub: customerExists?.id }),
+    access: await jwt.createAccess({ sub: customerExists?.id as string }),
+    refresh: await jwt.createRefresh({ sub: customerExists?.id as string }),
     type: "bearer",
   };
 }

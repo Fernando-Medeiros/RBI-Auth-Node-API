@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { Token, PropsToken } from "../../security/token/token";
+import { Token } from "../../security/token/token";
 
 const jwt = new Token();
 
@@ -66,7 +66,7 @@ describe("AccessToken", () => {
   });
 
   test("Decode", async () => {
-    const payload: PropsToken = await jwt.decode(newToken);
+    const payload = await jwt.decode(newToken);
 
     expect(payload).toBeTypeOf("object");
     expect(payload).toHaveProperty("sub");
@@ -86,7 +86,7 @@ describe("RefreshToken", () => {
   });
 
   test("Decode", async () => {
-    const payload: PropsToken = await jwt.decode(newToken);
+    const payload = await jwt.decode(newToken);
 
     expect(payload).toBeTypeOf("object");
     expect(payload).toHaveProperty("sub");
@@ -106,7 +106,7 @@ describe("RecoverToken", () => {
   });
 
   test("Decode", async () => {
-    const payload: PropsToken = await jwt.decode(newToken);
+    const payload = await jwt.decode(newToken);
 
     expect(payload).toBeTypeOf("object");
     expect(payload).toHaveProperty("sub");
