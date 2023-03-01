@@ -1,8 +1,8 @@
 import { expect, test, describe } from "vitest";
-import { Bcrypt } from "../../security/bcrypt";
+import { Crypt } from "../../security/crypt/crypt";
 import { CustomerMock } from "../clients";
 
-const bcrypt = new Bcrypt();
+const bcrypt = new Crypt();
 const mock = new CustomerMock();
 
 describe("Unit", () => {

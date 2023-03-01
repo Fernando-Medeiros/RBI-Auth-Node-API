@@ -4,36 +4,35 @@ import {
   StatusOK,
   StatusOkNoContent,
 } from "../helpers/http.protocols";
-import { CustomerHandler } from "./handlers/customer.handler";
 
-const handler = new CustomerHandler();
+import { CustomerHandler as handler } from "../handlers/customer.handler";
 
-export const getAllCustomer = async (_req: Request, res: Response) => {
-  const customers = await handler.getAll();
+export const getAllCustomers = async (_req: Request, res: Response) => {
+  const customers = await handler.getAllCustomers();
 
   return new StatusOK(res, customers);
 };
 
-export const getIdCustomer = async (req: Request, res: Response) => {
-  const customer = await handler.getById(req);
+export const getCustomerById = async (req: Request, res: Response) => {
+  const customer = await handler.getCustomerById(req);
 
   return new StatusOK(res, customer);
 };
 
 export const createCustomer = async (req: Request, res: Response) => {
-  await handler.create(req);
+  await handler.createCustomer(req);
 
   return new StatusCreated(res);
 };
 
 export const updateCustomer = async (req: Request, res: Response) => {
-  await handler.update(req);
+  await handler.updateCustomer(req);
 
   return new StatusOkNoContent(res);
 };
 
 export const deleteCustomer = async (req: Request, res: Response) => {
-  await handler.delete(req);
+  await handler.deleteCustomer(req);
 
   return new StatusOkNoContent(res);
 };

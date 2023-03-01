@@ -1,6 +1,7 @@
+import type { ICrypt } from "./crypt.interface";
 import bcrypt from "bcryptjs";
 
-export class Bcrypt {
+export class Crypt implements ICrypt {
   async hash(password: string): Promise<string> {
     return await bcrypt.hash(password, 10);
   }

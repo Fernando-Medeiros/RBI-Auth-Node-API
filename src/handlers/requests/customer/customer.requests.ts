@@ -1,9 +1,9 @@
 import type { Request } from "express";
+import type { ICustomerRequests } from "./requests.interface";
 import type {
   PropsUpdate,
   PropsCreate,
-} from "../../entities/interfaces/customer.interface";
-
+} from "../../../entities/interfaces/customer.interface";
 import {
   nameIsValid,
   emailIsValid,
@@ -12,9 +12,9 @@ import {
 
 import { isTrue_or_400 } from "../../validators/validators";
 
-export class CustomerRequest {
-  createRequest(request: Request): PropsCreate {
-    const { firstName, lastName, email, password } = request.body;
+export class CustomerRequests implements ICustomerRequests {
+  getRequestToCreate(req: Request): PropsCreate {
+    const { firstName, lastName, email, password } = req.body;
 
     nameIsValid(firstName);
     nameIsValid(lastName);
@@ -29,7 +29,7 @@ export class CustomerRequest {
     };
   }
 
-  updateRequest(request: Request): PropsUpdate {
+  getRequestToUpdate(request: Request): PropsUpdate {
     const { firstName, lastName, email } = request.body;
 
     firstName ? nameIsValid(firstName) : null;

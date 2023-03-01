@@ -2,7 +2,7 @@ import {
   BadRequest,
   BaseException,
   NotFound,
-} from "../helpers/http.exceptions";
+} from "../../helpers/http.exceptions";
 
 class TypeValidator {
   constructor(obj: unknown, exception: BaseException) {

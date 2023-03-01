@@ -1,9 +1,13 @@
 import type { Algorithm } from "jsonwebtoken";
+import type { PropsToken, IToken } from "./token.interface";
 
 import { env } from "process";
 import Jwt from "jsonwebtoken";
 
-import { InternalServerError, Unauthorized } from "../helpers/http.exceptions";
+import {
+  InternalServerError,
+  Unauthorized,
+} from "../../helpers/http.exceptions";
 
 const SECRET = env["SECRET_KEY"] || `${Math.random()}`;
 const ALGORITHM: Algorithm = "HS512";
@@ -11,12 +15,6 @@ const ALGORITHM: Algorithm = "HS512";
 const ExpACCESS = parseInt(env["EXP_ACCESS"] || "15");
 const ExpREFRESH = parseInt(env["EXP_REFRESH"] || "15");
 const ExpRECOVER = parseInt(env["EXP_RECOVER"] || "5");
-
-export interface PropsToken {
-  sub: string;
-  exp?: number;
-  scope?: string;
-}
 
 class EncodeToDecode {
   async encode(payload: PropsToken): Promise<string> {
@@ -40,9 +38,9 @@ class EncodeToDecode {
   }
 }
 
-export class Token extends EncodeToDecode {
-  convertToMilliseconds = (time: number): number => {
-    return Math.floor(Date.now() / 1000) + 60 * time;
+export class Token extends EncodeToDecode implements IToken {
+  convertToMilliseconds = (exp: number): number => {
+    return Math.floor(Date.now() / 1000) + 60 * exp;
   };
 
   createAccess = async (payload: PropsToken): Promise<string> => {

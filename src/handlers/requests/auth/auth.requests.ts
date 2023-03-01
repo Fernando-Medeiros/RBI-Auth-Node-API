@@ -1,14 +1,14 @@
 import type { Request } from "express";
+import type { IAuthRequests, accessRequest } from "./requests.interface";
 
+import { tokenIsValid } from "../../validators/auth.validators";
 import {
   emailIsValid,
   passwordIsValid,
 } from "../../validators/customer.validators";
 
-import { tokenIsValid } from "../../validators/auth.validators";
-
-export class AuthRequest {
-  accessRequest(request: Request): accessRequest {
+export class AuthRequest implements IAuthRequests {
+  getAccessRequest(request: Request): accessRequest {
     const { email, password } = request.body;
 
     emailIsValid(email);
@@ -20,7 +20,7 @@ export class AuthRequest {
     };
   }
 
-  refreshRequest(request: Request): string {
+  getRefreshRequest(request: Request): string {
     const { token } = request.body;
 
     tokenIsValid(token, "Missing refresh token!");
@@ -28,8 +28,3 @@ export class AuthRequest {
     return token;
   }
 }
-
-type accessRequest = {
-  email: string;
-  password: string;
-};

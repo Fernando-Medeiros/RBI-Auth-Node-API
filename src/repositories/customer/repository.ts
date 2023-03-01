@@ -1,17 +1,15 @@
+import type { ICustomerRepository } from "./repository.interface";
 import type {
   PropsCreate,
   PropsUpdate,
-} from "../entities/interfaces/customer.interface";
-import { CustomerModel as model } from "../models/customers.model";
-import { isTrue_or_404 } from "../validators/validators";
+} from "../../entities/interfaces/customer.interface";
 
-export class CustomerRepository {
-  async save(data: PropsCreate) {
-    return await model.create(data);
-  }
+import { CustomerModel as model } from "../../models/customers.model";
+import { isTrue_or_404 } from "../../handlers/validators/validators";
 
-  async findByEmail(_email: string) {
-    return await model.exists({ email: _email });
+export class CustomerRepository implements ICustomerRepository {
+  async findByEmail(email: string) {
+    return await model.exists({ email: email });
   }
 
   async find() {
@@ -48,5 +46,9 @@ export class CustomerRepository {
     isTrue_or_404(customer, "Account does not exist!");
 
     return customer;
+  }
+
+  async save(data: PropsCreate) {
+    return await model.create(data);
   }
 }

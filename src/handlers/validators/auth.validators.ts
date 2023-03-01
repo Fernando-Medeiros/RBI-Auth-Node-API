@@ -3,7 +3,7 @@ import {
   BadRequest,
   InternalServerError,
   Unauthorized,
-} from "../helpers/http.exceptions";
+} from "../../helpers/http.exceptions";
 
 export const tokenIsValid = (
   token: string | undefined,

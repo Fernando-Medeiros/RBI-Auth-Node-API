@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { sessionMiddleware } from "../middlewares/session";
 import {
-  getAllCustomer,
-  getIdCustomer,
+  getAllCustomers,
+  getCustomerById,
   createCustomer,
   updateCustomer,
   deleteCustomer,
@@ -14,9 +14,9 @@ route.post("/customers", createCustomer);
 
 route.use(sessionMiddleware);
 
-route.get("/customers", getAllCustomer);
+route.get("/customers", getAllCustomers);
 
-route.get("/customers/:id", getIdCustomer);
+route.get("/customers/:id", getCustomerById);
 
 route.patch("/customers", updateCustomer);
 
