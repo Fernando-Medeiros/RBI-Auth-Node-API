@@ -8,7 +8,7 @@ import {
 } from "../../validators/customer.validators";
 
 export class AuthRequest implements IAuthRequests {
-  getAccessRequest(request: Request): accessRequest {
+  getRequestToAccess(request: Request): accessRequest {
     const { email, password } = request.body;
 
     emailIsValid(email);
@@ -20,7 +20,7 @@ export class AuthRequest implements IAuthRequests {
     };
   }
 
-  getRefreshRequest(request: Request): string {
+  getRequestToRefresh(request: Request): string {
     const { token } = request.body;
 
     tokenIsValid(token, "Missing refresh token!");

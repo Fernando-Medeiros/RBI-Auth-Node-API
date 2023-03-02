@@ -10,7 +10,7 @@ export const getCredentials = (): string => {
   };
 
   const env = process.env["ENV"] || "dev";
-  
+
   switch (env.toLowerCase()) {
     case "pro":
       credentials.database = process.env["MONGO_COLLECTION"] as string;

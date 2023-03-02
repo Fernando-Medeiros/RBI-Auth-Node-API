@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import type { BaseException } from "../helpers/http.exceptions";
+import type { BaseException } from "../../helpers/http.exceptions";
 
 export const exceptionMiddleware = (
   error: Error & Partial<BaseException>,
@@ -13,5 +13,5 @@ export const exceptionMiddleware = (
 
   res.status(statusCode).json({ message: message });
 
-  return next;
+  next();
 };

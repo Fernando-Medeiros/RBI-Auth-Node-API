@@ -3,8 +3,8 @@ import type { Request } from "express";
 import type { PropsCreate } from "../../entities/interfaces/customer.interface";
 import type { ICrypt } from "../../security/crypt/crypt.interface";
 import type { IToken } from "../../security/token/token.interface";
-import type { ICustomerRepository } from "../../repositories/customer/repository.interface";
-import type { IAuthRequests } from "../requests/auth/requests.interface";
+import type { ICustomerRepository } from "../../repositories/customerRepo/interface";
+import type { IAuthRequests } from "./requests/requests.interface";
 
 import { Customer } from "../../entities/customer";
 
@@ -17,19 +17,19 @@ export async function accessCase(
   repository: ICustomerRepository,
   authRequest: IAuthRequests
 ): Promise<accessResponse> {
-  const payload = authRequest.getAccessRequest(req);
+  const { email, password } = authRequest.getRequestToAccess(req);
 
-  const emailExists = await repository.findByEmail(payload.email);
+  const emailExists = await repository.findByEmail(email);
 
   isTrue_or_404(emailExists, "Email not found!");
 
   const customerExists = await repository.findOne({
-    email: payload.email,
+    email: email,
   });
 
   const customer = new Customer(customerExists as PropsCreate);
 
-  const isEqualTo = await crypt.compare(payload.password, customer.getPassword);
+  const isEqualTo = await crypt.compare(password, customer.getPassword);
 
   isTrue_or_400(isEqualTo, "Invalid password!");
 

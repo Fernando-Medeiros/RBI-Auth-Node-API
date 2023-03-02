@@ -1,5 +1,5 @@
 import { expect, test, describe } from "vitest";
-import { Crypt } from "../../security/crypt/crypt";
+import { Crypt } from "../../security/crypt/crypt.impl";
 import { CustomerMock } from "../clients";
 
 const bcrypt = new Crypt();

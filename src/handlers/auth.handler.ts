@@ -1,9 +1,9 @@
 import type { Request } from "express";
 
-import { Crypt } from "../security/crypt/crypt";
-import { Token } from "../security/token/token";
-import { AuthRequest } from "./requests/auth/auth.requests";
-import { CustomerRepository } from "../repositories/customer/repository";
+import { Crypt } from "../security/crypt/crypt.impl";
+import { Token } from "../security/token/token.impl";
+import { AuthRequest } from "./authCase/requests/auth.requests";
+import { CustomerRepository } from "../repositories/customerRepo/repository.impl";
 
 import { accessCase } from "./authCase/accessCase";
 import { refreshCase } from "./authCase/refreshCase";
@@ -20,10 +20,6 @@ export const AuthHandler = {
   },
 
   async refresh(req: Request) {
-    return await refreshCase(
-      req,
-      new Token(),
-      new AuthRequest()
-      );
+    return await refreshCase(req, new Token(), new AuthRequest());
   },
 };

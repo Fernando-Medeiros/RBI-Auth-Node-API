@@ -1,8 +1,8 @@
 import type { Request } from "express";
 
-import { Crypt } from "../security/crypt/crypt";
-import { CustomerRepository } from "../repositories/customer/repository";
-import { CustomerRequests } from "./requests/customer/customer.requests";
+import { Crypt } from "../security/crypt/crypt.impl";
+import { CustomerRepository } from "../repositories/customerRepo/repository.impl";
+import { CustomerRequests } from "./customerCase/requests/customer.requests";
 
 import { createCase } from "./customerCase/createCase";
 import { deleteCase } from "./customerCase/deleteCase";
@@ -12,15 +12,11 @@ import { getByIDCase } from "./customerCase/getByIdCase";
 
 export const CustomerHandler = {
   async getAllCustomers() {
-    return getAllCase(
-      new CustomerRepository());
+    return await getAllCase(new CustomerRepository());
   },
 
   async getCustomerById(req: Request) {
-    return getByIDCase(
-      req, 
-      new CustomerRepository()
-      );
+    return await getByIDCase(req, new CustomerRepository());
   },
 
   async createCustomer(req: Request) {
@@ -33,17 +29,10 @@ export const CustomerHandler = {
   },
 
   async updateCustomer(req: Request) {
-    await updateCase(
-      req,
-      new CustomerRepository(),
-      new CustomerRequests()
-      );
+    await updateCase(req, new CustomerRepository(), new CustomerRequests());
   },
 
   async deleteCustomer(req: Request) {
-    await deleteCase(
-      req,
-      new CustomerRepository()
-      );
+    await deleteCase(req, new CustomerRepository());
   },
 };

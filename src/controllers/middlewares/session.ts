@@ -1,10 +1,10 @@
 import type { NextFunction, Request, Response } from "express";
 
-import { Token } from "../security/token/token";
+import { Token } from "../../security/token/token.impl";
 import {
   subIsValid,
   tokenIsValid,
-} from "../handlers/validators/auth.validators";
+} from "../../handlers/validators/auth.validators";
 
 const JWT = new Token();
 

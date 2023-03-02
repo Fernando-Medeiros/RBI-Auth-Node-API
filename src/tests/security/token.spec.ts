@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { Token } from "../../security/token/token";
+import { Token } from "../../security/token/token.impl";
 
 const jwt = new Token();
 

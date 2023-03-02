@@ -1,7 +1,7 @@
 import type { Request } from "express";
 import type { ICrypt } from "../../security/crypt/crypt.interface";
-import type { ICustomerRepository } from "../../repositories/customer/repository.interface";
-import type { ICustomerRequests } from "../requests/customer/requests.interface";
+import type { ICustomerRepository } from "../../repositories/customerRepo/interface";
+import type { ICustomerRequests } from "./requests/requests.interface";
 
 import { Customer } from "../../entities/customer";
 import { isTrue_or_400 } from "../validators/validators";

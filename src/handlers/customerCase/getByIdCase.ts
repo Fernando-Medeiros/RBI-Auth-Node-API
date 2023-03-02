@@ -1,5 +1,5 @@
 import type { Request } from "express";
-import type { ICustomerRepository } from "../../repositories/customer/repository.interface";
+import type { ICustomerRepository } from "../../repositories/customerRepo/interface";
 
 import { idIsValid } from "../validators/auth.validators";
 

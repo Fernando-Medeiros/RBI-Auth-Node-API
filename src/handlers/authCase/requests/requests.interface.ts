@@ -1,8 +1,8 @@
 import type { Request } from "express";
 
 export interface IAuthRequests {
-  getAccessRequest(req: Request): accessRequest;
-  getRefreshRequest(req: Request): string;
+  getRequestToAccess(req: Request): accessRequest;
+  getRequestToRefresh(req: Request): string;
 }
 
 export type accessRequest = {

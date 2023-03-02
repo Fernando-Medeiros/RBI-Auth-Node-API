@@ -1,4 +1,4 @@
-import type { ICustomerRepository } from "./repository.interface";
+import type { ICustomerRepository } from "./interface";
 import type {
   PropsCreate,
   PropsUpdate,
