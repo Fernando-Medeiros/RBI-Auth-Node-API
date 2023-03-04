@@ -1,7 +1,9 @@
+import "tsconfig-paths/register";
+
 import type { SwaggerInterface, Swagger } from "./interface";
 import * as fs from "fs";
 
-import swaggerJson from "../swagger.json";
+import swaggerJson from "@root/swagger.json";
 
 import information from "../config/info.json";
 
@@ -15,6 +17,9 @@ import authResponses from "../auth/responses.json";
 import customerRoutes from "../customer/paths.json";
 import customerRequests from "../customer/requests.json";
 import customerResponses from "../customer/responses.json";
+
+import passwordRoutes from "../password/paths.json";
+import passwordRequests from "../password/requests.json";
 
 class BuildSwagger implements SwaggerInterface {
   public file = swaggerJson as Swagger;
@@ -46,7 +51,7 @@ class BuildSwagger implements SwaggerInterface {
   save(): void {
     const toSave = JSON.stringify(this.file);
 
-    fs.writeFileSync("../swagger.json", toSave);
+    fs.writeFileSync("./swagger.json", toSave);
   }
 }
 
@@ -60,10 +65,11 @@ build.components([
   exceptions,
   authRequests,
   customerRequests,
+  passwordRequests,
   authResponses,
   customerResponses,
 ]);
 
-build.paths([authRoutes, customerRoutes]);
+build.paths([authRoutes, customerRoutes, passwordRoutes]);
 
 build.save();

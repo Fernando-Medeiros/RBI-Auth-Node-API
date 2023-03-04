@@ -9,7 +9,7 @@ import { customerRoutes } from "./resources/customer.routes";
 import { passwordRoutes } from "./resources/password.routes";
 
 import swaggerUi from "swagger-ui-express";
-import swaggerFile from "./docs/swagger.json";
+import swaggerFile from "@root/swagger.json";
 
 export const server = express();
 

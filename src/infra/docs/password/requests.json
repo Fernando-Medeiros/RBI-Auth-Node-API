@@ -1,0 +1,31 @@
+{
+  "RequestPasswordRecover": {
+    "type": "object",
+    "properties": {
+      "email": {
+        "type": "string",
+        "required": true,
+        "example": "example@gmail.com"
+      }
+    }
+  },
+
+  "RequestPasswordUpdate": {
+    "type": "object",
+    "properties": {
+      "password": {
+        "type": "string",
+        "required": true,
+        "example": "Example@@123"
+      }
+    }
+  },
+
+  "ParameterToken": {
+    "description": "Recover Token",
+    "name": "token",
+    "in": "path",
+    "type": "string",
+    "required": true
+  }
+}

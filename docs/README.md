@@ -1,16 +1,17 @@
 # Red-Boar-Inn API
 
-> Projeto Server - API utilizando **NodeJs** para o jogo **Red Boar Inn**
+>
 
 - [Red-Boar-Inn API](#red-boar-inn-api)
   - [Structure](#structure)
   - [Endpoints](#endpoints)
   - [Diagrams](#diagrams)
     - [Architecture](#architecture)
-    - [Auth endpoint](#auth-endpoint)
-    - [Customer endpoint](#customer-endpoint)
-    - [UseCase](#usecase)
-    - [Modeling](#modeling)
+    - [UseCases](#usecases)
+    - [Auth routes](#auth-routes)
+    - [Customer routes](#customer-routes)
+    - [Password routes](#password-routes)
+    - [Entity](#entity)
     - [Request Response](#request-response)
 
 ## Structure
@@ -27,21 +28,25 @@
 
 ![architecture](./diagrams/architecture.png)
 
-### Auth endpoint
+### UseCases
 
-![auth](./diagrams/auth_routes.png)
+![useCases](./diagrams/usecases.png)
 
-### Customer endpoint
+### Auth routes
 
-![customers](./diagrams/customer_routes.png)
+![authRoutes](./diagrams/authRoutes.png)
 
-### UseCase
+### Customer routes
 
-![usecase](./diagrams/usecase.png)
+![customerRoutes](./diagrams/customerRoutes.png)
 
-### Modeling
+### Password routes
 
-![modeling](./diagrams/modeling.png)
+![passwordRoutes](./diagrams/passwordRoutes.png)
+
+### Entity
+
+![entityCustomer](./diagrams/entity.png)
 
 ### Request Response
 
