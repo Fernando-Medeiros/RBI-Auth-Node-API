@@ -6,16 +6,16 @@ import type {
   PropsReset,
 } from "./requests.interface";
 import {
-  passwordIsValid,
-  emailIsValid,
+  passwordIsValid_or_400,
+  emailIsValid_or_400,
 } from "@app/validators/customer.validators";
-import { tokenIsValid } from "@app/validators/auth.validators";
+import { tokenIsValid_or_401 } from "@app/validators/auth.validators";
 
 export class PwdRequests implements IPwdRequests {
   getRequestToRecover(req: Request): PropsRecover {
     const { email } = req.body;
 
-    emailIsValid(email);
+    emailIsValid_or_400(email);
 
     return {
       email: email,
@@ -26,8 +26,8 @@ export class PwdRequests implements IPwdRequests {
     const { token } = req.params;
     const { password } = req.body;
 
-    tokenIsValid(token, "Token format is invalid");
-    passwordIsValid(password);
+    tokenIsValid_or_401(token, "Token format is invalid");
+    passwordIsValid_or_400(password);
 
     return {
       token: token as string,
@@ -38,7 +38,7 @@ export class PwdRequests implements IPwdRequests {
   getRequestToUpdate(req: Request): PropsUpdate {
     const { password } = req.body;
 
-    passwordIsValid(password);
+    passwordIsValid_or_400(password);
 
     return { password: password };
   }

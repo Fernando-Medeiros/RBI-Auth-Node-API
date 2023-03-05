@@ -5,7 +5,7 @@ import {
   Unauthorized,
 } from "@src/helpers/http.exceptions";
 
-export const tokenIsValid = (
+export const tokenIsValid_or_401 = (
   token: string | undefined,
   message: string
 ): void => {
@@ -16,7 +16,7 @@ export const tokenIsValid = (
   }
 };
 
-export const subIsValid = (sub?: string): void => {
+export const subIsValid_or_500 = (sub?: string): void => {
   const exp = sub === undefined || !validate(sub);
 
   if (exp) {
@@ -26,7 +26,7 @@ export const subIsValid = (sub?: string): void => {
   }
 };
 
-export const idIsValid = (id?: string): void => {
+export const idIsValid_or_400 = (id?: string): void => {
   const exp = id === undefined || !validate(id);
 
   if (exp) {

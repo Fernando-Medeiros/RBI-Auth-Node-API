@@ -5,9 +5,9 @@ import type {
   PropsCreate,
 } from "@dom/interfaces/customer.interface";
 import {
-  nameIsValid,
-  emailIsValid,
-  passwordIsValid,
+  nameIsValid_or_400,
+  emailIsValid_or_400,
+  passwordIsValid_or_400,
 } from "@app/validators/customer.validators";
 
 import { isTrue_or_400 } from "@app/validators/validators";
@@ -16,10 +16,10 @@ export class CustomerRequests implements ICustomerRequests {
   getRequestToCreate(req: Request): PropsCreate {
     const { firstName, lastName, email, password } = req.body;
 
-    nameIsValid(firstName);
-    nameIsValid(lastName);
-    emailIsValid(email);
-    passwordIsValid(password);
+    nameIsValid_or_400(firstName);
+    nameIsValid_or_400(lastName);
+    emailIsValid_or_400(email);
+    passwordIsValid_or_400(password);
 
     return {
       firstName: firstName,
@@ -32,9 +32,9 @@ export class CustomerRequests implements ICustomerRequests {
   getRequestToUpdate(request: Request): PropsUpdate {
     const { firstName, lastName, email } = request.body;
 
-    firstName ? nameIsValid(firstName) : null;
-    lastName ? nameIsValid(lastName) : null;
-    email ? emailIsValid(email) : null;
+    firstName ? nameIsValid_or_400(firstName) : null;
+    lastName ? nameIsValid_or_400(lastName) : null;
+    email ? emailIsValid_or_400(email) : null;
 
     const toUpdate = {
       ...(firstName && { firstName: firstName }),

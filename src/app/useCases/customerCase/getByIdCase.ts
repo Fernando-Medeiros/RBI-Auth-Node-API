@@ -1,7 +1,7 @@
 import type { Request } from "express";
 import type { ICustomerRepository } from "@app/interfaces/repositories/customer.repository.interface";
 
-import { idIsValid } from "@app/validators/auth.validators";
+import { idIsValid_or_400 } from "@app/validators/auth.validators";
 
 export async function getByIDCase(
   req: Request,
@@ -9,7 +9,7 @@ export async function getByIDCase(
 ) {
   const { id } = req.params;
 
-  idIsValid(id);
+  idIsValid_or_400(id);
 
   const customer = await repository.findById(String(id));
 
