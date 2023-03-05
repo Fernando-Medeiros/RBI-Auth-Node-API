@@ -13,5 +13,10 @@ export async function getByIDCase(
 
   const customer = await repository.findById(String(id));
 
-  return customer;
+  return {
+    pubId: customer?.pubId,
+    firstName: customer?.firstName,
+    lastName: customer?.lastName,
+    createdAt: customer?.createdAt,
+  };
 }
