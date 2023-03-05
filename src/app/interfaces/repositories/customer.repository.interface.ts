@@ -9,5 +9,5 @@ export interface ICustomerRepository {
   save(data: PropsCreate): Promise<Customer>;
 }
 
-export type PropsCreate = Omit<Customer, "createdAt" | "id">;
+export type PropsCreate = Omit<Customer, "createdAt" | "id" | "pubId">;
 export type PropsUpdate = Partial<Omit<PropsCreate, "password">>;

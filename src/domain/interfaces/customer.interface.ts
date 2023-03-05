@@ -12,7 +12,6 @@ export type PropsUpdate = {
 };
 
 export type Customer = {
-  id?: string;
   pubId?: string;
   email: string;
   firstName: string;
