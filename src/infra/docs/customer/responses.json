@@ -4,7 +4,7 @@
     "items": {
       "type": "object",
       "properties": {
-        "id": {
+        "pubId": {
           "type": "string",
           "format": "uuid"
         },
@@ -27,7 +27,7 @@
   "ResponseGetById": {
     "type": "object",
     "properties": {
-      "id": {
+      "pubId": {
         "type": "string",
         "format": "uuid"
       },

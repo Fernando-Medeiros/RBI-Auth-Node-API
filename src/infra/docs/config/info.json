@@ -1,6 +1,6 @@
 {
-  "title": "Red-Boar-Inn API",
-  "description": "Game API documentation",
+  "title": "Red-Boar-Inn Auth API",
+  "description": "Application for registering new customers and authenticating them.",
   "version": "1.0.0",
   "contact": { "name": "support", "email": "red-boar-inn-support@gmail.com" }
 }

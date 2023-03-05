@@ -4,8 +4,8 @@
     "properties": {
       "email": {
         "type": "string",
-        "required": true,
-        "example": "example@gmail.com"
+        "example": "example@gmail.com",
+        "required": true
       }
     }
   },
@@ -15,8 +15,8 @@
     "properties": {
       "password": {
         "type": "string",
-        "required": true,
-        "example": "Example@@123"
+        "example": "Example@@123",
+        "required": true
       }
     }
   },
