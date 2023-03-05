@@ -1,9 +1,8 @@
-# Red-Boar-Inn API
+# Red-Boar-Inn Auth API
 
->
-
-- [Red-Boar-Inn API](#red-boar-inn-api)
+- [Red-Boar-Inn Auth API](#red-boar-inn-auth-api)
   - [Structure](#structure)
+  - [Documentation](#documentation)
   - [Endpoints](#endpoints)
   - [Diagrams](#diagrams)
     - [Architecture](#architecture)
@@ -12,11 +11,14 @@
     - [Customer routes](#customer-routes)
     - [Password routes](#password-routes)
     - [Entity](#entity)
-    - [Request Response](#request-response)
 
 ## Structure
 
 [STRUCTURE.md](STRUCTURE.md)
+
+## Documentation
+
+[SCRIPT -> swagger](../src/infra/docs/build/script.ts)
 
 ## Endpoints
 
@@ -47,7 +49,3 @@
 ### Entity
 
 ![entityCustomer](./diagrams/entity.png)
-
-### Request Response
-
-![Request-Response](./diagrams/request_response.png)
