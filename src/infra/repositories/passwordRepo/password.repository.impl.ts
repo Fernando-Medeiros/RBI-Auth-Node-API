@@ -9,7 +9,7 @@ import { isTrue_or_404 } from "@app/validators/validators";
 
 export class PasswordRepository implements IPwdRepository {
   async findByIdAndUpdate(id: string, data: PropsUpdate): Promise<void> {
-    const customer = await model.findByIdAndUpdate(id, data);
+    const customer = await model.findOneAndUpdate({ pubId: id }, data);
 
     isTrue_or_404(customer, "Customer not found!");
   }

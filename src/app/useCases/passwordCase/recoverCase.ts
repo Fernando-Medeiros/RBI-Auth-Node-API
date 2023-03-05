@@ -16,7 +16,7 @@ export async function recoverCase(
 
   const customer = await pwdRepository.findByEmail(email);
 
-  const token = await jwt.createRecover({ sub: customer?.id as string });
+  const token = await jwt.createRecover({ sub: customer?.pubId as string });
 
   await pwdEmail.sendEmail(email, token);
 

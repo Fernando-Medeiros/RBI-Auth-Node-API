@@ -30,9 +30,9 @@ export class CustomerMock {
   async getOneCustomerId(headerAuth: Authorization): Promise<string> {
     const manyCustomers = await req.get("/customers").set(headerAuth);
 
-    const { _id } = await manyCustomers.body[0];
-    
-    return _id;
+    const { pubId } = await manyCustomers.body[0];
+
+    return pubId;
   }
 
   async getAccessToken(scope: "access" | "refresh"): Promise<string> {

@@ -1,5 +1,7 @@
 import { expect, it, describe } from "vitest";
 
+import { v4 } from "uuid";
+
 import { CustomerMock, req } from "@tes/config/clients";
 
 const mock = new CustomerMock();
@@ -19,9 +21,7 @@ describe("Get - Ok", async () => {
   });
 
   it("Should return all customers", async () => {
-    const resp = await req
-    .get("/customers")
-    .set(headerAuth);
+    const resp = await req.get("/customers").set(headerAuth);
 
     expect(resp.statusCode).toBe(200);
     expect(resp.body).toBeTypeOf("object");
@@ -56,9 +56,9 @@ describe("Get - Exceptions", async () => {
     expect(resp.body).toBeTypeOf("object");
   });
 
-  it("Should return 404 when looking up a customer with a valid but non-existent hex string", async () => {
+  it("Should return 404 when looking up a customer with a valid but non-existent uuid", async () => {
     const resp = await req
-      .get(`/customers/63f80f49ab18b61e74a92c28`)
+      .get(`/customers/${v4()}`)
       .set(headerAuth);
 
     expect(resp.statusCode).toBe(404);

@@ -1,8 +1,5 @@
 import type { Request } from "express";
 
-import { Customer } from "@dom/entities/customer";
-import type { PropsCreate } from "@dom/interfaces/customer.interface";
-
 import type { ICrypt } from "@app/interfaces/security/crypt.interface";
 import type { IToken } from "@app/interfaces/security/token.interface";
 import type { IAuthRequests } from "./requests/requests.interface";
@@ -23,19 +20,17 @@ export async function accessCase(
 
   isTrue_or_404(emailExists, "Email not found!");
 
-  const customerExists = await repository.findOne({
+  const customer = await repository.findOne({
     email: email,
   });
 
-  const customer = new Customer(customerExists as PropsCreate);
-
-  const isEqualTo = await crypt.compare(password, customer.getPassword);
+  const isEqualTo = await crypt.compare(password, customer?.password as string);
 
   isTrue_or_400(isEqualTo, "Invalid password!");
 
   return {
-    access: await jwt.createAccess({ sub: customerExists?.id as string }),
-    refresh: await jwt.createRefresh({ sub: customerExists?.id as string }),
+    access: await jwt.createAccess({ sub: customer?.pubId as string }),
+    refresh: await jwt.createRefresh({ sub: customer?.pubId as string }),
     type: "bearer",
   };
 }

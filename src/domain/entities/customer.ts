@@ -1,9 +1,6 @@
-import type {
-  PropsCreate,
-  CustomerInterface,
-} from "../interfaces/customer.interface";
+import type { PropsCreate, ICustomer } from "../interfaces/customer.interface";
 
-export class Customer implements CustomerInterface {
+export class Customer implements ICustomer {
   readonly props: PropsCreate;
 
   get getEmail(): string {

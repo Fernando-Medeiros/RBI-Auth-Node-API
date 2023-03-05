@@ -21,7 +21,7 @@ export class CustomerRepository implements ICustomerRepository {
   }
 
   async findById(id: string) {
-    const customer = await model.findById(id);
+    const customer = await model.findOne({ pubId: id });
 
     isTrue_or_404(customer, "Customer not found!");
 
@@ -29,7 +29,7 @@ export class CustomerRepository implements ICustomerRepository {
   }
 
   async findByIdAndUpdate(id: string, data: PropsUpdate) {
-    const customer = await model.findByIdAndUpdate(id, data);
+    const customer = await model.findOneAndUpdate({ pubId: id }, data);
 
     isTrue_or_404(customer, "Account does not exist!");
 
@@ -37,7 +37,7 @@ export class CustomerRepository implements ICustomerRepository {
   }
 
   async findByIdAndDelete(id: string) {
-    const customer = await model.findByIdAndRemove(id);
+    const customer = await model.findOneAndRemove({ pubId: id });
 
     isTrue_or_404(customer, "Account does not exist!");
 

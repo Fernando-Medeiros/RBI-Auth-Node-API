@@ -1,4 +1,4 @@
-import { isObjectIdOrHexString } from "mongoose";
+import { validate } from "uuid";
 import {
   BadRequest,
   InternalServerError,
@@ -17,7 +17,7 @@ export const tokenIsValid = (
 };
 
 export const subIsValid = (sub?: string): void => {
-  const exp = sub === undefined || !isObjectIdOrHexString(sub);
+  const exp = sub === undefined || !validate(sub);
 
   if (exp) {
     throw new InternalServerError(
@@ -27,7 +27,7 @@ export const subIsValid = (sub?: string): void => {
 };
 
 export const idIsValid = (id?: string): void => {
-  const exp = id === undefined || !isObjectIdOrHexString(id);
+  const exp = id === undefined || !validate(id);
 
   if (exp) {
     throw new BadRequest("Invalid or non-existent id!");

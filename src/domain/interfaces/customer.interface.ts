@@ -13,6 +13,7 @@ export type PropsUpdate = {
 
 export type Customer = {
   id?: string;
+  pubId?: string;
   email: string;
   firstName: string;
   lastName: string;
@@ -20,7 +21,7 @@ export type Customer = {
   createdAt: Date;
 };
 
-export interface CustomerInterface {
+export interface ICustomer {
   readonly props: PropsCreate;
   get getEmail(): string;
   get getPassword(): string;
