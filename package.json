@@ -15,6 +15,9 @@
     "test": "vitest",
     "test:ui": "vitest --ui"
   },
+  "engines": {
+    "node": "16.19.1"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
