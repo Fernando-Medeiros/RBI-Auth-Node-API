@@ -4,16 +4,5 @@
     "type": "http",
     "scheme": "bearer",
     "bearerFormat": "JWT"
-  },
-
-  "oAuth2AuthCode": {
-    "type": "oauth2",
-    "description": "Authentication with email and password",
-    "flows": {
-      "password": {
-        "tokenUrl": "/token",
-        "scopes": {}
-      }
-    }
   }
 }

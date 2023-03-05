@@ -31,7 +31,7 @@
     "get": {
       "tags": ["customer"],
       "summary": "Get all customers",
-      "security": [{ "bearerAuth": [] }, { "oAuth2AuthCode": [] }],
+      "security": [{ "bearerAuth": [] }],
       "description": "",
       "parameters": [],
       "responses": {
@@ -57,7 +57,7 @@
     "patch": {
       "tags": ["customer"],
       "summary": "Update account details",
-      "security": [{ "bearerAuth": [] }, { "oAuth2AuthCode": [] }],
+      "security": [{ "bearerAuth": [] }],
       "description": "",
       "requestBody": {
         "content": {
@@ -93,7 +93,7 @@
     "delete": {
       "tags": ["customer"],
       "summary": "Delete own account",
-      "security": [{ "bearerAuth": [] }, { "oAuth2AuthCode": [] }],
+      "security": [{ "bearerAuth": [] }],
       "description": "",
       "parameters": [],
       "responses": {
@@ -124,7 +124,7 @@
     "get": {
       "tags": ["customer"],
       "summary": "Find a customer by id",
-      "security": [{ "bearerAuth": [] }, { "oAuth2AuthCode": [] }],
+      "security": [{ "bearerAuth": [] }],
       "description": "",
       "parameters": [{ "$ref": "#/components/schemas/ParameterID" }],
       "responses": {

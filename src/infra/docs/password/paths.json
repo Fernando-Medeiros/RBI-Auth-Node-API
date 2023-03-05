@@ -39,7 +39,7 @@
     "patch": {
       "tags": ["password"],
       "summary": "Update password",
-      "security": [{ "bearerAuth": [] }, { "oAuth2AuthCode": [] }],
+      "security": [{ "bearerAuth": [] }],
       "description": "Change your new password",
       "requestBody": {
         "content": {

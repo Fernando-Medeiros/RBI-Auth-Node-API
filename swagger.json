@@ -14,11 +14,6 @@
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "JWT"
-      },
-      "oAuth2AuthCode": {
-        "type": "oauth2",
-        "description": "Authentication with email and password",
-        "flows": { "password": { "tokenUrl": "/token", "scopes": {} } }
       }
     },
     "schemas": {
@@ -270,7 +265,7 @@
       "get": {
         "tags": ["customer"],
         "summary": "Get all customers",
-        "security": [{ "bearerAuth": [] }, { "oAuth2AuthCode": [] }],
+        "security": [{ "bearerAuth": [] }],
         "description": "",
         "parameters": [],
         "responses": {
@@ -295,7 +290,7 @@
       "patch": {
         "tags": ["customer"],
         "summary": "Update account details",
-        "security": [{ "bearerAuth": [] }, { "oAuth2AuthCode": [] }],
+        "security": [{ "bearerAuth": [] }],
         "description": "",
         "requestBody": {
           "content": {
@@ -328,7 +323,7 @@
       "delete": {
         "tags": ["customer"],
         "summary": "Delete own account",
-        "security": [{ "bearerAuth": [] }, { "oAuth2AuthCode": [] }],
+        "security": [{ "bearerAuth": [] }],
         "description": "",
         "parameters": [],
         "responses": {
@@ -356,7 +351,7 @@
       "get": {
         "tags": ["customer"],
         "summary": "Find a customer by id",
-        "security": [{ "bearerAuth": [] }, { "oAuth2AuthCode": [] }],
+        "security": [{ "bearerAuth": [] }],
         "description": "",
         "parameters": [{ "$ref": "#/components/schemas/ParameterID" }],
         "responses": {
@@ -434,7 +429,7 @@
       "patch": {
         "tags": ["password"],
         "summary": "Update password",
-        "security": [{ "bearerAuth": [] }, { "oAuth2AuthCode": [] }],
+        "security": [{ "bearerAuth": [] }],
         "description": "Change your new password",
         "requestBody": {
           "content": {
