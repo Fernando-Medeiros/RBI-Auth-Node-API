@@ -5,15 +5,14 @@
 ├── docs
 │   ├── diagrams
 │   │   ├── architecture.png
-│   │   ├── auth_routes.png
-│   │   ├── customer_routes.png
-│   │   ├── modeling.png
-│   │   ├── request_response.png
-│   │   └── usecase.png
+│   │   ├── authRoutes.png
+│   │   ├── customerRoutes.png
+│   │   ├── entity.png
+│   │   ├── passwordRoutes.png
+│   │   └── usecases.png
 │   ├── endpoints.png
 │   ├── README.md
-│   ├── STRUCTURE.md
-│   └── tips.md
+│   └── STRUCTURE.md
 ├── src
 │   ├── app
 │   │   ├── interfaces
@@ -81,7 +80,9 @@
 │   │   │   │   ├── paths.json
 │   │   │   │   ├── requests.json
 │   │   │   │   └── responses.json
-│   │   │   └── swagger.json
+│   │   │   └── password
+│   │   │       ├── paths.json
+│   │   │       └── requests.json
 │   │   ├── handlers
 │   │   │   ├── auth.handler.ts
 │   │   │   ├── customer.handler.ts
@@ -90,12 +91,7 @@
 │   │   │   ├── exceptions.ts
 │   │   │   └── session.ts
 │   │   ├── models
-│   │   │   ├── characters.model.ts
-│   │   │   ├── customers.model.ts
-│   │   │   ├── equipments.model.ts
-│   │   │   ├── inventories.model.ts
-│   │   │   ├── skills.model.ts
-│   │   │   └── status.model.ts
+│   │   │   └── customers.model.ts
 │   │   ├── repositories
 │   │   │   ├── authRepo
 │   │   │   │   └── auth.repository.impl.ts
@@ -155,9 +151,10 @@
 ├── env.example
 ├── package.json
 ├── package-lock.json
+├── swagger.json
 ├── tsconfig.json
 ├── vitest.config.ts
 └── yarn.lock
 
-55 directories, 101 files
+56 directories, 97 files
 ```
