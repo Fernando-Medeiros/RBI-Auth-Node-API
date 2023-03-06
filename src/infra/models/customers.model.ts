@@ -26,6 +26,7 @@ const customerSchema = {
   email: {
     type: String,
     required: true,
+    index: true,
     trim: true,
     lowercase: true,
     minlength: 10,
