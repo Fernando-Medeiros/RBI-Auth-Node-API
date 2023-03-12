@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "nodemon -r ts-node src/main.ts",
-    "doc": "ts-node src/infra/docs/build/script.ts",
+    "doc": "ts-node docs/swagger/build/script.ts",
     "start": "node dist/src/main.js",
     "test": "vitest",
     "test:ui": "vitest --ui"
