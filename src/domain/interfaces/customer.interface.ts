@@ -21,7 +21,6 @@ export type Customer = {
 };
 
 export interface ICustomer {
-  readonly props: PropsCreate;
   get getEmail(): string;
   get getPassword(): string;
   set setPassword(v: string);

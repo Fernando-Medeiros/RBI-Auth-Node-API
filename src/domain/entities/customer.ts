@@ -1,7 +1,7 @@
 import type { PropsCreate, ICustomer } from "../interfaces/customer.interface";
 
 export class Customer implements ICustomer {
-  readonly props: PropsCreate;
+  private props: PropsCreate;
 
   get getEmail(): string {
     return this.props.email;
@@ -15,7 +15,7 @@ export class Customer implements ICustomer {
   get getDataToCreate(): PropsCreate {
     return this.props;
   }
-  constructor(dataToCreate: PropsCreate) {
-    this.props = dataToCreate;
+  constructor(data: PropsCreate) {
+    this.props = data;
   }
 }
