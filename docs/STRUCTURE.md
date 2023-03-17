@@ -102,8 +102,10 @@
 │   │   │   │   └── auth.repository.impl.ts
 │   │   │   ├── customerRepo
 │   │   │   │   └── customer.repository.impl.ts
-│   │   │   └── passwordRepo
-│   │   │       └── password.repository.impl.ts
+│   │   │   ├── passwordRepo
+│   │   │   │   └── password.repository.impl.ts
+│   │   │   └── sessionRepo
+│   │   │       └── session.repository.impl.ts
 │   │   ├── resources
 │   │   │   ├── auth.routes.ts
 │   │   │   ├── customer.routes.ts
@@ -116,6 +118,9 @@
 │   │   │   └── token
 │   │   │       └── token.impl.ts
 │   │   ├── services
+│   │   │   ├── cache
+│   │   │   │   ├── cache.connect.ts
+│   │   │   │   └── cache.handler.ts
 │   │   │   ├── database
 │   │   │   │   └── database.connect.ts
 │   │   │   └── email
@@ -158,6 +163,6 @@
 ├── vitest.config.ts
 └── yarn.lock
 
-54 directories, 100 files
+56 directories, 103 files
 
 ```
