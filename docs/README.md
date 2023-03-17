@@ -1,8 +1,10 @@
 # Red-Boar-Inn Auth API
 
 - [Red-Boar-Inn Auth API](#red-boar-inn-auth-api)
+  - [Start](#start)
   - [Structure](#structure)
   - [Documentation](#documentation)
+  - [Scripts](#scripts)
   - [Endpoints](#endpoints)
   - [Diagrams](#diagrams)
     - [Architecture](#architecture)
@@ -12,13 +14,21 @@
     - [Password routes](#password-routes)
     - [Entity](#entity)
 
+## Start
+
+[run - project](START.md)
+
 ## Structure
 
-[STRUCTURE.md](STRUCTURE.md)
+[tree - structure](STRUCTURE.md)
 
 ## Documentation
 
-[SCRIPT -> swagger](../src/infra/docs/build/script.ts)
+[doc - swagger](../swagger.json)
+
+## Scripts
+
+[scripts > tree - doc](../scripts/)
 
 ## Endpoints
 
