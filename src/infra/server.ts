@@ -27,5 +27,10 @@ server.use(passwordRoutes.private());
 
 server.use(exceptionMiddleware);
 
-const PORT = process.env["PORT"] ?? 8080;
-export const startServer = () => server.listen(PORT);
+export class Server {
+  static connect(): void {
+    const PORT = process.env["PORT"] || 8080;
+
+    server.listen(PORT);
+  }
+}

@@ -1,13 +1,15 @@
 import "tsconfig-paths/register";
-
 import { config } from "dotenv";
-
 config();
 
-import { connectToDatabase } from "@inf/services/mongodb";
-import { startServer } from "@inf/server";
-import { emailConfig } from "@inf/services/email";
+import { DatabasePrimary } from "@inf/services/database/database.connect";
+import { emailConfig } from "@inf/services/email/email";
+import { Server } from "@inf/server";
 
-emailConfig();
-connectToDatabase();
-startServer();
+async function main() {
+  emailConfig();
+  await DatabasePrimary.connect();
+  Server.connect();
+}
+
+main();

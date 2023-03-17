@@ -2,7 +2,7 @@ import type { IEmailService } from "@app/interfaces/security/email.interface";
 
 import { createTransport } from "nodemailer";
 
-import { emailConfig as eConfig } from "@inf/services/email";
+import { emailConfig as eConfig } from "@inf/services/email/email";
 
 import { InternalServerError } from "@src/helpers/http.exceptions";
 
