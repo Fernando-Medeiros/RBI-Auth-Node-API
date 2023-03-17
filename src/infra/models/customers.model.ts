@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 const customerSchema = {
   pubId: {
     type: String,
-    default: v4(),
+    default: v4,
     index: true,
   },
   firstName: {
