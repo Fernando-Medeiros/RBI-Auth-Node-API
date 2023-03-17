@@ -1,13 +1,10 @@
-import request from "supertest";
 import { beforeAll, afterAll } from "vitest";
 
-import { testServer as server } from "./conftest";
+import { app } from "./config";
 
 import { dataToNewCustomer } from "@tes/mock/customers.mock";
 
 import { Customer } from "@dom/entities/customer";
-
-export const req = request(server);
 
 export class CustomerMock {
   customer: Customer;
@@ -28,7 +25,7 @@ export class CustomerMock {
   }
 
   async getOneCustomerId(headerAuth: Authorization): Promise<string> {
-    const manyCustomers = await req.get("/customers").set(headerAuth);
+    const manyCustomers = await app.get("/customers").set(headerAuth);
 
     const { pubId } = await manyCustomers.body[0];
 
@@ -36,7 +33,7 @@ export class CustomerMock {
   }
 
   async getAccessToken(scope: "access" | "refresh"): Promise<string> {
-    const tokens = await req.post("/token").send(this.getDataToLogin());
+    const tokens = await app.post("/token").send(this.getDataToLogin());
 
     const { access, refresh } = tokens.body;
 
@@ -53,13 +50,13 @@ export class CustomerMock {
 
   beforeAll(): void {
     return beforeAll(async () => {
-      await req.post("/customers").send(this.getDataToCreate());
+      await app.post("/customers").send(this.getDataToCreate());
     });
   }
 
   afterAll(): void {
     return afterAll(async () => {
-      await req.delete(`/customers`).set(await this.getAuthorization());
+      await app.delete(`/customers`).set(await this.getAuthorization());
     });
   }
 }

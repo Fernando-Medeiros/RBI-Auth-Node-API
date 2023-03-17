@@ -1,6 +1,8 @@
 import { expect, it, describe } from "vitest";
 
-import { CustomerMock, req } from "@tes/config/clients";
+import { app } from "@tes/config/config";
+
+import { CustomerMock } from "@tes/config/clients";
 
 const mock = new CustomerMock();
 
@@ -8,9 +10,7 @@ describe("AccessToken - Ok", () => {
   mock.beforeAll();
 
   it("Should return an object with the tokens", async () => {
-    const resp = await req
-      .post("/token")
-      .send(mock.getDataToLogin());
+    const resp = await app.post("/token").send(mock.getDataToLogin());
 
     expect(resp.statusCode).toBe(200);
     expect(resp.body).toHaveProperty("access");
@@ -21,7 +21,7 @@ describe("AccessToken - Ok", () => {
 
 describe("AccessToken - Exceptions", () => {
   mock.afterAll();
-  
+
   const data1 = mock.getDataToLogin();
   const data2 = mock.getDataToLogin();
 
@@ -29,11 +29,11 @@ describe("AccessToken - Exceptions", () => {
   data2.password = "@example.com";
 
   it("Should return 400 when passing invalid or null data", async () => {
-    const respNull = await req.post("/token").send();
+    const respNull = await app.post("/token").send();
 
-    const respEmail = await req.post("/token").send(data1);
+    const respEmail = await app.post("/token").send(data1);
 
-    const respPwd = await req.post("/token").send(data2);
+    const respPwd = await app.post("/token").send(data2);
 
     expect(respNull.statusCode).toBe(400);
     expect(respNull.body).toBeTypeOf("object");

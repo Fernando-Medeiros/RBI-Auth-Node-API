@@ -1,6 +1,8 @@
 import { expect, it, describe } from "vitest";
 
-import { CustomerMock, req } from "@tes/config/clients";
+import { app } from "@tes/config/config";
+
+import { CustomerMock } from "@tes/config/clients";
 
 const mock = new CustomerMock();
 
@@ -8,7 +10,7 @@ describe("RefreshToken - Ok", () => {
   mock.beforeAll();
 
   it("Should return an object with the tokens", async () => {
-    const resp = await req
+    const resp = await app
       .post("/refresh")
       .send({ token: await mock.getAccessToken("refresh") });
 
@@ -24,9 +26,9 @@ describe("RefreshToken - Exceptions", () => {
   const iToken = `${Math.random() * 2}`;
 
   it("Should return 401 when passing invalid or null token", async () => {
-    const respNull = await req.post("/refresh").send();
+    const respNull = await app.post("/refresh").send();
 
-    const respInvalid = await req.post("/refresh").send({ token: iToken });
+    const respInvalid = await app.post("/refresh").send({ token: iToken });
 
     expect(respNull.statusCode).toBe(401);
     expect(respNull.body).toBeTypeOf("object");
@@ -36,7 +38,7 @@ describe("RefreshToken - Exceptions", () => {
   });
 
   it("should return 400 when sending a different scope token", async () => {
-    const resp = await req
+    const resp = await app
       .post("/refresh")
       .send({ token: await mock.getAccessToken("access") });
 

@@ -1,6 +1,8 @@
 import { expect, it, describe } from "vitest";
 
-import { CustomerMock, req } from "@tes/config/clients";
+import { app } from "@tes/config/config";
+
+import { CustomerMock } from "@tes/config/clients";
 
 import { Token } from "@inf/security/token/token.impl";
 
@@ -27,7 +29,7 @@ describe("Reset - Password - Ok", () => {
     const newPwd = "NewTest@1234";
     const RToken = await jwt.createRecover({ sub: id });
 
-    const resp = await req
+    const resp = await app
       .patch(`/password/${RToken}`)
       .send({ password: newPwd });
 
@@ -42,7 +44,7 @@ describe("Reset - Password - Exceptions", () => {
   it("Should return 401 when sending an invalid or null token", async () => {
     const newPwd = "newTest@8899";
 
-    const resp = await req
+    const resp = await app
       .patch(`/password/${Math.random() * 2}`)
       .send({ password: newPwd });
 
@@ -54,7 +56,7 @@ describe("Reset - Password - Exceptions", () => {
     const newPwd = "NNttPWd@@##00";
     const AToken = await jwt.createAccess({ sub: id });
 
-    const resp = await req
+    const resp = await app
       .patch(`/password/${AToken}`)
       .send({ password: newPwd });
 
@@ -66,7 +68,7 @@ describe("Reset - Password - Exceptions", () => {
     const newPwd = "<======>";
     const RToken = await jwt.createRecover({ sub: id });
 
-    const resp = await req
+    const resp = await app
       .patch(`/password/${RToken}`)
       .send({ password: newPwd });
 

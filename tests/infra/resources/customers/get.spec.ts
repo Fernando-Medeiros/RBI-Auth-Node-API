@@ -2,7 +2,9 @@ import { expect, it, describe } from "vitest";
 
 import { v4 } from "uuid";
 
-import { CustomerMock, req } from "@tes/config/clients";
+import { app } from "@tes/config/config";
+
+import { CustomerMock } from "@tes/config/clients";
 
 const mock = new CustomerMock();
 
@@ -21,7 +23,7 @@ describe("Get - Ok", async () => {
   });
 
   it("Should return all customers", async () => {
-    const resp = await req.get("/customers").set(headerAuth);
+    const resp = await app.get("/customers").set(headerAuth);
 
     expect(resp.statusCode).toBe(200);
     expect(resp.body).toBeTypeOf("object");
@@ -29,7 +31,7 @@ describe("Get - Ok", async () => {
   });
 
   it("Should return a customer by id", async () => {
-    const resp = await req.get(`/customers/${id}`).set(headerAuth);
+    const resp = await app.get(`/customers/${id}`).set(headerAuth);
 
     expect(resp.statusCode).toBe(200);
     expect(resp.body).toBeTypeOf("object");
@@ -48,7 +50,7 @@ describe("Get - Exceptions", async () => {
   });
 
   it("Should return 400 when searching for a customer with an invalid id", async () => {
-    const resp = await req
+    const resp = await app
       .get(`/customers/sad1243SA12sad1243SA1222`)
       .set(headerAuth);
 
@@ -57,16 +59,14 @@ describe("Get - Exceptions", async () => {
   });
 
   it("Should return 404 when looking up a customer with a valid but non-existent uuid", async () => {
-    const resp = await req
-      .get(`/customers/${v4()}`)
-      .set(headerAuth);
+    const resp = await app.get(`/customers/${v4()}`).set(headerAuth);
 
     expect(resp.statusCode).toBe(404);
     expect(resp.body).toBeTypeOf("object");
   });
 
   it("Should return unauthorized 401", async () => {
-    const respById = await req.get(`/customers/sad1243SA12sad1243SA1222`);
+    const respById = await app.get(`/customers/sad1243SA12sad1243SA1222`);
 
     expect(respById.statusCode).toBe(401);
   });

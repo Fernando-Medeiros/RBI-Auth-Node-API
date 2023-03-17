@@ -1,6 +1,8 @@
 import { expect, it, describe } from "vitest";
 
-import { CustomerMock, req } from "@tes/config/clients";
+import { app } from "@tes/config/config";
+
+import { CustomerMock } from "@tes/config/clients";
 
 const mock = new CustomerMock();
 
@@ -27,7 +29,7 @@ describe("Patch - Ok", async () => {
       lastName: "example",
     };
 
-    const resp = await req.patch(`/customers`).send(data).set(headerAuth);
+    const resp = await app.patch(`/customers`).send(data).set(headerAuth);
 
     expect(resp.statusCode).toBe(204);
     expect(resp.body).toBeNull;
@@ -38,7 +40,7 @@ describe("Patch - Ok", async () => {
       email: `newtester-${Math.random()}@tester.com`,
     };
 
-    const resp = await req.patch(`/customers`).send(data).set(headerAuth);
+    const resp = await app.patch(`/customers`).send(data).set(headerAuth);
 
     expect(resp.statusCode).toBe(204);
     expect(resp.body).toBeNull;
@@ -47,7 +49,7 @@ describe("Patch - Ok", async () => {
 
 describe("Patch - Exceptions", async () => {
   it("Should return 400 when sending request without content", async () => {
-    const resp = await req.patch(`/customers`).send({}).set(headerAuth);
+    const resp = await app.patch(`/customers`).send({}).set(headerAuth);
 
     expect(resp.statusCode).toBe(400);
     expect(resp.body).toBeTypeOf("object");
@@ -58,14 +60,14 @@ describe("Patch - Exceptions", async () => {
       password: "password@123",
     };
 
-    const resp = await req.patch(`/customers`).send(data).set(headerAuth);
+    const resp = await app.patch(`/customers`).send(data).set(headerAuth);
 
     expect(resp.statusCode).toBe(400);
     expect(resp.body).toBeTypeOf("object");
   });
 
   it("Should return unauthorized 401", async () => {
-    const resp = await req.patch(`/customers`).send({});
+    const resp = await app.patch(`/customers`).send({});
 
     expect(resp.statusCode).toBe(401);
     expect(resp.body).toBeTypeOf("object");
