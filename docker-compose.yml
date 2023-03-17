@@ -37,7 +37,8 @@ services:
     ports:
       - 7000:7000
     environment:
-      REDIS_PASSWORD: "password"
+      - REDIS_PASSWORD="password"
+      - REDIS_PORT_NUMBER=7000
     volumes:
       - redis_data:/bitnami/redis/database
 
