@@ -2,9 +2,19 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": ".",
-    "target": "es2016",
+
+    "target": "esnext",
     "module": "commonjs",
+    "sourceMap": false,
+    "strict": true,
     "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "ignoreDeprecations": "5.0",
+
     "baseUrl": ".",
     "paths": {
       "@root/*": ["./*"],
@@ -13,16 +23,13 @@
       "@app/*": ["src/app/*", "dist/src/app/*"],
       "@dom/*": ["src/domain/*", "dist/src/domain/*"],
       "@tes/*": ["tests/*"]
-    },
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true
+    }
   },
+
   "ts-node": {
     "esm": true // «———— enabling ESM for ts-node
   },
+
   "include": ["/**/*.ts"],
   "exclude": ["node_modules"],
   "$schema": "https://json.schemastore.org/tsconfig",

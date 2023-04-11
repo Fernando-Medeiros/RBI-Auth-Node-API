@@ -3,6 +3,7 @@ import express from "express";
 
 import { exceptionMiddleware } from "./middlewares/exceptions";
 import { sessionMiddleware } from "./middlewares/session";
+import { requestLimiterMiddleware } from "./middlewares/request-rate-limit";
 
 import { authRoutes } from "./resources/auth.routes";
 import { customerRoutes } from "./resources/customer.routes";
@@ -15,6 +16,8 @@ export const server = express();
 
 server.use(express.json());
 
+server.use(requestLimiterMiddleware);
+
 server.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 server.use(authRoutes.public());
@@ -22,6 +25,7 @@ server.use(customerRoutes.public());
 server.use(passwordRoutes.public());
 
 server.use(sessionMiddleware);
+
 server.use(customerRoutes.private());
 server.use(passwordRoutes.private());
 

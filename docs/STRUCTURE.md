@@ -94,6 +94,7 @@
 │   │   │   └── password.handler.ts
 │   │   ├── middlewares
 │   │   │   ├── exceptions.ts
+│   │   │   ├── request-rate-limit.ts
 │   │   │   └── session.ts
 │   │   ├── models
 │   │   │   └── customers.model.ts
@@ -163,6 +164,6 @@
 ├── vitest.config.ts
 └── yarn.lock
 
-56 directories, 103 files
+56 directories, 104 files
 
 ```
