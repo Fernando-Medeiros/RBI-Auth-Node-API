@@ -29,13 +29,15 @@ export async function accessCase(
   isTrue_or_400(isEqualTo, "Invalid password!");
 
   return {
-    access: await jwt.createAccess({ sub: customer?.pubId as string }),
-    refresh: await jwt.createRefresh({ sub: customer?.pubId as string }),
+    pubId: String(customer?.pubId),
+    access: await jwt.createAccess({ sub: String(customer?.pubId) }),
+    refresh: await jwt.createRefresh({ sub: String(customer?.pubId) }),
     type: "bearer",
   };
 }
 
 interface accessResponse {
+  pubId: string;
   access: string;
   refresh: string;
   type: string;
