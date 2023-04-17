@@ -1,47 +1,24 @@
-import type { Algorithm } from "jsonwebtoken";
 import type {
   PropsToken,
   IToken,
 } from "@app/interfaces/security/token.interface";
-
 import { env } from "process";
-import Jwt from "jsonwebtoken";
-
-import {
-  InternalServerError,
-  Unauthorized,
-} from "@src/helpers/http.exceptions";
-
-const SECRET = env["SECRET_KEY"] || `${Math.random()}`;
-const ALGORITHM: Algorithm = "HS512";
+import { encode } from "./encode.impl";
+import { decode } from "./decode.impl";
 
 const ExpACCESS = parseInt(env["EXP_ACCESS"] || "15");
 const ExpREFRESH = parseInt(env["EXP_REFRESH"] || "15");
 const ExpRECOVER = parseInt(env["EXP_RECOVER"] || "5");
 
-class EncodeToDecode {
+export class Token implements IToken {
   async encode(payload: PropsToken): Promise<string> {
-    const token = await new Promise((resolve) => {
-      resolve(Jwt.sign(payload, SECRET, { algorithm: ALGORITHM }));
-    }).catch(() => {
-      throw new InternalServerError("Internal failure while encoding token!");
-    });
-
-    return token as string;
+    return await encode<PropsToken, string>(payload);
   }
 
   async decode(token: string): Promise<PropsToken> {
-    const jwtPayload = await new Promise((resolve) => {
-      resolve(Jwt.verify(token, SECRET, { algorithms: [ALGORITHM] }));
-    }).catch(() => {
-      throw new Unauthorized("Could not validate credentials!");
-    });
-
-    return jwtPayload as PropsToken;
+    return await decode<string, PropsToken>(token);
   }
-}
 
-export class Token extends EncodeToDecode implements IToken {
   convertToMilliseconds = (exp: number): number => {
     return Math.floor(Date.now() / 1000) + 60 * exp;
   };
