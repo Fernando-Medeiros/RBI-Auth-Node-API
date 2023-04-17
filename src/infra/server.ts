@@ -1,5 +1,6 @@
 import "express-async-errors";
 import express from "express";
+import cors from "cors";
 
 import { exceptionMiddleware } from "./middlewares/exceptions";
 import { sessionMiddleware } from "./middlewares/session";
@@ -15,6 +16,8 @@ import swaggerFile from "@root/swagger.json";
 export const server = express();
 
 server.use(express.json());
+
+server.use(cors());
 
 server.use(requestLimiterMiddleware);
 
