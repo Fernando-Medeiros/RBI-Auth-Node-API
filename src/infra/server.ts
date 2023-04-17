@@ -5,6 +5,7 @@ import cors from "cors";
 import { exceptionMiddleware } from "./middlewares/exceptions";
 import { sessionMiddleware } from "./middlewares/session";
 import { requestLimiterMiddleware } from "./middlewares/request-rate-limit";
+import { apiSecretMiddleware } from "./middlewares/api-secret";
 
 import { authRoutes } from "./resources/auth.routes";
 import { customerRoutes } from "./resources/customer.routes";
@@ -18,6 +19,8 @@ export const server = express();
 server.use(express.json());
 
 server.use(cors());
+
+server.use(apiSecretMiddleware);
 
 server.use(requestLimiterMiddleware);
 
