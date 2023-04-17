@@ -1,42 +1,47 @@
-import { expect, it, describe } from "vitest";
+import { expect, it, describe, beforeAll } from "vitest";
+import { app, secretHeader } from "@tes/config/config";
 
-import { app } from "@tes/config/config";
-
-import { CustomerMock } from "@tes/config/clients";
+import { CustomerMock } from "@tes/config/customer";
+import { Helpers } from "@tes/config/helpers/insert-customer";
+import { authHeader } from "@tes/config/headers/authorization.header";
+import { getTokenByScope } from "@tes/config/helpers/get-token-by-scope";
 
 const mock = new CustomerMock();
+const headerAuth = { Authorization: "" };
 
-let headerAuth: { Authorization: string };
+describe("Delete - Ok", () => {
+  beforeAll(async () => await Helpers.insertCustomer(mock.dataToCreate));
 
-describe("Get Header -> Authorization", () => {
-  mock.beforeAll();
-
-  it("Should return current session header", async () => {
-    headerAuth = await mock.getAuthorization();
-
-    expect(headerAuth).toHaveProperty("Authorization");
+  it("Get Header", async () => {
+    await authHeader(await getTokenByScope("access", mock.dataToLogin)).then(
+      (authorizationHeader) => {
+        Object.assign(headerAuth, authorizationHeader);
+      }
+    );
   });
-});
 
-describe("Delete - Ok", async () => {
   it("Should delete customer with authenticated session", async () => {
-    const resp = await app.delete("/customers").set(headerAuth);
+    const resp = await app
+      .delete("/customers")
+      .set({ ...secretHeader, ...headerAuth });
 
     expect(resp.statusCode).toBe(204);
     expect(resp.body).toBeNull;
   });
 });
 
-describe("Delete - Exceptions", async () => {
+describe("Delete - Exceptions", () => {
   it("Should return 401 when trying to delete the same customer twice", async () => {
-    const resp = await app.delete("/customers").set(headerAuth);
+    const resp = await app
+      .delete("/customers")
+      .set({ ...secretHeader, ...headerAuth });
 
     expect(resp.statusCode).toBe(404);
     expect(resp.body).toBeTypeOf("object");
   });
 
   it("Should return unauthorized 401", async () => {
-    const resp = await app.delete("/customers");
+    const resp = await app.delete("/customers").set(secretHeader);
 
     expect(resp.statusCode).toBe(401);
   });
