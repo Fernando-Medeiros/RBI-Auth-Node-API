@@ -1,45 +1,46 @@
-import { expect, it, describe } from "vitest";
+import { expect, it, describe, beforeAll } from "vitest";
+import { app, secretHeader } from "@tes/config/config";
 
-import { app } from "@tes/config/config";
-
-import { CustomerMock } from "@tes/config/clients";
+import { CustomerMock } from "@tes/config/customer";
+import { Helpers } from "@tes/config/helpers/insert-customer";
+import { authHeader } from "@tes/config/headers/authorization.header";
+import { getTokenByScope } from "@tes/config/helpers/get-token-by-scope";
 
 const mock = new CustomerMock();
+const headerAuth = { Authorization: "" };
 
-let headerAuth: { Authorization: string };
+describe("Update - Password - Ok", async () => {
+  beforeAll(async () => await Helpers.insertCustomer(mock.dataToCreate));
 
-describe("Get Header -> Authorization", () => {
-  mock.beforeAll();
-
-  it("Should return current session header", async () => {
-    headerAuth = await mock.getAuthorization();
-
-    expect(headerAuth).toHaveProperty("Authorization");
+  it("Get Header and pubId", async () => {
+    await authHeader(await getTokenByScope("refresh", mock.dataToLogin)).then(
+      (authorizationHeader) => {
+        Object.assign(headerAuth, authorizationHeader);
+      }
+    );
   });
-});
 
-describe("Update - Password - Ok", () => {
   it("Should return 204 when updating new password", async () => {
     const newPwd = "NewTest@1234";
 
     const resp = await app
       .patch(`/password`)
-      .send({ password: newPwd })
-      .set(headerAuth);
+      .set({ ...secretHeader, ...headerAuth })
+      .send({ password: newPwd });
 
     expect(resp.statusCode).toEqual(204);
     expect(resp.body).toBeNull;
   });
 });
 
-describe("Update - Password - Exceptions", () => {
+describe("Update - Password - Exceptions", async () => {
   it("Should return 400 when sending password in invalid format", async () => {
     const newPwd = "<Z======Z>";
 
     const resp = await app
       .patch(`/password`)
-      .send({ password: newPwd })
-      .set(headerAuth);
+      .set({ ...secretHeader, ...headerAuth })
+      .send({ password: newPwd });
 
     expect(resp.statusCode).toEqual(400);
     expect(resp.body).toBeTypeOf("object");
@@ -48,7 +49,10 @@ describe("Update - Password - Exceptions", () => {
   it("Should return 401 when trying to update the password without authentication in the header", async () => {
     const newPwd = "NNttPWd@@##00";
 
-    const resp = await app.patch(`/password`).send({ password: newPwd });
+    const resp = await app
+      .patch(`/password`)
+      .set(secretHeader)
+      .send({ password: newPwd });
 
     expect(resp.statusCode).toEqual(401);
     expect(resp.body).toBeTypeOf("object");
@@ -60,7 +64,10 @@ describe("Update - Password - Exceptions", () => {
     const resp = await app
       .patch(`/password`)
       .send({ password: newPwd })
-      .set({ Authorization: String(Math.random() * 3) });
+      .set({
+        ...secretHeader,
+        Authorization: String(Math.random() * 3),
+      });
 
     expect(resp.statusCode).toEqual(401);
     expect(resp.body).toBeTypeOf("object");
