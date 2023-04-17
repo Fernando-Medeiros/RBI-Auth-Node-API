@@ -1,16 +1,21 @@
-import { expect, it, describe } from "vitest";
+import { expect, it, describe, beforeAll, afterAll } from "vitest";
+import { app, secretHeader } from "@tes/config/config";
 
-import { app } from "@tes/config/config";
-
-import { CustomerMock } from "@tes/config/clients";
+import { CustomerMock } from "@tes/config/customer";
+import { Helpers } from "@tes/config/helpers/insert-customer";
+import { authHeader } from "@tes/config/headers/authorization.header";
+import { getTokenByScope } from "@tes/config/helpers/get-token-by-scope";
 
 const mock = new CustomerMock();
 
-describe("AccessToken - Ok", () => {
-  mock.beforeAll();
+describe("AccessToken - Ok", async () => {
+  beforeAll(async () => await Helpers.insertCustomer(mock.dataToCreate));
 
   it("Should return an object with the tokens", async () => {
-    const resp = await app.post("/token").send(mock.getDataToLogin());
+    const resp = await app
+      .post("/token")
+      .set(secretHeader)
+      .send(mock.dataToLogin);
 
     expect(resp.statusCode).toBe(200);
     expect(resp.body).toHaveProperty("access");
@@ -19,21 +24,27 @@ describe("AccessToken - Ok", () => {
   });
 });
 
-describe("AccessToken - Exceptions", () => {
-  mock.afterAll();
-
-  const data1 = mock.getDataToLogin();
-  const data2 = mock.getDataToLogin();
-
-  data1.email = "email@example.com";
-  data2.password = "@example.com";
+describe("AccessToken - Exceptions", async () => {
+  afterAll(async () => {
+    await authHeader(await getTokenByScope("access", mock.dataToLogin)).then(
+      (authorizationHeader) => {
+        Helpers.removeCustomer(authorizationHeader);
+      }
+    );
+  });
+  const data1 = Object.assign(mock.dataToLogin, {
+    email: "email@example.com",
+  });
+  const data2 = Object.assign(mock.dataToLogin, {
+    password: "@example.com",
+  });
 
   it("Should return 400 when passing invalid or null data", async () => {
-    const respNull = await app.post("/token").send();
-
-    const respEmail = await app.post("/token").send(data1);
-
-    const respPwd = await app.post("/token").send(data2);
+    const [respNull, respEmail, respPwd] = await Promise.all([
+      await app.post("/token").set(secretHeader).send(),
+      await app.post("/token").set(secretHeader).send(data1),
+      await app.post("/token").set(secretHeader).send(data2),
+    ]);
 
     expect(respNull.statusCode).toBe(400);
     expect(respNull.body).toBeTypeOf("object");
