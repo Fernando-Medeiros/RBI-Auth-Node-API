@@ -93,6 +93,7 @@
 │   │   │   ├── customer.handler.ts
 │   │   │   └── password.handler.ts
 │   │   ├── middlewares
+│   │   │   ├── api-secret.ts
 │   │   │   ├── exceptions.ts
 │   │   │   ├── request-rate-limit.ts
 │   │   │   └── session.ts
@@ -117,6 +118,8 @@
 │   │   │   ├── email
 │   │   │   │   └── email.impl.ts
 │   │   │   └── token
+│   │   │       ├── decode.impl.ts
+│   │   │       ├── encode.impl.ts
 │   │   │       └── token.impl.ts
 │   │   ├── services
 │   │   │   ├── cache
@@ -130,8 +133,15 @@
 │   └── main.ts
 ├── tests
 │   ├── config
-│   │   ├── clients.ts
-│   │   └── config.ts
+│   │   ├── headers
+│   │   │   ├── api-secret.header.ts
+│   │   │   └── authorization.header.ts
+│   │   ├── helpers
+│   │   │   ├── get-one-customer.ts
+│   │   │   ├── get-token-by-scope.ts
+│   │   │   └── insert-customer.ts
+│   │   ├── config.ts
+│   │   └── customer.ts
 │   ├── infra
 │   │   ├── resources
 │   │   │   ├── auth
@@ -164,6 +174,6 @@
 ├── vitest.config.ts
 └── yarn.lock
 
-56 directories, 104 files
+58 directories, 112 files
 
 ```
