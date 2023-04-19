@@ -2,9 +2,9 @@ import "tsconfig-paths/register";
 import { config } from "dotenv";
 config();
 
-import { DatabasePrimary } from "@inf/services/database/database.connect";
-import { emailConfig } from "@inf/services/email/email";
-import { Server } from "@inf/server";
+import { DatabasePrimary } from "infra/services/database/database.connect";
+import { emailConfig } from "infra/services/email/email";
+import { Server } from "infra/server";
 
 async function main() {
   emailConfig();
