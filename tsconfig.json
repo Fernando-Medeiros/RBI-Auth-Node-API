@@ -17,12 +17,12 @@
 
     "baseUrl": ".",
     "paths": {
-      "@root/*": ["./*"],
-      "@src/*": ["src/*", "dist/src/*"],
-      "@inf/*": ["src/infra/*", "dist/src/infra/*"],
-      "@app/*": ["src/app/*", "dist/src/app/*"],
-      "@dom/*": ["src/domain/*", "dist/src/domain/*"],
-      "@tes/*": ["tests/*"]
+      "app/*": ["src/application/*", "dist/src/application/*"],
+      "domain/*": ["src/domain/*", "dist/src/domain/*"],
+      "infra/*": ["src/infrastructure/*", "dist/src/infrastructure/*"],
+      "utils/*": ["src/utils/*", "dist/src/utils/*"],
+      "tests/*": ["tests/*"],
+      "docs/*": ["docs/*"]
     }
   },
 
