@@ -1,38 +1,43 @@
-# Red-Boar-Inn Auth API
+# Red Boar Inn -- Auth -- API
 
-- [Red-Boar-Inn Auth API](#red-boar-inn-auth-api)
-  - [Start](#start)
-  - [Structure](#structure)
-  - [Documentation](#documentation)
-  - [Scripts](#scripts)
-  - [Endpoints](#endpoints)
-  - [Diagrams](#diagrams)
-    - [Architecture](#architecture)
-    - [UseCases](#usecases)
-    - [Auth routes](#auth-routes)
-    - [Customer routes](#customer-routes)
-    - [Password routes](#password-routes)
-    - [Entity](#entity)
+![Node](https://img.shields.io/badge/Node.JS-white?style=for-the-badge&logo=node.js&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-white?style=for-the-badge&logo=TypeScript&logoColor=black)
+![Vitest](https://img.shields.io/badge/Vitest-white?style=for-the-badge&logo=Vitest&logoColor=black)
+![Docker](https://img.shields.io/badge/Docker-white?style=for-the-badge&logo=Docker&logoColor=black)
+![MongoDB](https://img.shields.io/badge/MongoDB-white?style=for-the-badge&logo=Mongodb&logoColor=black)
+![Redis](https://img.shields.io/badge/Redis-white?style=for-the-badge&logo=Redis&logoColor=black)
+![Heroku](https://img.shields.io/badge/Heroku-white?style=for-the-badge&logo=Heroku&logoColor=black)
 
-## Start
+O projeto é uma API backend para cadastro e autenticação de usuários, utilizando NodeJS, TypeScript, Vitest, MongoDB, Redis, Docker e Heroku. É uma aplicação escalável e seguro, seguindo as melhores práticas de desenvolvimento.
 
-[run - project](START.md)
-
-## Structure
-
-[tree - structure](STRUCTURE.md)
-
-## Documentation
-
-[doc - swagger](../swagger.json)
-
-## Scripts
-
-[scripts > tree - doc](../scripts/)
+> - [Como inicializar o projeto](START.md)
+> - [Estrutura das pastas e arquivos (tree)](STRUCTURE.md)
+> - [Documentação - swagger - arquivo](../swagger.json)
+> - [Documentação - swagger - deploy](https://rbi-auth-node-api.herokuapp.com/docs/)
+> - [Scripts do projeto](../scripts/)
 
 ## Endpoints
 
-![endpoints](endpoints.png)
+> - [endpoints-image](endpoints.png)
+
+### Auth
+
+> - POST /token
+> - POST /refresh
+
+### Customer
+
+> - GET /customers
+> - GET /customers/:id
+> - POST /customers
+> - PATCH /customers
+> - DELETE /customers
+
+### Password
+
+> - POST /password
+> - PATCH /password
+> - PATCH /password/:token
 
 ## Diagrams
 

@@ -2,7 +2,7 @@ import "tsconfig-paths/register";
 import type { SwaggerInterface, Swagger } from "./interface";
 import * as fs from "fs";
 
-import swaggerFile from "@root/swagger.json";
+import swaggerFile from "swagger.json";
 
 export class BuildSwagger implements SwaggerInterface {
   public file = swaggerFile as Swagger;

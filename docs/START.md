@@ -16,13 +16,13 @@ docker compose up --build
 
 ```sh
 # use-cases
-yarn test app
+yarn test src/app
 
 # entities
-yarn test dom
+yarn test src/dom
 
 # entities and use-cases
-yarn test src
+yarn test src/
 ```
 
 ### To run the scope tests integration -> integration -> [mongo - redis]
@@ -35,7 +35,7 @@ docker compose up -d
 docker exec -it rbi-auth /bin/bash
 
 # 3
-yarn test int
+yarn test integration/
 ```
 
 ## Docker - Tips

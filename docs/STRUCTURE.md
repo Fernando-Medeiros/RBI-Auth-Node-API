@@ -38,7 +38,7 @@
 │   ├── build.swagger.ts
 │   └── build.tree.ts
 ├── src
-│   ├── app
+│   ├── application
 │   │   ├── interfaces
 │   │   │   ├── repositories
 │   │   │   │   ├── auth.repository.interface.ts
@@ -80,10 +80,7 @@
 │   │   │   └── customer.ts
 │   │   └── interfaces
 │   │       └── customer.interface.ts
-│   ├── helpers
-│   │   ├── http.exceptions.ts
-│   │   └── http.protocols.ts
-│   ├── infra
+│   ├── infrastructure
 │   │   ├── controllers
 │   │   │   ├── auth.controller.ts
 │   │   │   ├── customer.controller.ts
@@ -130,6 +127,9 @@
 │   │   │   └── email
 │   │   │       └── email.ts
 │   │   └── server.ts
+│   ├── utils
+│   │   ├── http.exceptions.ts
+│   │   └── http.protocols.ts
 │   └── main.ts
 ├── tests
 │   ├── config
@@ -143,19 +143,6 @@
 │   │   ├── config.ts
 │   │   └── customer.ts
 │   ├── infra
-│   │   ├── resources
-│   │   │   ├── auth
-│   │   │   │   ├── access.spec.ts
-│   │   │   │   └── refresh.spec.ts
-│   │   │   ├── customers
-│   │   │   │   ├── delete.spec.ts
-│   │   │   │   ├── get.spec.ts
-│   │   │   │   ├── post.spec.ts
-│   │   │   │   └── update.spec.ts
-│   │   │   └── password
-│   │   │       ├── recover.spec.ts
-│   │   │       ├── reset.spec.ts
-│   │   │       └── update.spec.ts
 │   │   ├── security
 │   │   │   ├── email.spec.ts
 │   │   │   ├── hash.spec.ts
@@ -163,6 +150,37 @@
 │   │   └── services
 │   │       └── mail
 │   │           └── mail.connect.spec.ts
+│   ├── integration
+│   │   ├── auth
+│   │   │   ├── access
+│   │   │   │   ├── exceptions.spec.ts
+│   │   │   │   └── success.spec.ts
+│   │   │   └── refresh
+│   │   │       ├── exceptions.spec.ts
+│   │   │       └── success.spec.ts
+│   │   ├── customers
+│   │   │   ├── delete
+│   │   │   │   ├── exceptions.spec.ts
+│   │   │   │   └── success.spec.ts
+│   │   │   ├── get
+│   │   │   │   ├── exceptions.spec.ts
+│   │   │   │   └── success.spec.ts
+│   │   │   ├── patch
+│   │   │   │   ├── exceptions.spec.ts
+│   │   │   │   └── success.spec.ts
+│   │   │   └── post
+│   │   │       ├── exceptions.spec.ts
+│   │   │       └── success.spec.ts
+│   │   └── password
+│   │       ├── recover
+│   │       │   ├── exceptions.spec.ts
+│   │       │   └── success.spec.ts
+│   │       ├── reset
+│   │       │   ├── exceptions.spec.ts
+│   │       │   └── success.spec.ts
+│   │       └── update
+│   │           ├── exceptions.spec.ts
+│   │           └── success.spec.ts
 │   └── mock
 │       └── customers.mock.ts
 ├── docker-compose.yml
@@ -174,6 +192,6 @@
 ├── vitest.config.ts
 └── yarn.lock
 
-58 directories, 112 files
+67 directories, 121 files
 
 ```
