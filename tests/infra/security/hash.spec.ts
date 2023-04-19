@@ -1,7 +1,6 @@
 import { expect, test, describe } from "vitest";
-import { CustomerMock } from "@root/tests/config/customer";
-
-import { Crypt } from "@inf/security/crypt/crypt.impl";
+import { CustomerMock } from "tests/config/customer";
+import { Crypt } from "infra/security/crypt/crypt.impl";
 
 const bcrypt = new Crypt();
 const mock = new CustomerMock();

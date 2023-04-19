@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import { config } from "dotenv";
 config();
 
-import { EmailService } from "@inf/security/email/email.impl";
+import { EmailService } from "infra/security/email/email.impl";
 
 describe("EmailService", () => {
   test("should connect to the email service", async () => {

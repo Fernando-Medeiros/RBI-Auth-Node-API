@@ -1,7 +1,7 @@
+import { describe, test, expect } from "vitest";
 import { config } from "dotenv";
 config();
-import { describe, test, expect } from "vitest";
-import { Token } from "@inf/security/token/token.impl";
+import { Token } from "infra/security/token/token.impl";
 
 const jwt = new Token();
 

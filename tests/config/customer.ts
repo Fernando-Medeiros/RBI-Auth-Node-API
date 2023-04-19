@@ -1,5 +1,5 @@
-import { Customer } from "@dom/entities/customer";
-import { dataToNewCustomer } from "@tes/mock/customers.mock";
+import { Customer } from "domain/entities/customer";
+import { dataToNewCustomer } from "tests/mock/customers.mock";
 
 export class CustomerMock {
   customer: Customer;
