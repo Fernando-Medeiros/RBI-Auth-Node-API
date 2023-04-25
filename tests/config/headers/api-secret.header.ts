@@ -5,7 +5,7 @@ export type ApiSecretKeySchema = {
 };
 
 export const secretHeader = async (): Promise<ApiSecretKeySchema> => {
-  const { API_SECRET_KEY } = process.env;
+  const { API_SECRET } = process.env;
 
-  return { secret: await encode(API_SECRET_KEY) };
+  return { secret: await encode(API_SECRET) };
 };

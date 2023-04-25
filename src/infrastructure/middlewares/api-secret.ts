@@ -7,11 +7,11 @@ export const apiSecretMiddleware = async (
   _res: Response,
   next: NextFunction
 ) => {
-  const { API_SECRET_KEY } = process.env;
+  const { API_SECRET } = process.env;
   const { secret } = req.headers;
 
   try {
-    (await decode<string, string>(String(secret))) != API_SECRET_KEY;
+    (await decode<string, string>(String(secret))) != API_SECRET;
   } catch (err) {
     throw new Unauthorized("Unauthorized access. The api password is invalid!");
   }
