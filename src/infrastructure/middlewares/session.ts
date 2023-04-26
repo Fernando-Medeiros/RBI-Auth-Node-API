@@ -1,11 +1,8 @@
 import type { NextFunction, Request, Response } from "express";
 import { Token } from "infra/security/token/token.impl";
-import { SessionRepository } from "infra/repositories/sessionRepo/session.repository.impl";
-import { Unauthorized } from "utils/http.exceptions";
-import {
-  subIsValid_or_500,
-  tokenIsValid_or_401,
-} from "app/validators/auth.validators";
+import { SessionRepository as session } from "infra/repositories/sessionRepo/session.repository.impl";
+import { InternalServerError, Unauthorized } from "utils/http.exceptions";
+import { validate } from "uuid";
 
 const JWT = new Token();
 
@@ -16,19 +13,23 @@ export const sessionMiddleware = async (
 ) => {
   const { authorization } = req.headers;
 
-  const token = authorization?.substring(authorization.indexOf(" ") + 1);
+  const token = authorization?.split(" ")[1];
 
-  tokenIsValid_or_401(token, "Missing Authorization header with token");
+  if (!token || token.length < 150)
+    throw new Unauthorized("Missing Authorization header with token");
 
-  const { sub } = await JWT.decode(String(token));
+  const { sub } = await JWT.decode(token);
 
-  subIsValid_or_500(sub);
+  if (!sub || !validate(sub))
+    throw new InternalServerError(
+      "Could not verify credentials, please sign in again to refresh session!"
+    );
 
-  if ((await SessionRepository.findByIdCache(sub)) === null) {
-    if ((await SessionRepository.customerExists(sub)) === null) {
+  if (!(await session.findById(sub))) {
+    if (!(await session.customerExists(sub))) {
       throw new Unauthorized("Invalid session, unauthorized token!");
     } else {
-      await SessionRepository.setCache(sub, sub);
+      await session.setCache(sub, sub);
     }
   }
 
