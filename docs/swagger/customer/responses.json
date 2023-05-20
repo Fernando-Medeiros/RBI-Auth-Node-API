@@ -1,48 +1,48 @@
 {
-  "ResponseGetAll": {
-    "type": "array",
-    "items": {
-      "type": "object",
-      "properties": {
-        "pubId": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "firstName": {
-          "type": "string",
-          "example": "example"
-        },
-        "lastName": {
-          "type": "string",
-          "example": "example"
-        },
-        "email": {
-          "type": "string",
-          "example": "example@gmail.com"
+    "ResponseGetAll": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "pubId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "firstName": {
+                    "type": "string",
+                    "example": "example"
+                },
+                "lastName": {
+                    "type": "string",
+                    "example": "example"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "example@gmail.com"
+                }
+            }
         }
-      }
-    }
-  },
+    },
 
-  "ResponseGetById": {
-    "type": "object",
-    "properties": {
-      "pubId": {
-        "type": "string",
-        "format": "uuid"
-      },
-      "firstName": {
-        "type": "string",
-        "example": "example"
-      },
-      "lastName": {
-        "type": "string",
-        "example": "example"
-      },
-      "email": {
-        "type": "string",
-        "example": "example"
-      }
+    "ResponseGetById": {
+        "type": "object",
+        "properties": {
+            "pubId": {
+                "type": "string",
+                "format": "uuid"
+            },
+            "firstName": {
+                "type": "string",
+                "example": "example"
+            },
+            "lastName": {
+                "type": "string",
+                "example": "example"
+            },
+            "email": {
+                "type": "string",
+                "example": "example"
+            }
+        }
     }
-  }
 }

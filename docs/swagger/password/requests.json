@@ -1,31 +1,31 @@
 {
-  "RequestPasswordRecover": {
-    "type": "object",
-    "properties": {
-      "email": {
-        "type": "string",
-        "example": "example@gmail.com",
-        "required": true
-      }
-    }
-  },
+    "RequestPasswordRecover": {
+        "type": "object",
+        "properties": {
+            "email": {
+                "type": "string",
+                "example": "example@gmail.com",
+                "required": true
+            }
+        }
+    },
 
-  "RequestPasswordUpdate": {
-    "type": "object",
-    "properties": {
-      "password": {
-        "type": "string",
-        "example": "Example@@123",
-        "required": true
-      }
-    }
-  },
+    "RequestPasswordUpdate": {
+        "type": "object",
+        "properties": {
+            "password": {
+                "type": "string",
+                "example": "Example@@123",
+                "required": true
+            }
+        }
+    },
 
-  "ParameterToken": {
-    "description": "Recover Token",
-    "name": "token",
-    "in": "path",
-    "type": "string",
-    "required": true
-  }
+    "ParameterToken": {
+        "description": "Recover Token",
+        "name": "token",
+        "in": "path",
+        "type": "string",
+        "required": true
+    }
 }

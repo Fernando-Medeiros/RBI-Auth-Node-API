@@ -1,10 +1,10 @@
-import type { Request } from "express";
+import type { Request } from 'express';
 import type {
-  PropsCreate,
-  PropsUpdate,
-} from "domain/interfaces/customer.interface";
+    PropsCreate,
+    PropsUpdate,
+} from 'domain/interfaces/customer.interface';
 
 export interface ICustomerRequests {
-  getRequestToCreate(req: Request): PropsCreate;
-  getRequestToUpdate(req: Request): PropsUpdate;
+    getRequestToCreate(req: Request): PropsCreate;
+    getRequestToUpdate(req: Request): PropsUpdate;
 }

@@ -1,27 +1,27 @@
 {
-  "RequestAccess": {
-    "type": "object",
-    "properties": {
-      "email": {
-        "type": "string",
-        "example": "example@gmail.com",
-        "required": true
-      },
-      "password": {
-        "type": "string",
-        "example": "Example@123",
-        "required": true
-      }
-    }
-  },
+    "RequestAccess": {
+        "type": "object",
+        "properties": {
+            "email": {
+                "type": "string",
+                "example": "example@gmail.com",
+                "required": true
+            },
+            "password": {
+                "type": "string",
+                "example": "Example@123",
+                "required": true
+            }
+        }
+    },
 
-  "RequestRefresh": {
-    "type": "object",
-    "properties": {
-      "token": {
-        "type": "string",
-        "required": true
-      }
+    "RequestRefresh": {
+        "type": "object",
+        "properties": {
+            "token": {
+                "type": "string",
+                "required": true
+            }
+        }
     }
-  }
 }

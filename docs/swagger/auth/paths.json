@@ -1,84 +1,100 @@
 {
-  "/token": {
-    "post": {
-      "tags": ["auth"],
-      "summary": "Login with access token",
-      "description": "",
-      "requestBody": {
-        "content": {
-          "application/json": {
-            "schema": { "$ref": "#/components/schemas/RequestAccess" }
-          }
+    "/token": {
+        "post": {
+            "tags": ["auth"],
+            "summary": "Login with access token",
+            "description": "",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/RequestAccess"
+                        }
+                    }
+                }
+            },
+            "parameters": [],
+            "responses": {
+                "200": {
+                    "description": "Successful Response",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResponseAccess"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BadRequest"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Not Found",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NotFound"
+                            }
+                        }
+                    }
+                }
+            }
         }
-      },
-      "parameters": [],
-      "responses": {
-        "200": {
-          "description": "Successful Response",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/ResponseAccess" }
+    },
+    "/refresh": {
+        "post": {
+            "tags": ["auth"],
+            "summary": "Refresh token",
+            "description": "Stay authenticated by refresh token",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/RequestRefresh"
+                        }
+                    }
+                }
+            },
+            "parameters": [],
+            "responses": {
+                "200": {
+                    "description": "Successful Response",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResponseRefresh"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BadRequest"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Not Found",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NotFound"
+                            }
+                        }
+                    }
+                }
             }
-          }
-        },
-        "400": {
-          "description": "Bad Request",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/BadRequest" }
-            }
-          }
-        },
-        "404": {
-          "description": "Not Found",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/NotFound" }
-            }
-          }
         }
-      }
     }
-  },
-  "/refresh": {
-    "post": {
-      "tags": ["auth"],
-      "summary": "Refresh token",
-      "description": "Stay authenticated by refresh token",
-      "requestBody": {
-        "content": {
-          "application/json": {
-            "schema": { "$ref": "#/components/schemas/RequestRefresh" }
-          }
-        }
-      },
-      "parameters": [],
-      "responses": {
-        "200": {
-          "description": "Successful Response",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/ResponseRefresh" }
-            }
-          }
-        },
-        "400": {
-          "description": "Bad Request",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/BadRequest" }
-            }
-          }
-        },
-        "404": {
-          "description": "Not Found",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/NotFound" }
-            }
-          }
-        }
-      }
-    }
-  }
 }

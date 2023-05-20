@@ -1,21 +1,21 @@
-import type { Request, Response } from "express";
-import { StatusOK, StatusOkNoContent } from "utils/http.protocols";
-import { PasswordHandler as handler } from "infra/handlers/password.handler";
+import type { Request, Response } from 'express';
+import { StatusOK, StatusOkNoContent } from 'utils/http.protocols';
+import { PasswordHandler as handler } from 'infra/handlers/password.handler';
 
 export const recoverPassword = async (req: Request, res: Response) => {
-  const message = await handler.recover(req);
+    const message = await handler.recover(req);
 
-  return new StatusOK(res, message);
+    return new StatusOK(res, message);
 };
 
 export const updatePassword = async (req: Request, res: Response) => {
-  await handler.update(req);
+    await handler.update(req);
 
-  return new StatusOkNoContent(res);
+    return new StatusOkNoContent(res);
 };
 
 export const resetPassword = async (req: Request, res: Response) => {
-  await handler.reset(req);
+    await handler.reset(req);
 
-  return new StatusOkNoContent(res);
+    return new StatusOkNoContent(res);
 };

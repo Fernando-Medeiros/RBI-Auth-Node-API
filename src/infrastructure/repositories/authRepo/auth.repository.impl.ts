@@ -1,22 +1,22 @@
-import type { Types } from "mongoose";
-import type { IAuthRepository } from "app/interfaces/repositories/auth.repository.interface";
+import type { Types } from 'mongoose';
+import type { IAuthRepository } from 'app/interfaces/repositories/auth.repository.interface';
 
-import { CustomerModel as model } from "infra/models/customers.model";
+import { CustomerModel as model } from 'infra/models/customers.model';
 
-import { isTrue_or_404 } from "app/validators/validators";
+import { isTrue_or_404 } from 'app/validators/validators';
 
 export class AuthRepository implements IAuthRepository {
-  async findOne(query: object) {
-    const customer = await model.findOne(query);
+    async findOne(query: object) {
+        const customer = await model.findOne(query);
 
-    isTrue_or_404(customer, "Customer not found!");
+        isTrue_or_404(customer, 'Customer not found!');
 
-    return customer;
-  }
+        return customer;
+    }
 
-  async findByEmail(
-    email: string
-  ): Promise<{ _id: Types.ObjectId | string } | null> {
-    return await model.exists({ email: email });
-  }
+    async findByEmail(
+        email: string,
+    ): Promise<{ _id: Types.ObjectId | string } | null> {
+        return await model.exists({ email: email });
+    }
 }

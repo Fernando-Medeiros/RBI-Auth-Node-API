@@ -1,20 +1,20 @@
-import type { Request } from "express";
+import type { Request } from 'express';
 
 export interface IPwdRequests {
-  getRequestToRecover(req: Request): PropsRecover;
-  getRequestToReset(req: Request): PropsReset;
-  getRequestToUpdate(req: Request): PropsUpdate;
+    getRequestToRecover(req: Request): PropsRecover;
+    getRequestToReset(req: Request): PropsReset;
+    getRequestToUpdate(req: Request): PropsUpdate;
 }
 
 export type PropsRecover = {
-  email: string;
+    email: string;
 };
 
 export type PropsReset = {
-  token: string;
-  password: string;
+    token: string;
+    password: string;
 };
 
 export type PropsUpdate = {
-  password: string;
+    password: string;
 };

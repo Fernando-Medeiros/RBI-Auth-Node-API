@@ -1,11 +1,11 @@
-import { encode } from "infra/security/token/encode.impl";
+import { encode } from 'infra/security/token/encode.impl';
 
 export type ApiSecretKeySchema = {
-  secret: string;
+    secret: string;
 };
 
 export const secretHeader = async (): Promise<ApiSecretKeySchema> => {
-  const { API_SECRET } = process.env;
+    const { API_SECRET } = process.env;
 
-  return { secret: await encode(API_SECRET) };
+    return { secret: await encode(API_SECRET) };
 };

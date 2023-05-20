@@ -1,38 +1,38 @@
-import type { Request, Response } from "express";
+import type { Request, Response } from 'express';
 import {
-  StatusCreated,
-  StatusOK,
-  StatusOkNoContent,
-} from "utils/http.protocols";
+    StatusCreated,
+    StatusOK,
+    StatusOkNoContent,
+} from 'utils/http.protocols';
 
-import { CustomerHandler as handler } from "infra/handlers/customer.handler";
+import { CustomerHandler as handler } from 'infra/handlers/customer.handler';
 
 export const getAllCustomers = async (_req: Request, res: Response) => {
-  const customers = await handler.getAllCustomers();
+    const customers = await handler.getAllCustomers();
 
-  return new StatusOK(res, customers);
+    return new StatusOK(res, customers);
 };
 
 export const getCustomerById = async (req: Request, res: Response) => {
-  const customer = await handler.getCustomerById(req);
+    const customer = await handler.getCustomerById(req);
 
-  return new StatusOK(res, customer);
+    return new StatusOK(res, customer);
 };
 
 export const createCustomer = async (req: Request, res: Response) => {
-  await handler.createCustomer(req);
+    await handler.createCustomer(req);
 
-  return new StatusCreated(res);
+    return new StatusCreated(res);
 };
 
 export const updateCustomer = async (req: Request, res: Response) => {
-  await handler.updateCustomer(req);
+    await handler.updateCustomer(req);
 
-  return new StatusOkNoContent(res);
+    return new StatusOkNoContent(res);
 };
 
 export const deleteCustomer = async (req: Request, res: Response) => {
-  await handler.deleteCustomer(req);
+    await handler.deleteCustomer(req);
 
-  return new StatusOkNoContent(res);
+    return new StatusOkNoContent(res);
 };

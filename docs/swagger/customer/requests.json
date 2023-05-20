@@ -1,53 +1,53 @@
 {
-  "RequestCreated": {
-    "type": "object",
-    "properties": {
-      "firstName": {
-        "type": "string",
-        "required": true,
-        "example": "example"
-      },
-      "lastName": {
-        "type": "string",
-        "required": true,
-        "example": "example"
-      },
-      "email": {
-        "type": "string",
-        "required": true,
-        "example": "example@gmail.com"
-      },
-      "password": {
-        "type": "string",
-        "required": true,
-        "example": "Example@123"
-      }
-    }
-  },
+    "RequestCreated": {
+        "type": "object",
+        "properties": {
+            "firstName": {
+                "type": "string",
+                "required": true,
+                "example": "example"
+            },
+            "lastName": {
+                "type": "string",
+                "required": true,
+                "example": "example"
+            },
+            "email": {
+                "type": "string",
+                "required": true,
+                "example": "example@gmail.com"
+            },
+            "password": {
+                "type": "string",
+                "required": true,
+                "example": "Example@123"
+            }
+        }
+    },
 
-  "RequestUpdate": {
-    "type": "object",
-    "properties": {
-      "firstName": {
-        "type": "string",
-        "example": "example"
-      },
-      "lastName": {
-        "type": "string",
-        "example": "example"
-      },
-      "email": {
-        "type": "string",
-        "example": "example@gmail.com"
-      }
-    }
-  },
+    "RequestUpdate": {
+        "type": "object",
+        "properties": {
+            "firstName": {
+                "type": "string",
+                "example": "example"
+            },
+            "lastName": {
+                "type": "string",
+                "example": "example"
+            },
+            "email": {
+                "type": "string",
+                "example": "example@gmail.com"
+            }
+        }
+    },
 
-  "ParameterID": {
-    "description": "Customer ID",
-    "name": "id",
-    "in": "path",
-    "type": "string",
-    "required": true
-  }
+    "ParameterID": {
+        "description": "Customer ID",
+        "name": "id",
+        "in": "path",
+        "type": "string",
+        "required": true
+    }
 }

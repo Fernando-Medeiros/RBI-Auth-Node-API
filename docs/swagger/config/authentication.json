@@ -1,8 +1,8 @@
 {
-  "bearerAuth": {
-    "description": "Authentication with bearer token ",
-    "type": "http",
-    "scheme": "bearer",
-    "bearerFormat": "JWT"
-  }
+    "bearerAuth": {
+        "description": "Authentication with bearer token ",
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+    }
 }

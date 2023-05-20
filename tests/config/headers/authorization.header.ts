@@ -1,3 +1,3 @@
 export type AuthorizationSchema = {
-  Authorization: string;
+    Authorization: string;
 };

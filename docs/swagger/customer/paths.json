@@ -1,168 +1,194 @@
 {
-  "/customers": {
-    "post": {
-      "tags": ["customer"],
-      "summary": "Register new customer",
-      "security": [],
-      "description": "",
-      "requestBody": {
-        "content": {
-          "application/json": {
-            "schema": { "$ref": "#/components/schemas/RequestCreated" }
-          }
-        }
-      },
-      "parameters": [],
-      "responses": {
-        "201": {
-          "description": "Successful Response"
-        },
-        "400": {
-          "description": "Bad Request",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/BadRequest" }
+    "/customers": {
+        "post": {
+            "tags": ["customer"],
+            "summary": "Register new customer",
+            "security": [],
+            "description": "",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/RequestCreated"
+                        }
+                    }
+                }
+            },
+            "parameters": [],
+            "responses": {
+                "201": {
+                    "description": "Successful Response"
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BadRequest"
+                            }
+                        }
+                    }
+                }
             }
-          }
+        },
+
+        "get": {
+            "tags": ["customer"],
+            "summary": "Get all customers",
+            "security": [{ "bearerAuth": [] }],
+            "description": "",
+            "parameters": [],
+            "responses": {
+                "200": {
+                    "description": "Successful Response",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResponseGetAll"
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "Unauthorized",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Unauthorized"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "patch": {
+            "tags": ["customer"],
+            "summary": "Update account details",
+            "security": [{ "bearerAuth": [] }],
+            "description": "",
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/RequestUpdate"
+                        }
+                    }
+                }
+            },
+            "parameters": [],
+            "responses": {
+                "204": {
+                    "description": "No content"
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BadRequest"
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "Unauthorized",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Unauthorized"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "delete": {
+            "tags": ["customer"],
+            "summary": "Delete own account",
+            "security": [{ "bearerAuth": [] }],
+            "description": "",
+            "parameters": [],
+            "responses": {
+                "204": {
+                    "description": "No content"
+                },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BadRequest"
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "Unauthorized",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Unauthorized"
+                            }
+                        }
+                    }
+                }
+            }
         }
-      }
     },
 
-    "get": {
-      "tags": ["customer"],
-      "summary": "Get all customers",
-      "security": [{ "bearerAuth": [] }],
-      "description": "",
-      "parameters": [],
-      "responses": {
-        "200": {
-          "description": "Successful Response",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/ResponseGetAll" }
-            }
-          }
-        },
-        "401": {
-          "description": "Unauthorized",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/Unauthorized" }
-            }
-          }
-        }
-      }
-    },
+    "/customers/{id}": {
+        "get": {
+            "tags": ["customer"],
+            "summary": "Find a customer by id",
+            "security": [{ "bearerAuth": [] }],
+            "description": "",
+            "parameters": [{ "$ref": "#/components/schemas/ParameterID" }],
+            "responses": {
+                "200": {
+                    "description": "Successful Response",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResponseGetById"
+                            }
+                        }
+                    }
+                },
 
-    "patch": {
-      "tags": ["customer"],
-      "summary": "Update account details",
-      "security": [{ "bearerAuth": [] }],
-      "description": "",
-      "requestBody": {
-        "content": {
-          "application/json": {
-            "schema": { "$ref": "#/components/schemas/RequestUpdate" }
-          }
-        }
-      },
-      "parameters": [],
-      "responses": {
-        "204": {
-          "description": "No content"
-        },
-        "400": {
-          "description": "Bad Request",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/BadRequest" }
-            }
-          }
-        },
-        "401": {
-          "description": "Unauthorized",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/Unauthorized" }
-            }
-          }
-        }
-      }
-    },
+                "400": {
+                    "description": "Bad Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BadRequest"
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "Unauthorized",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Unauthorized"
+                            }
+                        }
+                    }
+                },
 
-    "delete": {
-      "tags": ["customer"],
-      "summary": "Delete own account",
-      "security": [{ "bearerAuth": [] }],
-      "description": "",
-      "parameters": [],
-      "responses": {
-        "204": {
-          "description": "No content"
-        },
-        "400": {
-          "description": "Bad Request",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/BadRequest" }
+                "404": {
+                    "description": "Not Found",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NotFound"
+                            }
+                        }
+                    }
+                }
             }
-          }
-        },
-        "401": {
-          "description": "Unauthorized",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/Unauthorized" }
-            }
-          }
         }
-      }
     }
-  },
-
-  "/customers/{id}": {
-    "get": {
-      "tags": ["customer"],
-      "summary": "Find a customer by id",
-      "security": [{ "bearerAuth": [] }],
-      "description": "",
-      "parameters": [{ "$ref": "#/components/schemas/ParameterID" }],
-      "responses": {
-        "200": {
-          "description": "Successful Response",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/ResponseGetById" }
-            }
-          }
-        },
-
-        "400": {
-          "description": "Bad Request",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/BadRequest" }
-            }
-          }
-        },
-        "401": {
-          "description": "Unauthorized",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/Unauthorized" }
-            }
-          }
-        },
-
-        "404": {
-          "description": "Not Found",
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/NotFound" }
-            }
-          }
-        }
-      }
-    }
-  }
 }
