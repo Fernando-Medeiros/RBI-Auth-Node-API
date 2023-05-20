@@ -1,37 +1,37 @@
 {
-  "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": ".",
+    "compilerOptions": {
+        "outDir": "dist",
+        "rootDir": ".",
 
-    "target": "esnext",
-    "module": "commonjs",
-    "sourceMap": false,
-    "strict": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
+        "target": "esnext",
+        "module": "commonjs",
+        "sourceMap": false,
+        "strict": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "forceConsistentCasingInFileNames": true,
 
-    "ignoreDeprecations": "5.0",
+        "ignoreDeprecations": "5.0",
 
-    "baseUrl": ".",
-    "paths": {
-      "app/*": ["src/application/*", "dist/src/application/*"],
-      "domain/*": ["src/domain/*", "dist/src/domain/*"],
-      "infra/*": ["src/infrastructure/*", "dist/src/infrastructure/*"],
-      "utils/*": ["src/utils/*", "dist/src/utils/*"],
-      "tests/*": ["tests/*"],
-      "docs/*": ["docs/*"]
-    }
-  },
+        "baseUrl": ".",
+        "paths": {
+            "app/*": ["src/application/*", "dist/src/application/*"],
+            "domain/*": ["src/domain/*", "dist/src/domain/*"],
+            "infra/*": ["src/infrastructure/*", "dist/src/infrastructure/*"],
+            "utils/*": ["src/utils/*", "dist/src/utils/*"],
+            "tests/*": ["tests/*"],
+            "docs/*": ["docs/*"]
+        }
+    },
 
-  "ts-node": {
-    "esm": true // «———— enabling ESM for ts-node
-  },
+    "ts-node": {
+        "esm": true // «———— enabling ESM for ts-node
+    },
 
-  "include": ["/**/*.ts"],
-  "exclude": ["node_modules"],
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@tsconfig/node-lts-strictest-esm/tsconfig.json"
+    "include": ["/**/*.ts"],
+    "exclude": ["node_modules"],
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "@tsconfig/node-lts-strictest-esm/tsconfig.json"
 }
