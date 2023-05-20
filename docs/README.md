@@ -10,34 +10,34 @@
 
 O projeto é uma API backend para cadastro e autenticação de usuários, utilizando NodeJS, TypeScript, Vitest, MongoDB, Redis, Docker e Heroku. É uma aplicação escalável e seguro, seguindo as melhores práticas de desenvolvimento.
 
-> - [Como inicializar o projeto](START.md)
-> - [Estrutura das pastas e arquivos (tree)](STRUCTURE.md)
-> - [Documentação - swagger - arquivo](../swagger.json)
-> - [Documentação - swagger - deploy](https://rbi-auth-node-api.herokuapp.com/docs/)
-> - [Scripts do projeto](../scripts/)
+> -   [Como inicializar o projeto](START.md)
+> -   [Estrutura das pastas e arquivos (tree)](STRUCTURE.md)
+> -   [Documentação - swagger - arquivo](../swagger.json)
+> -   [Documentação - swagger - deploy](https://rbi-auth-node-api.herokuapp.com/docs/)
+> -   [Scripts do projeto](../scripts/)
 
 ## Endpoints
 
-> - [endpoints-image](endpoints.png)
+> -   [endpoints-image](endpoints.png)
 
 ### Auth
 
-> - POST /token
-> - POST /refresh
+> -   POST /token
+> -   POST /refresh
 
 ### Customer
 
-> - GET /customers
-> - GET /customers/:id
-> - POST /customers
-> - PATCH /customers
-> - DELETE /customers
+> -   GET /customers
+> -   GET /customers/:id
+> -   POST /customers
+> -   PATCH /customers
+> -   DELETE /customers
 
 ### Password
 
-> - POST /password
-> - PATCH /password
-> - PATCH /password/:token
+> -   POST /password
+> -   PATCH /password
+> -   PATCH /password/:token
 
 ## Diagrams
 

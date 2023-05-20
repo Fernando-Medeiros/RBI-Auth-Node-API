@@ -1,16 +1,22 @@
 {
-  "editor.inlayHints.enabled": "on",
-  "editor.inlayHints.padding": true,
-  "javascript.inlayHints.parameterNames.enabled": "all",
-  "typescript.inlayHints.parameterNames.enabled": "all",
-  "workbench.colorCustomizations": {
-    "editorInlayHint.background": "#ffffff00",
-    "editorInlayHint.foreground": "#66f2fc72"
-  },
-  "window.autoDetectColorScheme": true,
-  "workbench.preferredLightColorTheme": "Vitesse Light",
-  "workbench.preferredDarkColorTheme": "Vitesse Dark Soft",
-  "[typescript]": {
-    "editor.rulers": [79]
-  }
+    "editor.formatOnSave": true,
+    "indentRainbow.indicatorStyle": "light",
+    "indentRainbow.colors": ["grey", "yellow", "orange", "red"],
+
+    "editor.inlayHints.enabled": "on",
+    "editor.inlayHints.padding": true,
+    "javascript.inlayHints.parameterNames.enabled": "all",
+    "typescript.inlayHints.parameterNames.enabled": "all",
+    "workbench.colorCustomizations": {
+        "editorInlayHint.background": "#ffffff00",
+        "editorInlayHint.foreground": "#66f2fc72"
+    },
+    "window.autoDetectColorScheme": true,
+
+    "[typescript]": {
+        "editor.rulers": [80]
+    },
+    "terminal.integrated.fontFamily": "monospace",
+    "terminal.integrated.fontSize": 15,
+    "terminal.integrated.lineHeight": 1
 }

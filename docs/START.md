@@ -7,7 +7,10 @@
 yarn install
 
 # 2
-docker compose up --build
+docker compose up
+
+#3
+docker compose exec app bash
 ```
 
 ## Tests
@@ -28,12 +31,6 @@ yarn test src/
 ### To run the scope tests integration -> integration -> [mongo - redis]
 
 ```sh
-# 1
-docker compose up -d
-
-# 2
-docker exec -it rbi-auth /bin/bash
-
 # 3
 yarn test integration/
 ```
@@ -43,6 +40,9 @@ yarn test integration/
 ### D-Containers
 
 ```sh
+# Exec bash into container <app>
+docker compose exec <SERVICE_NAME> bash
+
 # List containers
 docker container ls
 
