@@ -1,47 +1,42 @@
-version: "3.7"
+version: '3.7'
 
 services:
-  app:
-    build: .
-    container_name: "rbi-auth"
-    depends_on:
-      - mongodb
-      - redis
-    links:
-      - mongodb
-      - redis
-    command: yarn dev
-    ports:
-      - 5000:5000
-    volumes:
-      - .:/usr/app
-      - /usr/app/node_modules
-    environment:
-      NODE_ENV: dev
-      PORT: 5000
+    app:
+        build: .
+        container_name: rbi-auth-app
+        entrypoint: .docker/entrypoint.sh
+        environment:
+            NODE_ENV: dev
+            PORT: 5000
+        depends_on:
+            - mongodb
+            - redis
+        links:
+            - mongodb
+            - redis
+        ports:
+            - 5000:5000
+        volumes:
+            - .:/home/node/app
 
-  mongodb:
-    container_name: "mongo-auth"
-    image: bitnami/mongodb:latest
-    ports:
-      - 27016:27016
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MONGODB_PORT_NUMBER=27016
-    volumes:
-      - "mongodb_data:/bitnami/mongodb/database"
+    mongodb:
+        container_name: rbi-mongo
+        image: bitnami/mongodb:latest
+        ports:
+            - 27016:27016
+        environment:
+            - ALLOW_EMPTY_PASSWORD=yes
+            - MONGODB_PORT_NUMBER=27016
+        volumes:
+            - .docker/dbdata/mongodb_data:/var/lib/mongodb/database
 
-  redis:
-    container_name: "redis-auth"
-    image: bitnami/redis:latest
-    ports:
-      - 7000:7000
-    environment:
-      - REDIS_PASSWORD="password"
-      - REDIS_PORT_NUMBER=7000
-    volumes:
-      - redis_data:/bitnami/redis/database
-
-volumes:
-  mongodb_data:
-  redis_data:
+    redis:
+        container_name: rbi-redis
+        image: bitnami/redis:latest
+        ports:
+            - 7000:7000
+        environment:
+            - REDIS_PASSWORD="password"
+            - REDIS_PORT_NUMBER=7000
+        volumes:
+            - .docker/dbdata/redis_data:/var/lib/redis/data

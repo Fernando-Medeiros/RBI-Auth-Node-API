@@ -1,13 +1,7 @@
-FROM node:16.19.1
+FROM  node:lts-alpine
 
-WORKDIR /usr/app
+RUN apk add --no-cache bash
 
-COPY package.json ./
+USER node
 
-RUN yarn install
-
-COPY . .
-
-EXPOSE 3000
-
-CMD ["yarn", "dev"]
+WORKDIR /home/node/app
