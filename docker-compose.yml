@@ -20,18 +20,18 @@ services:
             - .:/home/node/app
 
     mongodb:
-        container_name: rbi-mongo
+        container_name: rbi-auth-mongo
         image: bitnami/mongodb:latest
         ports:
-            - 27016:27016
+            - 27016:27017
         environment:
             - ALLOW_EMPTY_PASSWORD=yes
             - MONGODB_PORT_NUMBER=27016
         volumes:
-            - .docker/dbdata/mongodb_data:/var/lib/mongodb/database
+            - mongodb_data:/bitnami/mongodb/database
 
     redis:
-        container_name: rbi-redis
+        container_name: rbi-auth-redis
         image: bitnami/redis:latest
         ports:
             - 7000:7000
@@ -39,4 +39,8 @@ services:
             - REDIS_PASSWORD="password"
             - REDIS_PORT_NUMBER=7000
         volumes:
-            - .docker/dbdata/redis_data:/var/lib/redis/data
+            - redis_data:/bitnami/redis/database
+
+volumes:
+    redis_data:
+    mongodb_data:
